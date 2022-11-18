@@ -220,7 +220,8 @@ exec --no-startup-id xinput set-prop "MSFT0001:00 04F3:3140 Touchpad" "libinput 
 exec feh --bg-scale /home/dipankar/.local/share/backgrounds/2022-06-11-13-12-21-wave.jpg
 
 # Transparent windows for fade effect flag '-f'
-exec compton
+#exec compton -f
+exec compton --vsync opengl-swc --backend glx
 
 # Screenshots
 bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date)"
