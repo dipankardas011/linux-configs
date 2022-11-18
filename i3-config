@@ -153,6 +153,8 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
+
+
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
@@ -184,7 +186,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # class                 border  bground text    indicator child_border
-client.focused          #83CAFA #51A2DA #FFFFFF #83CAFA   #51A2DA
+client.focused          #1F341F #1F341F #EBDBB2 #3B623C   #3B623C
 client.focused_inactive #8C8C8C #4C4C4C #FFFFFF #4C4C4C   #8C8C8C
 client.unfocused        #4C4C4C #222222 #888888 #292D2E   #222222
 client.urgent           #EC69A0 #DB3279 #FFFFFF #DB3279   #DB3279
@@ -197,10 +199,10 @@ client.background       #FFFFFF
 bar {
   colors {
     background #000000
-    statusline #FFFFFF
+    statusline #EBDBB2
     separator  #666666
 
-    focused_workspace  #83CAFA #51A2DA #FFFFFF
+    focused_workspace  #77BE7A #1F341F  #FFFFFF
     active_workspace   #3C6EB4 #294172 #FFFFFF
     inactive_workspace #8C8C8C #4C4C4C #888888
     urgent_workspace   #EC69A0 #DB3279 #FFFFFF
@@ -217,6 +219,8 @@ exec --no-startup-id xinput set-prop "MSFT0001:00 04F3:3140 Touchpad" "libinput 
 # background
 exec feh --bg-scale /home/dipankar/.local/share/backgrounds/2022-06-11-13-12-21-wave.jpg
 
+# Transparent windows for fade effect flag '-f'
+exec compton
 
 # Screenshots
 bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date)"
