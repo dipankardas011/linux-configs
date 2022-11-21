@@ -184,9 +184,8 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
-
 # class                 border  bground text    indicator child_border
-client.focused          #1F341F #1F341F #EBDBB2 #3B623C   #3B623C
+client.focused          #1F341F #0D140D #EBDBB2 #142115   #3B623C
 client.focused_inactive #8C8C8C #4C4C4C #FFFFFF #4C4C4C   #8C8C8C
 client.unfocused        #4C4C4C #222222 #888888 #292D2E   #222222
 client.urgent           #EC69A0 #DB3279 #FFFFFF #DB3279   #DB3279
@@ -237,3 +236,8 @@ bindsym Ctrl+Shift+Print exec --no-startup-id maim --select | xclip -selection c
 bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5 # increase screen brightness
 bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5 # decrease screen brightness
 
+# window title icon
+for_window [all] title_window_icon on
+
+# popups during fullscreen
+popup_during_fullscreen smart
