@@ -248,3 +248,6 @@ for_window [all] title_window_icon on
 
 # popups during fullscreen
 popup_during_fullscreen smart
+
+# lock button
+bindsym $mod+Control+l exec i3lock --nofork -i $HOME/.config/i3/images/lock-forest.png
