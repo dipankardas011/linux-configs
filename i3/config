@@ -191,6 +191,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 # class                 border  bground text    indicator child_border
 client.focused          #1F341F #302F2F #EBDBB2 #142115   #282828
+client.focused          #F7D171 #302F2F #EBDBB2 #F7D171   #F7D171
 client.focused_inactive #8C8C8C #4C4C4C #FFFFFF #4C4C4C   #8C8C8C
 client.unfocused        #4C4C4C #222222 #888888 #292D2E   #222222
 client.urgent           #EC69A0 #DB3279 #FFFFFF #DB3279   #DB3279
