@@ -251,8 +251,11 @@ bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5 # decrease screen 
 gaps inner 10
 gaps outer 10
 
+for_window [class="^.*"] border pixel 2
+
 # popups during fullscreen
 popup_during_fullscreen smart
 
 # lock button
 bindsym $mod+Control+l exec i3lock --nofork -i $HOME/.config/i3/images/lock-forest.png
+
