@@ -15,7 +15,7 @@ lvim.colorscheme = "gruvbox"
 
 lvim.plugins = {
   { "lunarvim/colorschemes" },
-  { "ellisonleao/gruvbox.nvim" },
+  { "morhetz/gruvbox" },
 }
 
 lvim.builtin.dap.active = true

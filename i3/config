@@ -230,12 +230,12 @@ exec feh --bg-scale /home/dipankar/.config/i3/images/2022-06-10-14-28-37-forest.
 
 # Transparent windows for fade effect flag '-f'
 #exec compton -f
-exec compton --vsync opengl-swc --backend glx -O 0.09 -I 0.088 -f
+exec compton --vsync opengl-swc --backend glx -O 0.09 -I 0.088 -f -D 20
 
 # Screenshots
-bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date)"
-bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/$USER/Pictures/$(date)"
-bindsym Shift+Print exec --no-startup-id maim --select "/home/$USER/Pictures/$(date)"
+bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date +%h-%m-%H-%M).png"
+bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/$USER/Pictures/$(date +%h-%m-%H-%M).png"
+bindsym Shift+Print exec --no-startup-id maim --select "/home/$USER/Pictures/$(date +%h-%m-%H-%M)"
 
 ## Clipboard Screenshots
 bindsym Ctrl+Print exec --no-startup-id maim | xclip -selection clipboard -t image/png
@@ -249,8 +249,8 @@ bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5 # decrease screen 
 # window title icon
 #for_window [all] title_window_icon on
 
-gaps inner 10
-gaps outer 10
+gaps inner 11
+gaps outer 11
 
 for_window [class="^.*"] border pixel 2
 
