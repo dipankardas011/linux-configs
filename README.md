@@ -15,3 +15,7 @@ sudo dnf install i3-gaps
 - [x] neovim
 - [x] vim
 
+to get the polybar active move the contents of config.ini to 
+```
+/etc/polybar/config.ini
+```

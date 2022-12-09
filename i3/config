@@ -19,7 +19,7 @@ font pango:FantasqueSansMono NF 13
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 8
 
-# Start XDG autostart .desktop files using dex. See also
+
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex-autostart --autostart --environment i3
 
@@ -56,9 +56,9 @@ bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec --no-startup-id "i3-dmenu-desktop --dmenu='dmenu -i'"
-bindsym $mod+d exec rofi -modi drun -show drun -theme gruvbox-dark
+bindsym $mod+d exec rofi -modi drun -show drun -theme gruvbox-dark -font 'FantasqueSansMono NF 15' 
 
-bindsym $mod+Shift+d exec --no-startup-id "dmenu_run -nf '#BBBBBB' -nb '#222222' -sb '#005577' -sf '#EEEEEE' -fn 'FantasqueSansMono NF-15'"
+bindsym $mod+Shift+d exec --no-startup-id "dmenu_run -nf '#BBBBBB' -nb '#282828' -sb '#4C4C4C' -sf '#EEEEEE' -fn 'FantasqueSansMono NF-15'"
 
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
@@ -203,21 +203,22 @@ client.background       #FFFFFF
 # finds out, if available)
 
 
-bar {
- colors {
-   background #282828
-   statusline #EBDBB2
-   separator  #EBDBB2
+#bar {
+# colors {
+#   background #282828
+#   statusline #EBDBB2
+#   separator  #EBDBB2
+#
+#   focused_workspace  #77BE7A #1F341F  #FFFFFF
+#   active_workspace   #3C6EB4 #294172 #FFFFFF
+#   inactive_workspace #8C8C8C #4C4C4C #888888
+#   urgent_workspace   #EC69A0 #DB3279 #FFFFFF
+#   binding_mode       #b691d3 #A07CBC #FFFFFF
+# }
+# status_command polybar
+#}
 
-   focused_workspace  #77BE7A #1F341F  #FFFFFF
-   active_workspace   #3C6EB4 #294172 #FFFFFF
-   inactive_workspace #8C8C8C #4C4C4C #888888
-   urgent_workspace   #EC69A0 #DB3279 #FFFFFF
-   binding_mode       #b691d3 #A07CBC #FFFFFF
- }
- status_command i3status
-}
-
+exec --no-startup-id polybar
 # trackpad
 exec --no-startup-id xinput set-prop "MSFT0001:00 04F3:3140 Touchpad" "libinput Tapping Enabled" 1
 exec --no-startup-id xinput set-prop "MSFT0001:00 04F3:3140 Touchpad" "libinput Natural Scrolling Enabled" 1
@@ -237,6 +238,8 @@ bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date +%h-%m-%H-%
 bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/$USER/Pictures/$(date +%h-%m-%H-%M).png"
 bindsym Shift+Print exec --no-startup-id maim --select "/home/$USER/Pictures/$(date +%h-%m-%H-%M)"
 
+bindsym $mod+Shift+i exec gnome-control-center
+
 ## Clipboard Screenshots
 bindsym Ctrl+Print exec --no-startup-id maim | xclip -selection clipboard -t image/png
 bindsym Ctrl+$mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
@@ -249,10 +252,11 @@ bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5 # decrease screen 
 # window title icon
 #for_window [all] title_window_icon on
 
-gaps inner 11
-gaps outer 11
+gaps inner 6
+gaps outer 5
 
-for_window [class="^.*"] border pixel 2
+# border size
+for_window [class="^.*"] border pixel 1
 
 # popups during fullscreen
 popup_during_fullscreen smart
