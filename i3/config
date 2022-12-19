@@ -264,3 +264,5 @@ popup_during_fullscreen smart
 # lock button
 bindsym $mod+Control+l exec i3lock --nofork -i $HOME/.config/i3/images/lock-forest.png
 
+# battery status
+exec while [ true ]; do currBat=$(cat /sys/class/power_supply/BAT0/capacity) && stats=$(cat /sys/class/power_supply/BAT0/status) && if [ $currBat -lt 20 -a $stats != 'Charging' ]; then notify-send "BATTERY LOW" "......\n.CURR BAT: ${currBat}\n\n\n\n🔌"; fi ; sleep 1m; done

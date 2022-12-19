@@ -11,12 +11,20 @@ an executable
 -- general
 lvim.log.level = "warn"
 lvim.builtin.lualine.sections.lualine_c = { "diff" }
-lvim.colorscheme = "gruvbox"
+vim.opt.showmode = false
+lvim.builtin.lualine.sections.lualine_a = { "mode" }
+lvim.builtin.lualine.sections.lualine_b = { "branch" }
+lvim.builtin.lualine.sections.lualine_c = { "filename", "diff" }
+lvim.builtin.lualine.sections.lualine_d = { "filetype" }
+
+
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
 lvim.format_on_save = true
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
+--vim.transparent_window = true
+
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
@@ -27,8 +35,8 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- lvim.keys.normal_mode["<C-q>"] = ":q<cr>" -- or vim.keymap.set("n", "<C-q>", ":q<cr>" )
 lvim.plugins = {
   { "fatih/vim-go" },
-  { "morhetz/gruvbox" },
   { "norcalli/nvim-colorizer.lua" },
+  { "ellisonleao/gruvbox.nvim" },
   {
     "npxbr/glow.nvim",
     ft = { "markdown" }
@@ -63,14 +71,6 @@ lvim.plugins = {
   {
     "sindrets/diffview.nvim",
     event = "BufRead",
-  },
-  {
-    "f-person/git-blame.nvim",
-    event = "BufRead",
-    config = function()
-      vim.cmd "highlight default link gitblame SpecialComment"
-      vim.g.gitblame_enabled = 0
-    end,
   },
 }
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
@@ -113,7 +113,7 @@ lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
-lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
+lvim.builtin.nvimtree.setup.renderer.icons.show.git = true
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
@@ -139,11 +139,9 @@ lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enable = true
 require 'colorizer'.setup()
 
-lvim.transparent_window = true
 -- generic LSP settings
 
 vim.opt.cursorline = true
-vim.opt.relativenumber = true
 vim.opt.wrap = true
 vim.opt.spell = false
 -- -- change UI setting of `LspInstallInfo`
