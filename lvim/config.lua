@@ -12,19 +12,20 @@ an executable
 lvim.log.level = "warn"
 lvim.builtin.lualine.sections.lualine_c = { "diff" }
 vim.opt.showmode = false
+
 lvim.builtin.lualine.sections.lualine_a = { "mode" }
 lvim.builtin.lualine.sections.lualine_b = { "branch" }
 lvim.builtin.lualine.sections.lualine_c = { "filename", "diff" }
 lvim.builtin.lualine.sections.lualine_d = { "filetype" }
 
-
+lvim.colorscheme = "tokyonight-night"
+--lvim.colorscheme = "gruvbox"
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
 lvim.format_on_save = true
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
---vim.transparent_window = true
-
+vim.transparent_window = true
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
@@ -35,12 +36,27 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- lvim.keys.normal_mode["<C-q>"] = ":q<cr>" -- or vim.keymap.set("n", "<C-q>", ":q<cr>" )
 lvim.plugins = {
   { "fatih/vim-go" },
+  { "leoluz/nvim-dap-go",
+    require('dap-go').setup({
+    dap_configurations = {
+      {
+        type = "go",
+        name = "Attach remote",
+        mode = "remote",
+        request = "attach",
+      },
+    },
+    })
+  },
   { "norcalli/nvim-colorizer.lua" },
   { "ellisonleao/gruvbox.nvim" },
   {
     "npxbr/glow.nvim",
     ft = { "markdown" }
     -- run = "yay -S glow"
+  },
+  {
+    'ldelossa/gh.nvim'
   },
   {
     "karb94/neoscroll.nvim",
