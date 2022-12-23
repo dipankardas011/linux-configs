@@ -6,7 +6,7 @@
  *******************************************************************************/
 
 * {
-    font:   "IBM Plex Mono 12";
+    font:   "FantasqueSansMono NF 15";
 
     nord0:     #2e3440;
     nord1:     #3b4252;
@@ -39,11 +39,9 @@
 
 window {
     background-color:   @nord0;
-    border-color:       @accent-color;
 
     location:   center;
     width:      480px;
-    border:     1px;
 }
 
 inputbar {
@@ -68,8 +66,8 @@ listview {
 }
 
 element {
-    padding:    8px;
-    spacing:    8px;
+    padding:    11px;
+    spacing:    11px;
 }
 
 element normal urgent {
@@ -97,7 +95,7 @@ element selected active {
 }
 
 element-icon {
-    size:   0.75em;
+    size:   0.95em;
 }
 
 element-text {
