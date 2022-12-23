@@ -30,6 +30,7 @@ exec --no-startup-id dex-autostart --autostart --environment i3
 # screen before suspend. Use loginctl lock-session to lock your screen.
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork -i $HOME/.config/i3/images/lock-forest.png
 
+exec picom -b
 # lock screen
 #exec --no-startup-id xss-lock -l /home/$USER/.config/i3/lock
 
@@ -56,9 +57,9 @@ bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec --no-startup-id "i3-dmenu-desktop --dmenu='dmenu -i'"
-bindsym $mod+d exec rofi -modi drun -show drun -theme gruvbox-dark -font 'FantasqueSansMono NF 15' 
+bindsym $mod+d exec rofi -modi drun -show drun -show-icons -theme 'nord' -font 'FantasqueSansMono NF 20'
 
-bindsym $mod+Shift+d exec --no-startup-id "dmenu_run -nf '#BBBBBB' -nb '#282828' -sb '#4C4C4C' -sf '#EEEEEE' -fn 'FantasqueSansMono NF-15'"
+bindsym $mod+Shift+d exec --no-startup-id "dmenu_run -nf '#7AA2F7' -nb '#282828' -sb '#4C4C4C' -sf '#EEEEEE' -fn 'FantasqueSansMono NF-15'"
 
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
@@ -190,8 +191,8 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 # class                 border  bground text    indicator child_border
-client.focused          #1F341F #302F2F #EBDBB2 #142115   #282828
-client.focused          #F7D171 #302F2F #EBDBB2 #F7D171   #F7D171
+client.focused          #1A1B26 #302F2F #7AA2F7 #142115   #282828
+client.focused          #7AA2F7 #302F2F #7AA2F7 #7AA2F7   #7AA2F7
 client.focused_inactive #8C8C8C #4C4C4C #FFFFFF #4C4C4C   #8C8C8C
 client.unfocused        #4C4C4C #222222 #888888 #292D2E   #222222
 client.urgent           #EC69A0 #DB3279 #FFFFFF #DB3279   #DB3279
@@ -199,24 +200,6 @@ client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 
 client.background       #FFFFFF
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-
-
-#bar {
-# colors {
-#   background #282828
-#   statusline #EBDBB2
-#   separator  #EBDBB2
-#
-#   focused_workspace  #77BE7A #1F341F  #FFFFFF
-#   active_workspace   #3C6EB4 #294172 #FFFFFF
-#   inactive_workspace #8C8C8C #4C4C4C #888888
-#   urgent_workspace   #EC69A0 #DB3279 #FFFFFF
-#   binding_mode       #b691d3 #A07CBC #FFFFFF
-# }
-# status_command polybar
-#}
 
 exec --no-startup-id polybar
 # trackpad
@@ -225,18 +208,16 @@ exec --no-startup-id xinput set-prop "MSFT0001:00 04F3:3140 Touchpad" "libinput 
 
 
 # background
-exec feh --bg-scale /home/dipankar/.config/i3/images/2022-06-10-14-28-37-forest.jpg
+exec feh --bg-scale /home/dipankar/.config/i3/images/default.jpg
 
 
-
-# Transparent windows for fade effect flag '-f'
-#exec compton -f
-exec compton --vsync opengl-swc --backend glx -O 0.09 -I 0.088 -f -D 20
+# picom
+#exec picom -f -D 5 -m 0.95 -e 1 --corner-radius 8 --inactive-dim 0.1 --backend glx
 
 # Screenshots
 bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date +%h-%m-%H-%M).png"
 bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/$USER/Pictures/$(date +%h-%m-%H-%M).png"
-bindsym Shift+Print exec --no-startup-id maim --select "/home/$USER/Pictures/$(date +%h-%m-%H-%M)"
+bindsym Shift+Print exec --no-startup-id maim --select "/home/$USER/Pictures/$(date +%h-%m-%H-%M).png"
 
 bindsym $mod+Shift+i exec gnome-control-center
 
@@ -252,11 +233,17 @@ bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5 # decrease screen 
 # window title icon
 #for_window [all] title_window_icon on
 
-gaps inner 6
-gaps outer 5
+gaps inner 8
+gaps outer 8
 
 # border size
-for_window [class="^.*"] border pixel 1
+for_window [class="^.*"] border pixel 0
+
+smart_gaps on
+
+smart_gaps inverse_outer
+
+smart_borders on
 
 # popups during fullscreen
 popup_during_fullscreen smart
@@ -265,4 +252,4 @@ popup_during_fullscreen smart
 bindsym $mod+Control+l exec i3lock --nofork -i $HOME/.config/i3/images/lock-forest.png
 
 # battery status
-exec while [ true ]; do currBat=$(cat /sys/class/power_supply/BAT0/capacity) && stats=$(cat /sys/class/power_supply/BAT0/status) && if [ $currBat -lt 20 -a $stats != 'Charging' ]; then notify-send "BATTERY LOW" "......\n.CURR BAT: ${currBat}\n\n\n\n🔌"; fi ; sleep 1m; done
+exec while [ true ]; do currBat=$(cat /sys/class/power_supply/BAT0/capacity) && stats=$(cat /sys/class/power_supply/BAT0/status) && if [ $currBat -lt 20 -a $stats != 'Charging' ]; then notify-send "BATTERY LOW" "......\n.CURR BAT: ${currBat}\n\n\n\n🔌"; elif [ $currBat -gt 80 -a $stats = 'Charging' ]; then notify-send "BATTERY HIGH" "......\n.CURR BAT: ${currBat}\n\n\n\n🔌" ; fi ; sleep 1m; done
