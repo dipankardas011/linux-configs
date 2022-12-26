@@ -34,7 +34,6 @@ exec picom -b
 # lock screen
 #exec --no-startup-id xss-lock -l /home/$USER/.config/i3/lock
 
-
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
@@ -201,7 +200,7 @@ client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 client.background       #FFFFFF
 
 
-exec --no-startup-id polybar
+# exec --no-startup-id polybar
 # trackpad
 exec --no-startup-id xinput set-prop "MSFT0001:00 04F3:3140 Touchpad" "libinput Tapping Enabled" 1
 exec --no-startup-id xinput set-prop "MSFT0001:00 04F3:3140 Touchpad" "libinput Natural Scrolling Enabled" 1
@@ -253,3 +252,8 @@ bindsym $mod+Control+l exec i3lock --nofork -i $HOME/.config/i3/images/lock-fore
 
 # battery status
 exec while [ true ]; do currBat=$(cat /sys/class/power_supply/BAT0/capacity) && stats=$(cat /sys/class/power_supply/BAT0/status) && if [ $currBat -lt 20 -a $stats != 'Charging' ]; then notify-send "BATTERY LOW" "......\n.CURR BAT: ${currBat}\n\n\n\n🔌"; elif [ $currBat -gt 80 -a $stats = 'Charging' ]; then notify-send "BATTERY HIGH" "......\n.CURR BAT: ${currBat}\n\n\n\n🔌" ; fi ; sleep 1m; done
+
+# polybar
+exec ~/.config/i3/colorblocks/launch.sh
+
+

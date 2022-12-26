@@ -25,7 +25,7 @@ lvim.colorscheme = "tokyonight-night"
 lvim.format_on_save = true
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
-vim.transparent_window = true
+lvim.transparent_window = true
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
@@ -36,16 +36,17 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- lvim.keys.normal_mode["<C-q>"] = ":q<cr>" -- or vim.keymap.set("n", "<C-q>", ":q<cr>" )
 lvim.plugins = {
   { "fatih/vim-go" },
+  { "williamboman/mason.nvim" },
   { "leoluz/nvim-dap-go",
     require('dap-go').setup({
-    dap_configurations = {
-      {
-        type = "go",
-        name = "Attach remote",
-        mode = "remote",
-        request = "attach",
+      dap_configurations = {
+        {
+          type = "go",
+          name = "Attach remote",
+          mode = "remote",
+          request = "attach",
+        },
       },
-    },
     })
   },
   { "norcalli/nvim-colorizer.lua" },
