@@ -1,0 +1,3 @@
+[submodule "my-nvchad-configs"]
+	path = my-nvchad-configs
+	url = https://github.com/dipankardas011/my-nvchad-configs
