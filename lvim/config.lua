@@ -19,14 +19,12 @@ vim.opt.shiftwidth = 2 -- the number of spaces inserted for each indentation
 vim.opt.tabstop = 2 -- insert 2 spaces for a tab
 vim.opt.cursorline = true -- highlight the current line
 vim.opt.number = true -- set numbered lines
-vim.opt.relativenumber = false -- set relative numbered lines
+vim.opt.relativenumber = true -- set relative numbered lines
 vim.opt.numberwidth = 4 -- set number column width to 2 {default 4}
 vim.opt.signcolumn = "yes" -- always show the sign column otherwise it would shift the text each time
-vim.opt.wrap = false -- display lines as one long line
-vim.opt.spell = false
+vim.opt.wrap = true -- display lines as one long line
+vim.opt.spell = true
 vim.opt.spelllang = "en"
-vim.opt.scrolloff = 8 -- is one of my fav
-vim.opt.sidescrolloff = 8
 
 
 -- to disable icons and use a minimalist setup, uncomment the following
@@ -124,6 +122,9 @@ lvim.plugins = {
     config = function()
       require("todo-comments").setup()
     end,
+  },
+  {
+    "williamboman/mason.nvim",
   },
 }
 -- generic LSP settings

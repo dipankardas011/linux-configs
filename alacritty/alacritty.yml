@@ -18,7 +18,6 @@ window:
   #
   # Specified in number of columns/lines, not pixels. If both are zero this
   # setting is ignored.
-  
 
   # Window padding (changes require restart)
   #
@@ -29,7 +28,7 @@ window:
     y: 0
 
   # Spread additional padding evenly around the terminal content.
-  dynamic_padding: false
+  dynamic_padding: true
 
   # Window decorations
   #
@@ -38,7 +37,7 @@ window:
   # - none: neither borders nor title bar
   # - transparent: title bar, transparent background and title bar buttons
   # - buttonless: title bar, transparent background, but no title bar buttons
-  decorations: full
+  decorations: none
 
   # Startup Mode (changes require restart)
   #
@@ -67,7 +66,6 @@ scrolling:
 font:
   # The normal (roman) font face to use.
   # Style can be specified to pick a specific face.
- 
   normal:
     family: FantasqueSansMono NF
     # family: "Fira Code"
@@ -76,7 +74,7 @@ font:
 
   # The bold font face
   bold:
-    family:  FantasqueSansMono NF
+    family: FantasqueSansMono NF
     # style: Medium
     # family: "Fira Code"
     # family: "Source Code Pro"
@@ -84,7 +82,7 @@ font:
   # The italic font face
   italic:
     family: Iosevka
-    style: "Light Italic"
+    style: Light Italic
 
 
   # Point size of the font
@@ -162,9 +160,10 @@ colors:
   # # Tomorrow Night (https://github.com/aarowill/base16-alacritty/blob/master/colors/base16-tomorrow-night.yml)
    # Default colors
   primary:
-    background: '#1a1b26'
+    # background: '#1a1b26'
     foreground: '#c0caf5'
    # Colors the cursor will use if `custom_cursor_colors` is true
+    background: '#1a1b26'
   cursor:
     text: '0x1d1f21'
     cursor: '0xc5c8c6'
