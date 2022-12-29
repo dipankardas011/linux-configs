@@ -18,9 +18,7 @@ window:
   #
   # Specified in number of columns/lines, not pixels. If both are zero this
   # setting is ignored.
-  dimensions:
-    columns: 100
-    lines: 85
+  
 
   # Window padding (changes require restart)
   #
