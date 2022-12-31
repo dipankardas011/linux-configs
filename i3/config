@@ -248,8 +248,8 @@ smart_borders on
 popup_during_fullscreen smart
 
 # lock button
-bindsym $mod+Control+l exec i3lock --nofork -i $HOME/.config/i3/images/lock-forest.png
-
+bindsym $mod+Control+l exec i3lock --nofork -i $HOME/.config/i3/images/lockscreen.png
+# bindsym $mod+Control+l exec convert lock-forest.png RGB:- | i3lock --raw 1920x1080:rgb --image /dev/stdin
 # battery status
 exec while [ true ]; do currBat=$(cat /sys/class/power_supply/BAT0/capacity) && stats=$(cat /sys/class/power_supply/BAT0/status) && if [ $currBat -lt 20 -a $stats != 'Charging' ]; then notify-send "BATTERY LOW" "......\n.CURR BAT: ${currBat}\n\n\n\n🔌"; elif [ $currBat -gt 80 -a $stats = 'Charging' ]; then notify-send "BATTERY HIGH" "......\n.CURR BAT: ${currBat}\n\n\n\n🔌" ; fi ; sleep 1m; done
 
