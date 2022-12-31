@@ -99,7 +99,7 @@ PROMPT='$(kube_ps1)'$'\n'$PROMPT
 # else
 #   export EDITOR='mvim'
 # fi
-export EDITOR="nvim"
+export EDITOR="lvim"
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -121,7 +121,7 @@ alias la='ls -la'
 alias gpo='git push origin'
 alias gplo='git pull origin'
 alias cls='clear'
-alias vi='nvim'
+alias vi='lvim'
 
 alias onedrivePull='rclone sync -P onedrive: ~/Onedrive'
 alias onedrivePush='rclone sync -P ~/Onedrive onedrive:'
@@ -176,3 +176,8 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 # Added by Amplify CLI binary installer
 export PATH="$HOME/.amplify/bin:$PATH"
 export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/go/bin"
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/home/dipankar/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)

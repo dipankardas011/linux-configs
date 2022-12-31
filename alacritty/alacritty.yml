@@ -80,9 +80,9 @@ font:
     # family: "Source Code Pro"
 
   # The italic font face
-  italic:
-    family: Iosevka
-    style: Light Italic
+  # italic:
+  #   family: Iosevka
+  #   style: Light Italic
 
 
   # Point size of the font
@@ -197,6 +197,7 @@ colors:
   #   `- { index: 16, color: '0xff00ff' }`
   #
   # indexed_colors: []
+
 
 # Visual Bell
 #

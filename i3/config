@@ -49,7 +49,7 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec gnome-terminal
+bindsym $mod+Return exec /bin/alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -256,4 +256,4 @@ exec while [ true ]; do currBat=$(cat /sys/class/power_supply/BAT0/capacity) && 
 # polybar
 exec ~/.config/i3/colorblocks/launch.sh
 
-
+bindsym $mod+Shift+f exec thunar

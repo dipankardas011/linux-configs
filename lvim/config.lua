@@ -11,8 +11,9 @@ an executable
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save.enabled = false
+-- lvim.colorscheme = "github_dimmed"
 lvim.colorscheme = "github_dark_default"
-
+lvim.transparent_window = true
 
 vim.opt.termguicolors = true
 vim.opt.shiftwidth = 2 -- the number of spaces inserted for each indentation
@@ -75,6 +76,19 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 --   w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
 -- }
 
+
+-- Debugging Keymaps
+vim.keymap.set("n", "<F10>", ":lua require'dap-go'.step_over()<CR>")
+vim.keymap.set("n", "<F11>", ":lua require'dap-go'.step_into()<CR>")
+vim.keymap.set("n", "<F12>", ":lua require'dap-go'.step_out()<CR>")
+vim.keymap.set("n", "<F5>", ":lua require'dap-go'.continue()<CR>")
+
+-- used to start debugging test files
+vim.keymap.set("n", "<Space>DT", ":lua require'dap-go'.debug_test()<CR>")
+
+-- used to start normal debugging files
+-- <leader>bs
+
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.alpha.active = true
@@ -126,6 +140,27 @@ lvim.plugins = {
   {
     "williamboman/mason.nvim",
   },
+  {
+    "mfussenegger/nvim-dap-ui",
+  },
+  {
+    "ldelossa/nvim-dap-projects",
+  },
+  {
+    "ldelossa/nvim-ide",
+  },
+  {
+    "leoluz/nvim-dap-go",
+    config = function ()
+      require("dap-go").setup()
+    end,
+  },
+  {
+    "norcalli/nvim-colorizer.lua",
+    config = function ()
+      require("colorizer").setup()
+    end,
+  }
 }
 -- generic LSP settings
 

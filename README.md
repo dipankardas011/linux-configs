@@ -14,10 +14,9 @@ sudo dnf install i3-gaps
 - [x] i3
 - [x] neovim
 - [x] vim
-
-to get the polybar active move the contents of config.ini to 
-```
-/etc/polybar/config.ini
-```
+- [x] rofi
+- [x] polybar
+- [x] picom
+- [x] alacritty
 
 https://github.com/adi1090x/polybar-themes
