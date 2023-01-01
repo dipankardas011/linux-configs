@@ -13,8 +13,8 @@ cp -rv rofi ${HOME}/.config
 
 cp -rv i3 ${HOME}/.config
 
-cp -v zshrc ${HOME}/.zshrc
-cp -v vimrc ${HOME}/.vimrc
+# cp -v zshrc ${HOME}/.zshrc
+# cp -v vimrc ${HOME}/.vimrc
 
 cd ${HOME}/.config/i3
 
@@ -22,12 +22,12 @@ chmod u+x setup-font-polybar.sh
 ./setup-font-polybar.sh
 
 
-echo "+---------------------+"
-echo "| Installing Lunarvim |"
-echo "+---------------------+"
-cd ${HOME}
-LV_BRANCH='release-1.2/neovim-0.8' bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
+# echo "+---------------------+"
+# echo "| Installing Lunarvim |"
+# echo "+---------------------+"
+# cd ${HOME}
+# LV_BRANCH='release-1.2/neovim-0.8' bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
 
-cp -rv lvim/config.lua ${HOME}/.config/lvim/config.lua
+# cp -rv lvim/config.lua ${HOME}/.config/lvim/config.lua
 
 echo "Done ✅"
