@@ -20,3 +20,6 @@ sudo dnf install i3-gaps
 - [x] alacritty
 
 https://github.com/adi1090x/polybar-themes
+
+> **NOTE**
+> Before running `./install.sh` do make backups

@@ -11,8 +11,9 @@ an executable
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save.enabled = false
--- lvim.colorscheme = "github_dimmed"
-lvim.colorscheme = "github_dark_default"
+lvim.colorscheme = "github_dimmed"
+-- lvim.colorscheme = "github_dark_default"
+-- lvim.colorscheme = "tokyonight-storm"
 lvim.transparent_window = true
 
 vim.opt.termguicolors = true
@@ -160,6 +161,15 @@ lvim.plugins = {
     config = function ()
       require("colorizer").setup()
     end,
+  }
+}
+
+
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
+  {
+    command = "clang-format",
+    filetypes = { "java" },
   }
 }
 -- generic LSP settings
