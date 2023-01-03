@@ -216,9 +216,9 @@ exec feh --bg-scale /home/dipankar/.config/i3/images/default.jpg
 #exec picom -f -D 5 -m 0.95 -e 1 --corner-radius 8 --inactive-dim 0.1 --backend glx
 
 # Screenshots
-bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date +%h-%m-%H-%M).png"
-bindsym $mod+Print exec --no-startup-id maim -o --window $(xdotool getactivewindow) "/home/$USER/Pictures/$(date +%h-%m-%H-%M).png"
-bindsym Shift+Print exec --no-startup-id maim -o --select "/home/$USER/Pictures/$(date +%h-%m-%H-%M).png"
+bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date +%d-%m-%Y:%H:%M:%S).png"
+bindsym $mod+Print exec --no-startup-id maim -o --window $(xdotool getactivewindow) "/home/$USER/Pictures/$(date +%d-%m-%Y:%H:%M:%S).png"
+bindsym Shift+Print exec --no-startup-id maim -o --select "/home/$USER/Pictures/$(date +%d-%m-%Y:%H:%M:%S).png"
 
 bindsym $mod+Shift+i exec gnome-control-center
 
