@@ -10,10 +10,12 @@ an executable
 
 -- general
 lvim.log.level = "warn"
+
 lvim.format_on_save.enabled = false
-lvim.colorscheme = "github_dimmed"
+-- lvim.colorscheme = "github_dimmed"
 -- lvim.colorscheme = "github_dark_default"
--- lvim.colorscheme = "tokyonight-storm"
+-- lvim.colorscheme = "darkplus"
+lvim.colorscheme = "tokyonight-night"
 lvim.transparent_window = true
 
 vim.opt.termguicolors = true
@@ -28,10 +30,10 @@ vim.opt.wrap = true -- display lines as one long line
 vim.opt.spell = true
 vim.opt.spelllang = "en"
 
-
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
 lvim.builtin.lualine.sections.lualine_a = { "mode" }
+
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
 -- add your own keymapping
@@ -77,7 +79,6 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 --   w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
 -- }
 
-
 -- Debugging Keymaps
 vim.keymap.set("n", "<F10>", ":lua require'dap-go'.step_over()<CR>")
 vim.keymap.set("n", "<F11>", ":lua require'dap-go'.step_into()<CR>")
@@ -112,6 +113,8 @@ lvim.builtin.treesitter.ensure_installed = {
   "rust",
   "java",
   "yaml",
+  "hcl",
+  "dockerfile"
 }
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
@@ -161,17 +164,55 @@ lvim.plugins = {
     config = function ()
       require("colorizer").setup()
     end,
-  }
+  },
+  {"neovim/nvim-lspconfig"},
+  -- {
+  --   "mfussenegger/nvim-jdtls",
+  --   config = function ()
+  --     require('jdtls').start_or_attach({
+  --     -- The command that starts the language server
+  --     -- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
+  --     cmd = {
+
+  --       -- 💀
+  --       'java',
+  --       '-Declipse.application=org.eclipse.jdt.ls.core.id1',
+  --       '-Dosgi.bundles.defaultStartLevel=4',
+  --       '-Declipse.product=org.eclipse.jdt.ls.core.product',
+  --       '-Dlog.protocol=true',
+  --       '-Dlog.level=ALL',
+  --       '-Xms1g',
+  --       '--add-modules=ALL-SYSTEM',
+  --       '--add-opens', 'java.base/java.util=ALL-UNNAMED',
+  --       '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
+
+  --       -- 💀
+  --       '-jar', '/home/dipankar/.local/share/nvim/lsp_servers/jdtls/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar',
+  --       '-configuration', '/home/dipankar/.local/share/nvim/lsp_servers/jdtls/config_linux',
+  --       '-data', '/home/dipankar/projects/dev/java'
+  --     },
+
+  --     -- 💀
+  --     -- This is the default if not provided, you can remove it. Or adjust as needed.
+  --     -- One dedicated LSP server & client will be started per unique root_dir
+  --     root_dir = require('jdtls.setup').find_root({'.git', 'mvnw', 'gradlew'}),
+
+  --     -- Here you can configure eclipse.jdt.ls specific settings
+  --     -- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
+  --     -- for a list of options
+  --     settings = {
+  --       java = {
+  --       }
+  --     }
+  --   })
+  --   end
+  -- },
+  -- {"williamboman/nvim-lsp-installer"},
 }
 
 
-local formatters = require "lvim.lsp.null-ls.formatters"
-formatters.setup {
-  {
-    command = "clang-format",
-    filetypes = { "java" },
-  }
-}
+
+
 -- generic LSP settings
 
 -- -- make sure server will always be installed even if the server is in skipped_servers list
@@ -230,22 +271,22 @@ formatters.setup {
 -- }
 
 -- -- set additional linters
--- local linters = require "lvim.lsp.null-ls.linters"
--- linters.setup {
---   { command = "flake8", filetypes = { "python" } },
---   {
---     -- each linter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
---     command = "shellcheck",
---     ---@usage arguments to pass to the formatter
---     -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
---     extra_args = { "--severity", "warning" },
---   },
---   {
---     command = "codespell",
---     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
---     filetypes = { "javascript", "python" },
---   },
--- }
+local linters = require "lvim.lsp.null-ls.linters"
+linters.setup {
+  { command = "flake8", filetypes = { "python" } },
+  {
+    -- each linter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
+    command = "shellcheck",
+    ---@usage arguments to pass to the formatter
+    -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
+    extra_args = { "--severity", "warning" },
+  },
+  {
+    command = "codespell",
+    ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
+    filetypes = { "javascript", "python" },
+  },
+}
 
 -- Additional Plugins
 

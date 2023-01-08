@@ -238,7 +238,7 @@ gaps inner 8
 gaps outer 8
 
 # border size
-for_window [class="^.*"] border pixel 0
+for_window [all] border pixel 0
 
 smart_gaps on
 
