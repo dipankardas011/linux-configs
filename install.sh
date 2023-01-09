@@ -7,6 +7,12 @@ echo "| Installing packages |"
 echo "+---------------------+"
 sudo dnf install -y picom polybar rofi alacritty feh
 
+mkdir -p ~/.config/picom
+mkdir -p ~/.config/alacritty
+mkdir -p ~/.config/i3
+
+
+
 cp -rv alacritty ${HOME}/.config
 cp -rv picom ${HOME}/.config
 cp -rv rofi ${HOME}/.config
