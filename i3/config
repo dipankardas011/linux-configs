@@ -234,17 +234,17 @@ bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5 # decrease screen 
 # window title icon
 #for_window [all] title_window_icon on
 
-gaps inner 8
-gaps outer 8
+gaps inner 10
+gaps outer 10
 
 # border size
-for_window [all] border pixel 0
+for_window [all] border pixel 2
 
 smart_gaps on
 
 smart_gaps inverse_outer
 
-smart_borders on
+# smart_borders on
 
 # popups during fullscreen
 popup_during_fullscreen smart
