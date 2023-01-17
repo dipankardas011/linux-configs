@@ -212,9 +212,6 @@ exec --no-startup-id xinput set-prop "MSFT0001:00 04F3:3140 Touchpad" "libinput 
 exec feh --bg-scale /home/$USER/.config/i3/images/default.jpg
 
 
-# picom
-#exec picom -f -D 5 -m 0.95 -e 1 --corner-radius 8 --inactive-dim 0.1 --backend glx
-
 # Screenshots
 bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date +%d-%m-%Y:%H:%M:%S).png"
 bindsym $mod+Print exec --no-startup-id maim -o --window $(xdotool getactivewindow) "/home/$USER/Pictures/$(date +%d-%m-%Y:%H:%M:%S).png"
@@ -228,8 +225,8 @@ bindsym Ctrl+$mod+Print exec --no-startup-id maim  -o --window $(xdotool getacti
 bindsym Ctrl+Shift+Print exec --no-startup-id maim -o --select | xclip -selection clipboard -t image/png
 
 #brightness
-bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5 # increase screen brightness
-bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5 &&  notify-send "Brightness level: $(light -G -u low)" # increase screen brightness
+bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5 && notify-send "Brightness level: $(light -G -u low )" #decrease screen brightness
 
 # window title icon
 #for_window [all] title_window_icon on
