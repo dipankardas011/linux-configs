@@ -235,7 +235,7 @@ gaps inner 10
 gaps outer 10
 
 # border size
-for_window [all] border pixel 2
+for_window [all] border pixel 0
 
 smart_gaps on
 
