@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -15,6 +15,10 @@ KUBE_PS1_SUFFIX_COLOR="yellow"
 KUBE_PS1_SEPARATOR_COLOR="yellow"
 
 KUBE_PS1_CTX_COLOR="magenta"
+
+
+
+
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
@@ -181,3 +185,16 @@ export PATH="$PATH:$HOME/go/bin"
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
 export PATH="/home/dipankar/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+
+alias createNode='echo "---\nauthor: Dipankar Das\n---\n" > notes-$(date +%d-%m-%Y).md'
+
+autoload bashcompinit && bashcompinit
+autoload -Uz compinit && compinit
+
+complete -C '/usr/local/bin/aws_completer' aws
+alias ls='lsd'
+
+alias pynbtopdf='jupyter-nbconvert --to pdf'
+
+alias conservativemode='sudo sed -i s/STOP_CHARGE_THRESH_BAT0=0/STOP_CHARGE_THRESH_BAT0=1/g /etc/tlp.conf && sudo tlp start'
+alias normalmode='sudo sed -i s/STOP_CHARGE_THRESH_BAT0=1/STOP_CHARGE_THRESH_BAT0=0/g /etc/tlp.conf && sudo tlp start'
