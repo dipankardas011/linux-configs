@@ -209,7 +209,7 @@ exec --no-startup-id xinput set-prop "MSFT0001:00 04F3:3140 Touchpad" "libinput 
 
 
 # background
-exec feh --bg-scale /home/$USER/.config/i3/images/bg_$(($RANDOM % 25)).jpg
+exec feh --bg-scale /home/$USER/.config/i3/images/bg_$(($RANDOM % 20)).jpg
 
 
 # Screenshots
