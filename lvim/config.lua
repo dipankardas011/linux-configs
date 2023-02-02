@@ -84,9 +84,11 @@ vim.keymap.set("n", "<F10>", ":lua require'dap-go'.step_over()<CR>")
 vim.keymap.set("n", "<F11>", ":lua require'dap-go'.step_into()<CR>")
 vim.keymap.set("n", "<F12>", ":lua require'dap-go'.step_out()<CR>")
 vim.keymap.set("n", "<F5>", ":lua require'dap-go'.continue()<CR>")
+vim.keymap.set("n", "<Space>F", ":Telescope current_buffer_fuzzy_find<CR>")
 
 -- used to start debugging test files
 vim.keymap.set("n", "<Space>DT", ":lua require'dap-go'.debug_test()<CR>")
+vim.keymap.set("n", "<Space>Dd", ":GoDoc<CR>")
 
 -- used to start normal debugging files
 -- <leader>bs
