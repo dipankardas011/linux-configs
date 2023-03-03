@@ -1,3 +1,4 @@
+
 # Configuration for Alacritty, the GPU enhanced terminal emulator
 
 # Any items in the `env` entry below will be added as
@@ -24,8 +25,8 @@ window:
   # Blank space added around the window in pixels. This padding is not scaled by
   # DPI and the specified value is always added at both opposing sides.
   padding:
-    x: 0
-    y: 0
+    x: 1
+    y: 1
 
   # Spread additional padding evenly around the terminal content.
   dynamic_padding: true
@@ -60,22 +61,24 @@ scrolling:
 
   # Number of lines the viewport will move for every line scrolled when
   # scrollback is enabled (history > 0).
-  multiplier: 3
+  # multiplier: 3
 
 # Font configuration (changes require restart)
 font:
   # The normal (roman) font face to use.
   # Style can be specified to pick a specific face.
   normal:
-    # family: Iosevka
-    # style: Italic
     family: FantasqueSansMono NF
     # family: Iosevka
+    # family: SF Mono
+    # family: JetBrains Mono
 
   # # The italic font face
-  # italic:
-    # family: Iosevka
-    # style: Italic
+  italic:
+    family: Iosevka
+    # family: Victor Mono
+    style: Bold Italic
+    # weight: bold
 
 
   # Point size of the font
@@ -455,7 +458,7 @@ live_config_reload: true
 
 debug:
   # Should display the render timer
-  render_timer: false
+  # render_timer: true
 
   # Keep the log file after quitting Alacritty.
   persistent_logging: false
@@ -483,4 +486,3 @@ debug:
 # Entries in shell.args are passed unmodified as arguments to the shell.
 shell:
   program: /bin/zsh
-

@@ -32,7 +32,7 @@ exec --no-startup-id dex-autostart --autostart --environment i3
 # screen before suspend. Use loginctl lock-session to lock your screen.
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork -i $HOME/.config/i3/images/lockscreen.png
 
-exec picom --experimental-backends -b
+exec picom -b
 # lock screen
 #exec --no-startup-id xss-lock -l /home/$USER/.config/i3/lock
 
