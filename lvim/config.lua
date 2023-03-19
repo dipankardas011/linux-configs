@@ -13,9 +13,12 @@ lvim.log.level = "warn"
 
 lvim.format_on_save.enabled = false
 -- lvim.colorscheme = "github_dimmed"
+lvim.colorscheme = "everforest"
+-- lvim.colorscheme = "github_dark"
 -- lvim.colorscheme = "github_dark_default"
 -- lvim.colorscheme = "darkplus"
-lvim.colorscheme = "tokyonight-night"
+
+-- lvim.colorscheme = "tokyonight-night"
 lvim.transparent_window = true
 
 vim.opt.termguicolors = true
@@ -23,7 +26,7 @@ vim.opt.shiftwidth = 2 -- the number of spaces inserted for each indentation
 vim.opt.tabstop = 2 -- insert 2 spaces for a tab
 vim.opt.cursorline = true -- highlight the current line
 vim.opt.number = true -- set numbered lines
-vim.opt.relativenumber = true -- set relative numbered lines
+-- vim.opt.relativenumber = true -- set relative numbered lines
 vim.opt.numberwidth = 4 -- set number column width to 2 {default 4}
 vim.opt.signcolumn = "yes" -- always show the sign column otherwise it would shift the text each time
 vim.opt.wrap = true -- display lines as one long line
@@ -116,9 +119,9 @@ lvim.builtin.treesitter.ensure_installed = {
   "java",
   "yaml",
   "hcl",
+  "go",
   "dockerfile"
 }
-
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enable = true
 lvim.plugins = {
@@ -158,7 +161,19 @@ lvim.plugins = {
   {
     "leoluz/nvim-dap-go",
     config = function ()
-      require("dap-go").setup()
+      require("dap-go").setup({
+        dap_configurations = {
+        {
+          -- Must be "go" or it will be ignored by the plugin
+          type = "go",
+          name = "Attach remote",
+          mode = "remote",
+          request = "attach",
+          program = "${file}",
+          port = "40404"
+        },
+      },
+      })
     end,
   },
   {
@@ -168,50 +183,10 @@ lvim.plugins = {
     end,
   },
   {"neovim/nvim-lspconfig"},
-  -- {
-  --   "mfussenegger/nvim-jdtls",
-  --   config = function ()
-  --     require('jdtls').start_or_attach({
-  --     -- The command that starts the language server
-  --     -- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
-  --     cmd = {
-
-  --       -- 💀
-  --       'java',
-  --       '-Declipse.application=org.eclipse.jdt.ls.core.id1',
-  --       '-Dosgi.bundles.defaultStartLevel=4',
-  --       '-Declipse.product=org.eclipse.jdt.ls.core.product',
-  --       '-Dlog.protocol=true',
-  --       '-Dlog.level=ALL',
-  --       '-Xms1g',
-  --       '--add-modules=ALL-SYSTEM',
-  --       '--add-opens', 'java.base/java.util=ALL-UNNAMED',
-  --       '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
-
-  --       -- 💀
-  --       '-jar', '/home/dipankar/.local/share/nvim/lsp_servers/jdtls/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar',
-  --       '-configuration', '/home/dipankar/.local/share/nvim/lsp_servers/jdtls/config_linux',
-  --       '-data', '/home/dipankar/projects/dev/java'
-  --     },
-
-  --     -- 💀
-  --     -- This is the default if not provided, you can remove it. Or adjust as needed.
-  --     -- One dedicated LSP server & client will be started per unique root_dir
-  --     root_dir = require('jdtls.setup').find_root({'.git', 'mvnw', 'gradlew'}),
-
-  --     -- Here you can configure eclipse.jdt.ls specific settings
-  --     -- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
-  --     -- for a list of options
-  --     settings = {
-  --       java = {
-  --       }
-  --     }
-  --   })
-  --   end
-  -- },
-  -- {"williamboman/nvim-lsp-installer"},
+  {"yorickpeterse/Autumn.vim"},
+  {"sainnhe/everforest"}
 }
-
+  -- {
 
 
 
@@ -273,22 +248,22 @@ lvim.plugins = {
 -- }
 
 -- -- set additional linters
-local linters = require "lvim.lsp.null-ls.linters"
-linters.setup {
-  { command = "flake8", filetypes = { "python" } },
-  {
-    -- each linter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
-    command = "shellcheck",
-    ---@usage arguments to pass to the formatter
-    -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
-    extra_args = { "--severity", "warning" },
-  },
-  {
-    command = "codespell",
-    ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
-    filetypes = { "javascript", "python" },
-  },
-}
+-- local linters = require "lvim.lsp.null-ls.linters"
+-- linters.setup {
+--   { command = "flake8", filetypes = { "python" } },
+--   {
+--     -- each linter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
+--     command = "shellcheck",
+--     ---@usage arguments to pass to the formatter
+--     -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
+--     extra_args = { "--severity", "warning" },
+--   },
+--   {
+--     command = "codespell",
+--     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
+--     filetypes = { "javascript", "python" },
+--   },
+-- }
 
 -- Additional Plugins
 
@@ -305,3 +280,4 @@ linters.setup {
 --     require("nvim-treesitter.highlight").attach(0, "bash")
 --   end,
 -- })
+
