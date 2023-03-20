@@ -199,7 +199,7 @@ mode "resize" {
 #     status_command echo '{"version":1}[[],'; xtitle -s -f '[{"full_text": "%s"}],'
 # }
 bar {
-  status_command i3status  | i3status-title-on-bar --color '#02FFBF' --fixed-width 30
+  status_command i3status | i3status-title-on-bar --color '#02FFBF' --fixed-width 30
   # status_command i3status
   i3bar_command i3bar --transparency 
   
@@ -288,3 +288,5 @@ exec while [ true ]; do currBat=$(cat /sys/class/power_supply/BAT0/capacity) && 
 # exec ~/.config/i3/colorblocks/launch.sh
 
 bindsym $mod+Shift+f exec thunar
+
+exec --no-startup-id "sleep 1; urxvt -e i3-msg restart"
