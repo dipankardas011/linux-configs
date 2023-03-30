@@ -42,7 +42,9 @@ exec --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+# bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+
+bindsym XF86AudioRaiseVolume exec --no-startup-id $HOME/.config/i3/scripts/volume.sh 100
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
@@ -290,3 +292,7 @@ exec while [ true ]; do currBat=$(cat /sys/class/power_supply/BAT0/capacity) && 
 bindsym $mod+Shift+f exec thunar
 
 exec --no-startup-id "sleep 1; urxvt -e i3-msg restart"
+
+bindsym $mod+Shift+g scratchpad show
+
+bindsym $mod+g move scratchpad
