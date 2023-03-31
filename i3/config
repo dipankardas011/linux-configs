@@ -42,10 +42,9 @@ exec --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-# bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
 
-bindsym XF86AudioRaiseVolume exec --no-startup-id $HOME/.config/i3/scripts/volume.sh 100
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id $HOME/.config/i3/scripts/volume.sh "UP"
+bindsym XF86AudioLowerVolume exec --no-startup-id $HOME/.config/i3/scripts/volume.sh "DOWN"
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
@@ -58,12 +57,8 @@ bindsym $mod+Return exec /bin/alacritty
 # kill focused window
 bindsym $mod+q kill
 
-# start dmenu (a program launcher)
-#bindsym $mod+d exec --no-startup-id "i3-dmenu-desktop --dmenu='dmenu -i'"
-# bindsym $mod+d exec rofi -modi drun -show drun -show-icons -theme 'nord' -font 'FantasqueSansMono NF 20'
-
+# rofi
 bindsym $mod+d exec rofi -no-config -no-lazy-grab -show drun -modi drun -show-icons -theme 'gruvbox-dark' -font 'FantasqueSansMono NF 15'
-# bindsym $mod+d exec rofi -no-config -no-lazy-grab -show drun -modi drun -theme ~/.config/i3/colorblocks/scripts/rofi/launcher.rasi
 
 bindsym $mod+Shift+d exec --no-startup-id "dmenu_run -nf '#7AA2F7' -nb '#282828' -sb '#4C4C4C' -sf '#EEEEEE' -fn 'FantasqueSansMono NF-15'"
 
@@ -174,12 +169,7 @@ bindsym $mod+Mod1+Shift+r exec "i3-nagbar -t warning -m 'You pressed the REBOOT 
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
         bindsym j resize shrink width 10 px or 10 ppt
         bindsym k resize grow height 10 px or 10 ppt
         bindsym l resize shrink height 10 px or 10 ppt
@@ -197,9 +187,7 @@ mode "resize" {
         bindsym $mod+r mode "default"
 }
 
-# bar {
-#     status_command echo '{"version":1}[[],'; xtitle -s -f '[{"full_text": "%s"}],'
-# }
+
 bar {
   status_command i3status | i3status-title-on-bar --color '#02FFBF' --fixed-width 30
   # status_command i3status
@@ -223,9 +211,6 @@ bar {
 }
 
 bindsym $mod+r mode "resize"
-# class                 border  bground text    indicator child_border
-# client.focused          #1A1B26 #302F2F #7AA2F7 #142115   #282828
-# client.focused          #7AA2F7 #302F2F #7AA2F7 #7AA2F7   #7AA2F7
 client.focused          #a7c080 #302F2F #a7c080 #a7c080   #a7c080
 client.focused_inactive #8C8C8C #4C4C4C #FFFFFF #4C4C4C   #8C8C8C
 client.unfocused        #4C4C4C #222222 #888888 #292D2E   #222222
@@ -235,7 +220,6 @@ client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 client.background       #FFFFFF
 
 
-# exec --no-startup-id polybar
 # trackpad
 exec --no-startup-id xinput set-prop "MSFT0001:00 04F3:3140 Touchpad" "libinput Tapping Enabled" 1
 exec --no-startup-id xinput set-prop "MSFT0001:00 04F3:3140 Touchpad" "libinput Natural Scrolling Enabled" 1
@@ -243,7 +227,6 @@ exec --no-startup-id xinput set-prop "MSFT0001:00 04F3:3140 Touchpad" "libinput 
 
 # background
 exec feh --bg-scale /home/$USER/.config/i3/images/bg_4.jpg
-# exec feh --bg-scale /home/$USER/.config/i3/images/bg_$(($RANDOM % $(ls $bg_folder | grep "bg_*" | wc -l))).jpg
 
 
 # Screenshots
@@ -282,12 +265,9 @@ popup_during_fullscreen smart
 
 # lock button
 bindsym $mod+Control+l exec i3lock --nofork -i $HOME/.config/i3/images/lockscreen.png
-# bindsym $mod+Control+l exec convert lock-forest.png RGB:- | i3lock --raw 1920x1080:rgb --image /dev/stdin
+
 # battery status
 exec while [ true ]; do currBat=$(cat /sys/class/power_supply/BAT0/capacity) && stats=$(cat /sys/class/power_supply/BAT0/status) && if [ $currBat -lt 20 -a $stats != 'Charging' ]; then notify-send "BATTERY LOW" "......\n.CURR BAT: ${currBat}\n\n\n\n🔌"; elif [ $currBat -gt 80 -a $stats = 'Charging' ]; then notify-send "BATTERY HIGH" "......\n.CURR BAT: ${currBat}\n\n\n\n🔌" ; fi ; sleep 1m; done
-
-# polybar
-# exec ~/.config/i3/colorblocks/launch.sh
 
 bindsym $mod+Shift+f exec thunar
 
