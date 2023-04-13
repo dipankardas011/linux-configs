@@ -22,11 +22,11 @@ lvim.colorscheme = "everforest"
 lvim.transparent_window = true
 
 vim.opt.termguicolors = true
-vim.opt.shiftwidth = 2 -- the number of spaces inserted for each indentation
-vim.opt.tabstop = 2 -- insert 2 spaces for a tab
+vim.opt.shiftwidth = 4 -- the number of spaces inserted for each indentation
+vim.opt.tabstop = 4 -- insert 2 spaces for a tab
 vim.opt.cursorline = true -- highlight the current line
 vim.opt.number = true -- set numbered lines
--- vim.opt.relativenumber = true -- set relative numbered lines
+vim.opt.relativenumber = true -- set relative numbered lines
 vim.opt.numberwidth = 4 -- set number column width to 2 {default 4}
 vim.opt.signcolumn = "yes" -- always show the sign column otherwise it would shift the text each time
 vim.opt.wrap = true -- display lines as one long line
@@ -106,89 +106,189 @@ lvim.builtin.nvimtree.setup.renderer.icons.show.git = true
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
-  "bash",
-  "c",
-  "javascript",
-  "json",
-  "lua",
-  "python",
-  "typescript",
-  "tsx",
-  "css",
-  "rust",
-  "java",
-  "yaml",
-  "hcl",
-  "go",
-  "dockerfile"
+    "bash",
+    "c",
+    "javascript",
+    "json",
+    "lua",
+    "python",
+    "typescript",
+    "tsx",
+    "css",
+    "rust",
+    "java",
+    "yaml",
+    "hcl",
+    "go",
+    "dockerfile"
 }
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enable = true
 lvim.plugins = {
-  {
-    "folke/trouble.nvim",
-    cmd = "TroubleToggle",
-  },
-  {
-    "ggandor/lightspeed.nvim",
-    event = "BufRead",
-  },
-  {
-    "fatih/vim-go",
-  },
-  {
-    "projekt0n/github-nvim-theme",
-  },
-  {
-    "folke/todo-comments.nvim",
-    event = "BufRead",
-    config = function()
-      require("todo-comments").setup()
-    end,
-  },
-  {
-    "williamboman/mason.nvim",
-  },
-  {
-    "mfussenegger/nvim-dap-ui",
-  },
-  {
-    "ldelossa/nvim-dap-projects",
-  },
-  {
-    "ldelossa/nvim-ide",
-  },
-  {
-    "leoluz/nvim-dap-go",
-    config = function ()
-      require("dap-go").setup({
-        dap_configurations = {
-        {
-          -- Must be "go" or it will be ignored by the plugin
-          type = "go",
-          name = "Attach remote",
-          mode = "remote",
-          request = "attach",
-          program = "${file}",
-          port = "40404"
-        },
-      },
-      })
-    end,
-  },
-  {
-    "norcalli/nvim-colorizer.lua",
-    config = function ()
-      require("colorizer").setup()
-    end,
-  },
-  {"neovim/nvim-lspconfig"},
-  {"yorickpeterse/Autumn.vim"},
-  {"sainnhe/everforest"}
+    {
+        "folke/trouble.nvim",
+        cmd = "TroubleToggle",
+    },
+    {
+        "ggandor/lightspeed.nvim",
+        event = "BufRead",
+    },
+    {
+        "fatih/vim-go",
+    },
+    {
+        "projekt0n/github-nvim-theme",
+    },
+    {
+        "folke/todo-comments.nvim",
+        event = "BufRead",
+        config = function()
+            require("todo-comments").setup()
+        end,
+    },
+    {
+        "williamboman/mason.nvim",
+    },
+    {
+        "mfussenegger/nvim-dap-ui",
+    },
+    {
+        "ldelossa/nvim-dap-projects",
+    },
+    {
+        "ldelossa/nvim-ide",
+    },
+    {
+        "leoluz/nvim-dap-go",
+        config = function ()
+            require("dap-go").setup({
+                dap_configurations = {
+                    {
+                        -- Must be "go" or it will be ignored by the plugin
+                        type = "go",
+                        name = "Attach remote",
+                        mode = "remote",
+                        request = "attach",
+                        program = "${file}",
+                        port = "40404"
+                    },
+                },
+            })
+        end,
+    },
+    {
+        "norcalli/nvim-colorizer.lua",
+        config = function ()
+            require("colorizer").setup()
+        end,
+    },
+    {"neovim/nvim-lspconfig"},
+    {"yorickpeterse/Autumn.vim"},
+    {"sainnhe/everforest"},
+    {"lukas-reineke/indent-blankline.nvim",
+        config = function ()
+            require("indent_blankline").setup {
+                -- for example, context is off by default, use this to turn it on
+                show_current_context = true,
+                space_char_blankline = " ",
+            }
+        end},
+    {'iamcco/markdown-preview.nvim'},
+    {
+        "windwp/nvim-spectre",
+        event = "BufRead",
+        config = function()
+            require("spectre").setup()
+        end,
+    },
+    {
+        "echasnovski/mini.map",
+        branch = "stable",
+        config = function()
+            require('mini.map').setup()
+            local map = require('mini.map')
+            map.setup({
+                integrations = {
+                    map.gen_integration.builtin_search(),
+                    map.gen_integration.diagnostic({
+                        error = 'DiagnosticFloatingError',
+                        warn  = 'DiagnosticFloatingWarn',
+                        info  = 'DiagnosticFloatingInfo',
+                        hint  = 'DiagnosticFloatingHint',
+                    }),
+                },
+                symbols = {
+                    encode = map.gen_encode_symbols.dot('4x2'),
+                },
+                window = {
+                    side = 'right',
+                    width = 20, -- set to 1 for a pure scrollbar :)
+                    winblend = 15,
+                    show_integration_count = false,
+                },
+            })
+        end
+    },
+    {
+        "romgrk/nvim-treesitter-context",
+        config = function()
+            require("treesitter-context").setup{
+                enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+                throttle = true, -- Throttles plugin updates (may improve performance)
+                max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+                patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
+                    -- For all filetypes
+                    -- Note that setting an entry here replaces all other patterns for this entry.
+                    -- By setting the 'default' entry below, you can control which nodes you want to
+                    -- appear in the context window.
+                    default = {
+                        'class',
+                        'function',
+                        'method',
+                    },
+                },
+            }
+        end
+    },
+    {
+        "tzachar/cmp-tabnine",
+        run = "./install.sh",
+        requires = "hrsh7th/nvim-cmp",
+        event = "InsertEnter",
+    },
+    {
+        "iamcco/markdown-preview.nvim",
+        run = "cd app && npm install",
+        ft = "markdown",
+        config = function()
+            vim.g.mkdp_auto_start = 1
+        end,
+    },
+    {
+        "ethanholz/nvim-lastplace",
+        event = "BufRead",
+        config = function()
+            require("nvim-lastplace").setup({
+                lastplace_ignore_buftype = { "quickfix", "nofile", "help" },
+                lastplace_ignore_filetype = {
+                    "gitcommit", "gitrebase", "svn", "hgcommit",
+                },
+                lastplace_open_folds = true,
+            })
+        end,
+    },
+    {
+        "turbio/bracey.vim",
+        cmd = {"Bracey", "BracyStop", "BraceyReload", "BraceyEval"},
+        run = "npm install --prefix server",
+    },
+
 }
-  -- {
 
 
+vim.opt.list = true
+vim.opt.listchars:append "space:⋅"
+-- vim.opt.listchars:append "eol:↴"
 
 -- generic LSP settings
 

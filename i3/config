@@ -198,7 +198,7 @@ bar {
   padding 5px 0 0 0
 
   colors {
-    background #272e33AF
+    background #272e335F
     statusline #d3c6aa
     separator #d699b6
     # <colorclass> <border> <background> <text>
@@ -211,8 +211,8 @@ bar {
 }
 
 bindsym $mod+r mode "resize"
-client.focused          #a7c080 #302F2F #a7c080 #a7c080   #a7c080
-client.focused_inactive #8C8C8C #4C4C4C #FFFFFF #4C4C4C   #8C8C8C
+client.focused          #a7c080 #272e33FF #a7c080 #272e33FF   #272e33FF
+client.focused_inactive #8C8C8C #272e33FF #FFFFFF #272e33FF   #272e33FF
 client.unfocused        #4C4C4C #222222 #888888 #292D2E   #222222
 client.urgent           #EC69A0 #DB3279 #FFFFFF #DB3279   #DB3279
 client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
@@ -276,3 +276,5 @@ exec --no-startup-id "sleep 1; urxvt -e i3-msg restart"
 bindsym $mod+Shift+g scratchpad show
 
 bindsym $mod+g move scratchpad
+
+
