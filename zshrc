@@ -7,7 +7,9 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+
 ZSH_THEME="robbyrussell"
+
 NPM_CONFIG_PREFIX='~/.npm-global'
 KUBE_PS1_SEPARATOR=" |"
 KUBE_PS1_PREFIX_COLOR="yellow"
@@ -125,6 +127,7 @@ alias la='ls -la'
 alias gpo='git push origin'
 alias gplo='git pull origin'
 alias cls='clear'
+
 alias vi='lvim'
 
 alias onedrivePull='rclone sync -P onedrive: ~/Onedrive'
@@ -134,23 +137,9 @@ alias gdrivePush='rclone sync -P ~/GoogleDrive gdrive:'
 
 export PATH=$PATH:/home/dipankar/.linkerd2/bin
 
-export PATH=$PATH:/home/dipankar/anaconda3/bin
 export pager="delta"
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/dipankar/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/dipankar/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/dipankar/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/dipankar/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
+
 export PATH=$PATH:/home/dipankar/Desktop/OPS/kubernetes/third_party/etcd
 
 
@@ -196,5 +185,22 @@ alias ls='lsd'
 
 alias pynbtopdf='jupyter-nbconvert --to pdf'
 
+alias mirrordisplay='xrandr --output "eDP-1" --auto --output "HDMI-1" --same-as "eDP-1"'
+
+alias normaldisplay='xrandr --output "eDP-1" --auto'
+
 alias conservativemode='sudo sed -i s/STOP_CHARGE_THRESH_BAT0=0/STOP_CHARGE_THRESH_BAT0=1/g /etc/tlp.conf && sudo tlp start'
 alias normalmode='sudo sed -i s/STOP_CHARGE_THRESH_BAT0=1/STOP_CHARGE_THRESH_BAT0=0/g /etc/tlp.conf && sudo tlp start'
+
+alias batmode='sudo sed -i s/TLP_DEFAULT_MODE=AC/TLP_DEFAULT_MODE=BAT/g /etc/tlp.conf && sudo tlp start'
+
+alias acmode='sudo sed -i s/TLP_DEFAULT_MODE=BAT/TLP_DEFAULT_MODE=AC/g /etc/tlp.conf && sudo tlp start'
+
+export GPG_TTY=$(tty)
+fpath=($fpath "/home/dipankar/.zfunctions")
+
+export PATH="$PATH:$HOME/.npm-global/bin:$HOME/.cargo/env:$HOME/.wasmedge/env"
+# Set typewritten ZSH as a prompt
+# autoload -U promptinit; promptinit
+# prompt typewritten
+. "/home/dipankar/.wasmedge/env"
