@@ -19,8 +19,8 @@ lvim.colorscheme = "everforest"
 -- lvim.colorscheme = "darkplus"
 
 -- lvim.colorscheme = "tokyonight-night"
-lvim.transparent_window = true
-
+-- lvim.transparent_window = true
+lvim.lsp.buffer_mappings.normal_mode['H'] = { vim.lsp.buf.hover, "Show documentation" }
 vim.opt.termguicolors = true
 vim.opt.shiftwidth = 4 -- the number of spaces inserted for each indentation
 vim.opt.tabstop = 4 -- insert 2 spaces for a tab
@@ -40,12 +40,23 @@ lvim.builtin.lualine.sections.lualine_a = { "mode" }
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
 -- add your own keymapping
+lvim.keys.normal_mode["<C-q>"] = ":q<cr>"
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
 -- lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
 -- unmap a default keymapping
--- vim.keymap.del("n", "<C-Up>")
--- override a default keymapping
+
+for _, mode in pairs({'n','i','v', 'x'}) do
+    for _, key in pairs({'<Up>','<Down>','<Left>','<Right>'}) do
+        vim.keymap.set(mode, key, '<Nop>', { noremap = true, silent = true })
+    end
+end
+
+-- vim.keymap.set('n', '<Up>', '<Nop>', { noremap = true, silent = true })
+-- vim.keymap.set('n', '<Down>', '<Nop>', { noremap = true, silent = true })
+-- vim.keymap.set('n', '<Left>', '<Nop>', { noremap = true, silent = true })
+-- vim.keymap.set('n', '<Right>', '<Nop>', { noremap = true, silent = true })
+-- -- override a default keymapping
 -- lvim.keys.normal_mode["<C-q>"] = ":q<cr>" -- or vim.keymap.set("n", "<C-q>", ":q<cr>" )
 
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
@@ -71,16 +82,20 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- lvim.builtin.theme.options.style = "storm"
 
 -- Use which-key to add extra bindings with the leader-key prefix
--- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
--- lvim.builtin.which_key.mappings["t"] = {
---   name = "+Trouble",
---   r = { "<cmd>Trouble lsp_references<cr>", "References" },
---   f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
---   d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
---   q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
---   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
---   w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
--- }
+
+----
+--- <leader-H> for quick short
+----
+lvim.builtin.which_key.mappings["h"] = { "<cmd>Telescope projects<CR>", "Projects" }
+lvim.builtin.which_key.mappings["t"] = {
+  name = "+Trouble",
+  r = { "<cmd>Trouble lsp_references<cr>", "References" },
+  f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
+  d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
+  q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
+  l = { "<cmd>Trouble loclist<cr>", "LocationList" },
+  w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
+}
 
 -- Debugging Keymaps
 vim.keymap.set("n", "<F10>", ":lua require'dap-go'.step_over()<CR>")
@@ -91,7 +106,7 @@ vim.keymap.set("n", "<Space>F", ":Telescope current_buffer_fuzzy_find<CR>")
 
 -- used to start debugging test files
 vim.keymap.set("n", "<Space>DT", ":lua require'dap-go'.debug_test()<CR>")
-vim.keymap.set("n", "<Space>Dd", ":GoDoc<CR>")
+-- vim.keymap.set("n", "<Space>Dd", ":GoDoc<CR>")
 
 -- used to start normal debugging files
 -- <leader>bs
@@ -282,7 +297,6 @@ lvim.plugins = {
         cmd = {"Bracey", "BracyStop", "BraceyReload", "BraceyEval"},
         run = "npm install --prefix server",
     },
-
 }
 
 

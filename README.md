@@ -23,3 +23,13 @@ https://github.com/adi1090x/polybar-themes
 
 > **NOTE**
 > Before running `./install.sh` do make backups
+
+
+to make the capslock to esc
+
+> **Notes**
+```bash
+vi /etc/X11/xorg.conf.d/00-keyboard.conf
+
+localectl set-x11-keymap in '' '' caps:escape_shifted_capslock
+```
