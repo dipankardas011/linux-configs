@@ -33,3 +33,17 @@ vi /etc/X11/xorg.conf.d/00-keyboard.conf
 
 localectl set-x11-keymap in '' '' caps:escape_shifted_capslock
 ```
+
+```bash
+# for the fonts install the required ones
+cd ~/.local/share/fonts && curl -fLO https://github.com/ryanoasis/nerd-fonts/raw/HEAD/patched-fonts/DroidSansMono/DroidSansMNerdFont-Regular.otf
+git clone https://github.com/ronniedroid/getnf.git
+cd getnf
+chmod +x ./install.sh
+./install.sh
+
+# install lates firacode as well
+
+fc-cache -f -v
+.config/fontconfig/fonts.conf
+```
