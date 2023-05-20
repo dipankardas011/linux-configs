@@ -19,7 +19,7 @@ lvim.colorscheme = "everforest"
 -- lvim.colorscheme = "darkplus"
 
 -- lvim.colorscheme = "tokyonight-night"
--- lvim.transparent_window = true
+lvim.transparent_window = true
 lvim.lsp.buffer_mappings.normal_mode['H'] = { vim.lsp.buf.hover, "Show documentation" }
 vim.opt.termguicolors = true
 vim.opt.shiftwidth = 4 -- the number of spaces inserted for each indentation
@@ -86,26 +86,26 @@ end
 ----
 --- <leader-H> for quick short
 ----
-lvim.builtin.which_key.mappings["h"] = { "<cmd>Telescope projects<CR>", "Projects" }
+lvim.builtin.which_key.mappings["k"] = { "<cmd>Telescope projects<CR>", "Projects" }
 lvim.builtin.which_key.mappings["t"] = {
-  name = "+Trouble",
-  r = { "<cmd>Trouble lsp_references<cr>", "References" },
-  f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
-  d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
-  q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
-  l = { "<cmd>Trouble loclist<cr>", "LocationList" },
-  w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
+    name = "+Trouble",
+    r = { "<cmd>Trouble lsp_references<cr>", "References" },
+    f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
+    d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
+    q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
+    l = { "<cmd>Trouble loclist<cr>", "LocationList" },
+    w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
 }
 
 -- Debugging Keymaps
-vim.keymap.set("n", "<F10>", ":lua require'dap-go'.step_over()<CR>")
-vim.keymap.set("n", "<F11>", ":lua require'dap-go'.step_into()<CR>")
-vim.keymap.set("n", "<F12>", ":lua require'dap-go'.step_out()<CR>")
-vim.keymap.set("n", "<F5>", ":lua require'dap-go'.continue()<CR>")
+-- vim.keymap.set("n", "<F10>", ":lua require'dap-go'.step_over()<CR>")
+-- vim.keymap.set("n", "<F11>", ":lua require'dap-go'.step_into()<CR>")
+-- vim.keymap.set("n", "<F12>", ":lua require'dap-go'.step_out()<CR>")
+-- vim.keymap.set("n", "<F5>", ":lua require'dap-go'.continue()<CR>")
 vim.keymap.set("n", "<Space>F", ":Telescope current_buffer_fuzzy_find<CR>")
 
 -- used to start debugging test files
-vim.keymap.set("n", "<Space>DT", ":lua require'dap-go'.debug_test()<CR>")
+-- vim.keymap.set("n", "<Space>DT", ":lua require'dap-go'.debug_test()<CR>")
 -- vim.keymap.set("n", "<Space>Dd", ":GoDoc<CR>")
 
 -- used to start normal debugging files
@@ -148,9 +148,9 @@ lvim.plugins = {
         "ggandor/lightspeed.nvim",
         event = "BufRead",
     },
-    {
-        "fatih/vim-go",
-    },
+    -- {
+    --     "fatih/vim-go",
+    -- },
     {
         "projekt0n/github-nvim-theme",
     },
@@ -216,34 +216,34 @@ lvim.plugins = {
             require("spectre").setup()
         end,
     },
-    {
-        "echasnovski/mini.map",
-        branch = "stable",
-        config = function()
-            require('mini.map').setup()
-            local map = require('mini.map')
-            map.setup({
-                integrations = {
-                    map.gen_integration.builtin_search(),
-                    map.gen_integration.diagnostic({
-                        error = 'DiagnosticFloatingError',
-                        warn  = 'DiagnosticFloatingWarn',
-                        info  = 'DiagnosticFloatingInfo',
-                        hint  = 'DiagnosticFloatingHint',
-                    }),
-                },
-                symbols = {
-                    encode = map.gen_encode_symbols.dot('4x2'),
-                },
-                window = {
-                    side = 'right',
-                    width = 20, -- set to 1 for a pure scrollbar :)
-                    winblend = 15,
-                    show_integration_count = false,
-                },
-            })
-        end
-    },
+    -- {
+    --     "echasnovski/mini.map",
+    --     branch = "stable",
+    --     config = function()
+    --         require('mini.map').setup()
+    --         local map = require('mini.map')
+    --         map.setup({
+    --             integrations = {
+    --                 map.gen_integration.builtin_search(),
+    --                 map.gen_integration.diagnostic({
+    --                     error = 'DiagnosticFloatingError',
+    --                     warn  = 'DiagnosticFloatingWarn',
+    --                     info  = 'DiagnosticFloatingInfo',
+    --                     hint  = 'DiagnosticFloatingHint',
+    --                 }),
+    --             },
+    --             symbols = {
+    --                 encode = map.gen_encode_symbols.dot('4x2'),
+    --             },
+    --             window = {
+    --                 side = 'right',
+    --                 width = 20, -- set to 1 for a pure scrollbar :)
+    --                 winblend = 15,
+    --                 show_integration_count = false,
+    --             },
+    --         })
+    --     end
+    -- },
     {
         "romgrk/nvim-treesitter-context",
         config = function()
@@ -256,11 +256,11 @@ lvim.plugins = {
                     -- Note that setting an entry here replaces all other patterns for this entry.
                     -- By setting the 'default' entry below, you can control which nodes you want to
                     -- appear in the context window.
-                    default = {
-                        'class',
-                        'function',
-                        'method',
-                    },
+                    -- default = {
+                    --     'class',
+                    --     'function',
+                    --     'method',
+                    -- },
                 },
             }
         end
@@ -293,10 +293,9 @@ lvim.plugins = {
         end,
     },
     {
-        "turbio/bracey.vim",
-        cmd = {"Bracey", "BracyStop", "BraceyReload", "BraceyEval"},
-        run = "npm install --prefix server",
+        "karb94/neoscroll.nvim",
     },
+    {"sebdah/vim-delve"},
 }
 
 
