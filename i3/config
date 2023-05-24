@@ -30,11 +30,10 @@ exec --no-startup-id dex-autostart --autostart --environment i3
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
+# exec --no-startup-id xss-lock --transfer-sleep-lock -- betterlockscreen -l
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork -i $HOME/.config/i3/images/lockscreen.png
 
 exec picom -b
-# lock screen
-#exec --no-startup-id xss-lock -l /home/$USER/.config/i3/lock
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -247,19 +246,19 @@ bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5 &&  notify-send "Bri
 bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5 && notify-send "Brightness level: $(light -G -u low )" #decrease screen brightness
 
 # window title icon
-#for_window [all] title_window_icon on
+# for_window [all] title_window_icon on
 
 gaps inner 10
 gaps outer 10
 
 # border size
-for_window [all] border pixel 2
+for_window [all] border pixel 0
 
 smart_gaps on
 
 smart_gaps inverse_outer
 
-# smart_borders on
+smart_borders on
 
 # popups during fullscreen
 popup_during_fullscreen smart
@@ -269,6 +268,7 @@ bindsym $mod+Control+l exec i3lock --nofork -i $HOME/.config/i3/images/lockscree
 
 # battery status
 exec while [ true ]; do currBat=$(cat /sys/class/power_supply/BAT0/capacity) && stats=$(cat /sys/class/power_supply/BAT0/status) && if [ $currBat -lt 20 -a $stats != 'Charging' ]; then notify-send "BATTERY LOW" "......\n.CURR BAT: ${currBat}\n\n\n\n🔌"; elif [ $currBat -gt 80 -a $stats = 'Charging' ]; then notify-send "BATTERY HIGH" "......\n.CURR BAT: ${currBat}\n\n\n\n🔌" ; fi ; sleep 1m; done
+
 
 bindsym $mod+Shift+f exec thunar
 
