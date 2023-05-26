@@ -231,14 +231,14 @@ exec feh --bg-scale /home/$USER/.config/i3/images/bg_4.jpg
 
 # Screenshots
 bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date +%d-%m-%Y:%H:%M:%S).png"
-bindsym $mod+Print exec --no-startup-id maim -o --window $(xdotool getactivewindow) "/home/$USER/Pictures/$(date +%d-%m-%Y:%H:%M:%S).png"
+bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/$USER/Pictures/$(date +%d-%m-%Y:%H:%M:%S).png"
 bindsym Shift+Print exec --no-startup-id maim -o --select "/home/$USER/Pictures/$(date +%d-%m-%Y:%H:%M:%S).png"
 
 bindsym $mod+Shift+i exec gnome-control-center
 
 ## Clipboard Screenshots
-bindsym Ctrl+Print exec --no-startup-id maim -o | xclip -selection clipboard -t image/png
-bindsym Ctrl+$mod+Print exec --no-startup-id maim  -o --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
+bindsym Ctrl+Print exec --no-startup-id maim | xclip -selection clipboard -t image/png
+bindsym Ctrl+$mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
 bindsym Ctrl+Shift+Print exec --no-startup-id maim -o --select | xclip -selection clipboard -t image/png
 
 #brightness
@@ -265,10 +265,6 @@ popup_during_fullscreen smart
 
 # lock button
 bindsym $mod+Control+l exec i3lock --nofork -i $HOME/.config/i3/images/lockscreen.png
-
-# battery status
-exec while [ true ]; do currBat=$(cat /sys/class/power_supply/BAT0/capacity) && stats=$(cat /sys/class/power_supply/BAT0/status) && if [ $currBat -lt 20 -a $stats != 'Charging' ]; then notify-send "BATTERY LOW" "......\n.CURR BAT: ${currBat}\n\n\n\n🔌"; elif [ $currBat -gt 80 -a $stats = 'Charging' ]; then notify-send "BATTERY HIGH" "......\n.CURR BAT: ${currBat}\n\n\n\n🔌" ; fi ; sleep 1m; done
-
 
 bindsym $mod+Shift+f exec thunar
 
