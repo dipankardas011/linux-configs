@@ -277,4 +277,4 @@ bindsym $mod+g move scratchpad
 
 
 # battery status
-exec while [ true ]; do currBat=$(cat /sys/class/power_supply/BAT0/capacity) && stats=$(cat /sys/class/power_supply/BAT0/status) && if [ $currBat -lt 20 -a $stats != 'Charging' ]; then notify-send "BATTERY LOW" "......\n.CURR BAT: ${currBat}🔌"; fi ; sleep 1m; done
+exec while [ true ]; do currBat=$(cat /sys/class/power_supply/BAT0/capacity) && stats=$(cat /sys/class/power_supply/BAT0/status) && if [ $currBat -lt 20 -a $stats = 'Discharging' ]; then notify-send "BATTERY LOW" "......\n.CURR BAT: ${currBat}🔌"; fi ; sleep 1m; done
