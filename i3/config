@@ -33,7 +33,8 @@ exec --no-startup-id dex-autostart --autostart --environment i3
 # exec --no-startup-id xss-lock --transfer-sleep-lock -- betterlockscreen -l
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork -i $HOME/.config/i3/images/lockscreen.png
 
-exec picom -b
+exec --no-startup-id picom -b
+exec --no-startup-id copyq
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -275,3 +276,5 @@ bindsym $mod+Shift+g scratchpad show
 bindsym $mod+g move scratchpad
 
 
+# battery status
+exec while [ true ]; do currBat=$(cat /sys/class/power_supply/BAT0/capacity) && stats=$(cat /sys/class/power_supply/BAT0/status) && if [ $currBat -lt 20 -a $stats != 'Charging' ]; then notify-send "BATTERY LOW" "......\n.CURR BAT: ${currBat}🔌"; fi ; sleep 1m; done

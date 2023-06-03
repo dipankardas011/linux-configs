@@ -7,7 +7,13 @@ stats=$(cat /sys/class/power_supply/BAT0/status)
 tt=$(date +'%H:%M %d-%m-%y')
 
 echo "--------"
-if [[ $currBat -lt 80 && $stats = 'Discharging' ]]; then
+if [[ $currBat -le 10 && $stats = 'Discharging' ]]; then
+    # battery low
+    notify-send "BATTERY ULTRA LOW" "......\n.CURR BAT: ${currBat} 🔌🔌"
+elif [[ $currBat -le 30 && $stats = 'Discharging' ]]; then
+    # battery low
+    notify-send "BATTERY LOW" "......\n.CURR BAT: ${currBat} 🔌"
+elif [[ $currBat -lt 80 && $stats = 'Discharging' ]]; then
     # normal mode
     echo "${tt} start charging ${currBat}"
     sudo sed -i s/STOP_CHARGE_THRESH_BAT0=1/STOP_CHARGE_THRESH_BAT0=0/g /etc/tlp.conf
@@ -17,7 +23,7 @@ elif [[ $currBat -lt 80 && $stats = 'Not charging' ]]; then
     echo "${tt} start charging ${currBat}"
     sudo sed -i s/STOP_CHARGE_THRESH_BAT0=1/STOP_CHARGE_THRESH_BAT0=0/g /etc/tlp.conf
     sudo tlp start
-elif [[ $currBat -gt 85 && $stats = 'Charging' ]]; then
+elif [[ $currBat -ge 85 && $stats = 'Charging' ]]; then
     # conservative mode
     echo "${tt} stop charging ${currBat}"
     sudo sed -i s/STOP_CHARGE_THRESH_BAT0=0/STOP_CHARGE_THRESH_BAT0=1/g /etc/tlp.conf
