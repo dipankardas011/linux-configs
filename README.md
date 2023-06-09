@@ -47,3 +47,16 @@ chmod +x ./install.sh
 fc-cache -f -v
 .config/fontconfig/fonts.conf
 ```
+
+
+```bash
+sudo dnf install -y autoconf automake cairo-devel fontconfig gcc libev-de
+vel libjpeg-turbo-devel libXinerama libxkbcommon-devel libxkbcommon-x11-devel li
+bXrandr pam-devel pkgconf xcb-util-image-devel xcb-util-xrm-devel
+
+git clone https://github.com/Raymo111/i3lock-color.git\ncd i3lock-color
+./build.sh
+./install-i3lock-color.sh
+
+betterlockscreen -u ~/.config/i3/images/bg_6.jpg
+```

@@ -8,49 +8,19 @@ an executable
 ]]
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 
--- general
-lvim.log.level = "warn"
-
-lvim.format_on_save.enabled = false
--- lvim.colorscheme = "github_dimmed"
-lvim.colorscheme = "everforest"
--- lvim.colorscheme = "github_dark"
--- lvim.colorscheme = "github_dark_default"
--- lvim.colorscheme = "darkplus"
-
--- lvim.colorscheme = "tokyonight-night"
-lvim.transparent_window = true
-lvim.lsp.buffer_mappings.normal_mode['H'] = { vim.lsp.buf.hover, "Show documentation" }
-vim.opt.termguicolors = true
-vim.opt.shiftwidth = 4 -- the number of spaces inserted for each indentation
-vim.opt.tabstop = 4 -- insert 2 spaces for a tab
-vim.opt.cursorline = true -- highlight the current line
-vim.opt.number = true -- set numbered lines
-vim.opt.relativenumber = true -- set relative numbered lines
-vim.opt.numberwidth = 4 -- set number column width to 2 {default 4}
-vim.opt.signcolumn = "yes" -- always show the sign column otherwise it would shift the text each time
-vim.opt.wrap = true -- display lines as one long line
-vim.opt.spell = true
-vim.opt.spelllang = "en"
-
--- to disable icons and use a minimalist setup, uncomment the following
--- lvim.use_icons = false
-lvim.builtin.lualine.sections.lualine_a = { "mode" }
-
--- keymappings [view all the defaults by pressing <leader>Lk]
-lvim.leader = "space"
+---
 -- add your own keymapping
-lvim.keys.normal_mode["<C-q>"] = ":q<cr>"
-lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
+-- lvim.keys.normal_mode["<C-q>"] = ":q<cr>"
+-- lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
 -- lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
 -- unmap a default keymapping
 
-for _, mode in pairs({'n','i','v', 'x'}) do
-    for _, key in pairs({'<Up>','<Down>','<Left>','<Right>'}) do
-        vim.keymap.set(mode, key, '<Nop>', { noremap = true, silent = true })
-    end
-end
+-- for _, mode in pairs({'n','i','v', 'x'}) do
+--     for _, key in pairs({'<Up>','<Down>','<Left>','<Right>'}) do
+--         vim.keymap.set(mode, key, '<Nop>', { noremap = true, silent = true })
+--     end
+-- end
 
 -- vim.keymap.set('n', '<Up>', '<Nop>', { noremap = true, silent = true })
 -- vim.keymap.set('n', '<Down>', '<Nop>', { noremap = true, silent = true })
@@ -86,6 +56,34 @@ end
 ----
 --- <leader-H> for quick short
 ----
+
+
+
+-- general
+lvim.log.level = "warn"
+
+lvim.format_on_save.enabled = false
+-- lvim.colorscheme = "gruvbox-material"
+lvim.colorscheme = "everforest"
+
+lvim.transparent_window = true
+lvim.lsp.buffer_mappings.normal_mode['H'] = { vim.lsp.buf.hover, "Show documentation" }
+vim.opt.termguicolors = true
+vim.opt.shiftwidth = 4 -- the number of spaces inserted for each indentation
+vim.opt.tabstop = 4 -- insert 2 spaces for a tab
+vim.opt.cursorline = true -- highlight the current line
+vim.opt.number = true -- set numbered lines
+vim.opt.relativenumber = true -- set relative numbered lines
+vim.opt.numberwidth = 4 -- set number column width to 2 {default 4}
+vim.opt.signcolumn = "yes" -- always show the sign column otherwise it would shift the text each time
+vim.opt.wrap = true -- display lines as one long line
+vim.opt.spell = true
+vim.opt.spelllang = "en"
+
+lvim.builtin.lualine.sections.lualine_a = { "mode" }
+-- keymappings [view all the defaults by pressing <leader>Lk]
+lvim.leader = "space"
+
 lvim.builtin.which_key.mappings["k"] = { "<cmd>Telescope projects<CR>", "Projects" }
 lvim.builtin.which_key.mappings["t"] = {
     name = "+Trouble",
@@ -97,19 +95,8 @@ lvim.builtin.which_key.mappings["t"] = {
     w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
 }
 
--- Debugging Keymaps
--- vim.keymap.set("n", "<F10>", ":lua require'dap-go'.step_over()<CR>")
--- vim.keymap.set("n", "<F11>", ":lua require'dap-go'.step_into()<CR>")
--- vim.keymap.set("n", "<F12>", ":lua require'dap-go'.step_out()<CR>")
--- vim.keymap.set("n", "<F5>", ":lua require'dap-go'.continue()<CR>")
 vim.keymap.set("n", "<Space>F", ":Telescope current_buffer_fuzzy_find<CR>")
 
--- used to start debugging test files
--- vim.keymap.set("n", "<Space>DT", ":lua require'dap-go'.debug_test()<CR>")
--- vim.keymap.set("n", "<Space>Dd", ":GoDoc<CR>")
-
--- used to start normal debugging files
--- <leader>bs
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
@@ -148,9 +135,9 @@ lvim.plugins = {
         "ggandor/lightspeed.nvim",
         event = "BufRead",
     },
-    -- {
-    --     "fatih/vim-go",
-    -- },
+    {
+        "fatih/vim-go",
+    },
     {
         "projekt0n/github-nvim-theme",
     },
@@ -163,9 +150,6 @@ lvim.plugins = {
     },
     {
         "williamboman/mason.nvim",
-    },
-    {
-        "mfussenegger/nvim-dap-ui",
     },
     {
         "ldelossa/nvim-dap-projects",
@@ -198,8 +182,6 @@ lvim.plugins = {
         end,
     },
     {"neovim/nvim-lspconfig"},
-    {"yorickpeterse/Autumn.vim"},
-    {"sainnhe/everforest"},
     {"lukas-reineke/indent-blankline.nvim",
         config = function ()
             require("indent_blankline").setup {
@@ -216,34 +198,6 @@ lvim.plugins = {
             require("spectre").setup()
         end,
     },
-    -- {
-    --     "echasnovski/mini.map",
-    --     branch = "stable",
-    --     config = function()
-    --         require('mini.map').setup()
-    --         local map = require('mini.map')
-    --         map.setup({
-    --             integrations = {
-    --                 map.gen_integration.builtin_search(),
-    --                 map.gen_integration.diagnostic({
-    --                     error = 'DiagnosticFloatingError',
-    --                     warn  = 'DiagnosticFloatingWarn',
-    --                     info  = 'DiagnosticFloatingInfo',
-    --                     hint  = 'DiagnosticFloatingHint',
-    --                 }),
-    --             },
-    --             symbols = {
-    --                 encode = map.gen_encode_symbols.dot('4x2'),
-    --             },
-    --             window = {
-    --                 side = 'right',
-    --                 width = 20, -- set to 1 for a pure scrollbar :)
-    --                 winblend = 15,
-    --                 show_integration_count = false,
-    --             },
-    --         })
-    --     end
-    -- },
     {
         "romgrk/nvim-treesitter-context",
         config = function()
@@ -265,15 +219,15 @@ lvim.plugins = {
             }
         end
     },
-    {
-        "tzachar/cmp-tabnine",
-        run = "./install.sh",
-        requires = "hrsh7th/nvim-cmp",
-        event = "InsertEnter",
-    },
+    -- {
+    --     "tzachar/cmp-tabnine",
+    --     build = "./install.sh",
+    --     dependencies = "hrsh7th/nvim-cmp",
+    --     event = "InsertEnter",
+    -- },
     {
         "iamcco/markdown-preview.nvim",
-        run = "cd app && npm install",
+        build = "cd app && npm install",
         ft = "markdown",
         config = function()
             vim.g.mkdp_auto_start = 1
@@ -296,12 +250,29 @@ lvim.plugins = {
         "karb94/neoscroll.nvim",
     },
     {"sebdah/vim-delve"},
+    {"rose-pine/neovim"},
+    {
+        "sainnhe/everforest",
+        config = function ()
+            vim.g.everforest_diagnostic_text_highlight=1
+            vim.g.everforest_diagnostic_line_highlight=1
+            vim.g.everforest_diagnostic_virtual_text='highlighted'
+        end,
+    },
+    {
+        "sainnhe/gruvbox-material",
+        config = function ()
+            vim.g.gruvbox_material_diagnostic_text_highlight=1
+            vim.g.gruvbox_material_diagnostic_line_highlight=1
+            vim.g.gruvbox_material_diagnostic_virtual_text='highlighted'
+        end,
+    },
 }
 
 
-vim.opt.list = true
+vim.opt.list = false
 vim.opt.listchars:append "space:⋅"
--- vim.opt.listchars:append "eol:↴"
+vim.opt.listchars:append "eol:↴"
 
 -- generic LSP settings
 
