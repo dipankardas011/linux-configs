@@ -58,7 +58,7 @@ bindsym $mod+Return exec /bin/alacritty
 bindsym $mod+q kill
 
 # rofi
-bindsym $mod+d exec rofi -no-config -no-lazy-grab -show drun -modi drun -show-icons -theme 'gruvbox-dark' -font 'FantasqueSansMono NF 15'
+bindsym $mod+d exec rofi -no-config -no-lazy-grab -show drun -modi drun -show-icons -theme 'everforest' -font 'FantasqueSansMono NF 15'
 
 bindsym $mod+Shift+d exec --no-startup-id "dmenu_run -nf '#7AA2F7' -nb '#282828' -sb '#4C4C4C' -sf '#EEEEEE' -fn 'FantasqueSansMono NF-15'"
 
@@ -203,7 +203,7 @@ bar {
     statusline #dbdcff
     separator #d699b6
     # <colorclass> <border> <background> <text>
-    focused_workspace  #a7f080 #414b50 #fbbc7f
+    focused_workspace  #a7f080 #a7c080 #000000
     active_workspace   #333333 #5f676a #ffffff
     inactive_workspace #333333 #222222 #888888
     urgent_workspace   #2f343a #900000 #ffffff
@@ -212,7 +212,7 @@ bar {
 }
 
 bindsym $mod+r mode "resize"
-client.focused          #a7c080 #272e33FF #a7c080 #272e33FF   #272e33FF
+client.focused          #a7c080 #272e33FF #a7c080 #a7c080   #a7c080
 client.focused_inactive #8C8C8C #272e33FF #FFFFFF #272e33FF   #272e33FF
 client.unfocused        #4C4C4C #222222 #888888 #292D2E   #222222
 client.urgent           #EC69A0 #DB3279 #FFFFFF #DB3279   #DB3279
@@ -253,13 +253,13 @@ gaps inner 11
 gaps outer 11
 
 # border size
-for_window [all] border pixel 0
+for_window [all] border pixel 2
 
 smart_gaps on
 
 smart_gaps inverse_outer
 
-smart_borders on
+# smart_borders on
 
 # popups during fullscreen
 popup_during_fullscreen smart
