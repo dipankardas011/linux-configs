@@ -212,11 +212,11 @@ bar {
 }
 
 bindsym $mod+r mode "resize"
-client.focused          #a7c080 #272e33FF #a7c080 #a7c080   #a7c080
-client.focused_inactive #8C8C8C #272e33FF #FFFFFF #272e33FF   #272e33FF
-client.unfocused        #4C4C4C #222222 #888888 #292D2E   #222222
-client.urgent           #EC69A0 #DB3279 #FFFFFF #DB3279   #DB3279
-client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
+client.focused          #a7c080 #272e33FF #a7c080 #272e33FF #272e33FF
+client.focused_inactive #8C8C8C #272e33FF #FFFFFF #272e33FF #272e33FF
+client.unfocused        #4C4C4C #222222 #888888 #292D2E #222222
+client.urgent           #EC69A0 #DB3279 #FFFFFF #DB3279 #DB3279
+client.placeholder      #000000 #0C0C0C #FFFFFF #000000 #0C0C0C
 
 client.background       #FFFFFF
 
@@ -253,13 +253,13 @@ gaps inner 11
 gaps outer 11
 
 # border size
-for_window [all] border pixel 2
+for_window [all] border pixel 0
 
 smart_gaps on
 
 smart_gaps inverse_outer
 
-# smart_borders on
+smart_borders on
 
 # popups during fullscreen
 popup_during_fullscreen smart
