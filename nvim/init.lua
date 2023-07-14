@@ -461,7 +461,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
   -- NOTE: Remember that lua is a real programming language, and as such it is possible
   -- to define small helper and utility functions so you don't have to repeat yourself
   -- many times.
@@ -505,18 +505,20 @@ local on_attach = function(_, bufnr)
 
   vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
   vim.api.nvim_clear_autocmds { buffer = bufnr, group = "lsp_document_highlight" }
-  vim.api.nvim_create_autocmd("CursorHold", {
-    callback = vim.lsp.buf.document_highlight,
-    buffer = bufnr,
-    group = "lsp_document_highlight",
-    desc = "Document Highlight",
-  })
-  vim.api.nvim_create_autocmd("CursorMoved", {
-    callback = vim.lsp.buf.clear_references,
-    buffer = bufnr,
-    group = "lsp_document_highlight",
-    desc = "Clear All the References",
-  })
+  if client.server_capabilities.documentHighlightProvider then
+    vim.api.nvim_create_autocmd("CursorHold", {
+      callback = vim.lsp.buf.document_highlight,
+      buffer = bufnr,
+      group = "lsp_document_highlight",
+      desc = "Document Highlight",
+    })
+    vim.api.nvim_create_autocmd("CursorMoved", {
+      callback = vim.lsp.buf.clear_references,
+      buffer = bufnr,
+      group = "lsp_document_highlight",
+      desc = "Clear All the References",
+    })
+  end
 
 end
 
