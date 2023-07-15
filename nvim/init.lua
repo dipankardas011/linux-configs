@@ -74,7 +74,7 @@ require('lazy').setup({
     config = function()
       vim.g.everforest_diagnostic_text_highlight=1
       vim.g.everforest_diagnostic_line_highlight=1
-      -- vim.g.everforest_transparent_background=1
+      vim.g.everforest_transparent_background=1
       vim.g.everforest_diagnostic_virtual_text='highlighted'
       vim.cmd.colorscheme 'everforest'
     end,
@@ -177,7 +177,14 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
+      { 'j-hui/fidget.nvim', tag = 'legacy', opts = {
+        window = {
+        relative = "win",         -- where to anchor, either "win" or "editor"
+        blend = 0,              -- &winblend for the window
+        zindex = nil,             -- the zindex value for the window
+        border = "none",          -- style of border for the fidget window
+      },
+      } },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -358,23 +365,22 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 vim.keymap.set('n', '<leader>b', ":NERDTreeToggle<CR>", nil)
 
 --- for the nvim-terminal
-vim.keymap.set({'n', 't'}, '<A-h>', function () require("nvterm.terminal").toggle('horizontal') end)
-vim.keymap.set({'n', 't'}, '<A-v>', function () require("nvterm.terminal").toggle('vertical') end)
-vim.keymap.set({'n', 't'}, '<A-i>', function () require("nvterm.terminal").toggle('float') end)
+vim.keymap.set({'n', 't'}, '<A-h>', function () require("nvterm.terminal").toggle('horizontal') end, { desc = '[A]ctivate terminal [H]orizontal' })
+vim.keymap.set({'n', 't'}, '<A-v>', function () require("nvterm.terminal").toggle('vertical') end, { desc = '[A]ctivate terminal [V]ertical' })
+vim.keymap.set({'n', 't'}, '<A-i>', function () require("nvterm.terminal").toggle('float') end, { desc = '[A]ctivate terminal [I]Floating' })
 
-vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
-vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)
-vim.keymap.set('n', '<F11>', function() require('dap').step_into() end)
-vim.keymap.set('n', '<F12>', function() require('dap').step_out() end)
-vim.keymap.set('n', '<Leader>db', function() require('dap').toggle_breakpoint() end)
-vim.keymap.set('n', '<Leader>dU', function() require('dapui').toggle() end)
-vim.keymap.set('n', '<Leader>dB', function() require('dap').set_breakpoint() end)
-vim.keymap.set('n', '<Leader>lp', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
-vim.keymap.set('n', '<Leader>dr', function() require('dap').repl.open() end)
-vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end)
+vim.keymap.set('n', '<F5>', function() require('dap').continue() end, { desc = 'Go debug CONTINUE' })
+-- vim.keymap.set('n', '<F10>', function() require('dap').step_over() end, { desc = '[ ] Find existing buffers' })
+-- vim.keymap.set('n', '<F11>', function() require('dap').step_into() end, { desc = '[ ] Find existing buffers' })
+-- vim.keymap.set('n', '<F12>', function() require('dap').step_out() end, { desc = '[ ] Find existing buffers' })
+vim.keymap.set('n', '<Leader>db', function() require('dap').toggle_breakpoint() end, { desc = '[D]ebug [b]reakpoint' })
+vim.keymap.set('n', '<Leader>dU', function() require('dapui').toggle() end, { desc = '[D]ebug [U]UI toggle' })
+vim.keymap.set('n', '<Leader>lp', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, { desc = '[l]log pointer for debug' })
+-- vim.keymap.set('n', '<Leader>dr', function() require('dap').repl.open() end, { desc = '[ ] Find existing buffers' })
+-- vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end, { desc = '[ ] Find existing buffers' })
 vim.keymap.set({'n', 'v'}, '<Leader>dh', function()
   require('dap.ui.widgets').hover()
-end)
+end, {desc = 'debug hover info'})
 vim.keymap.set({'n', 'v'}, '<Leader>dp', function()
   require('dap.ui.widgets').preview()
 end)
@@ -421,8 +427,8 @@ vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { d
 vim.keymap.set('n', '<leader>/', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
   require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-    winblend = 10,
-    previewer = false,
+    -- winblend = 10,
+    previewer = true,
   })
 end, { desc = '[/] Fuzzily search in current buffer' })
 
@@ -437,7 +443,7 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim' },
+  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim', 'python', 'html', 'css' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
@@ -554,6 +560,7 @@ local on_attach = function(client, bufnr)
   if client.server_capabilities.documentHighlightProvider then
     vim.api.nvim_create_autocmd("CursorHold", {
       callback = vim.lsp.buf.document_highlight,
+      -- callback = vim.lsp.buf.document_highlight,
       buffer = bufnr,
       group = "lsp_document_highlight",
       desc = "Document Highlight",
