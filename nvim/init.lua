@@ -63,7 +63,12 @@ vim.opt.rtp:prepend(lazypath)
 --  You can also configure plugins after the setup call,
 --    as they will be available in your neovim runtime.
 require('lazy').setup({
-  -- NOTE: First, some plugins that don't require any configuration
+  {
+    "NvChad/nvterm",
+    config = function ()
+      require("nvterm").setup()
+    end,
+  },
   {
     "sainnhe/everforest",
     config = function()
@@ -352,6 +357,10 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 
 vim.keymap.set('n', '<leader>b', ":NERDTreeToggle<CR>", nil)
 
+--- for the nvim-terminal
+vim.keymap.set({'n', 't'}, '<A-h>', function () require("nvterm.terminal").toggle('horizontal') end)
+vim.keymap.set({'n', 't'}, '<A-v>', function () require("nvterm.terminal").toggle('vertical') end)
+vim.keymap.set({'n', 't'}, '<A-i>', function () require("nvterm.terminal").toggle('float') end)
 
 vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
 vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)
