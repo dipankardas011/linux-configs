@@ -74,7 +74,7 @@ require('lazy').setup({
     config = function()
       vim.g.everforest_diagnostic_text_highlight=1
       vim.g.everforest_diagnostic_line_highlight=1
-      vim.g.everforest_transparent_background=1
+      vim.g.everforest_transparent_background=2
       vim.g.everforest_diagnostic_virtual_text='highlighted'
       vim.cmd.colorscheme 'everforest'
     end,
@@ -369,15 +369,13 @@ vim.keymap.set({'n', 't'}, '<A-h>', function () require("nvterm.terminal").toggl
 vim.keymap.set({'n', 't'}, '<A-v>', function () require("nvterm.terminal").toggle('vertical') end, { desc = '[A]ctivate terminal [V]ertical' })
 vim.keymap.set({'n', 't'}, '<A-i>', function () require("nvterm.terminal").toggle('float') end, { desc = '[A]ctivate terminal [I]Floating' })
 
+vim.keymap.set('n', '<A-j>', ':bnext<CR>',{ desc = '[A]ctivate j for next buffer' })
+vim.keymap.set('n', '<A-k>', ':bprev<CR>',{ desc = '[A]ctivate k for prev buffer' })
+
 vim.keymap.set('n', '<F5>', function() require('dap').continue() end, { desc = 'Go debug CONTINUE' })
--- vim.keymap.set('n', '<F10>', function() require('dap').step_over() end, { desc = '[ ] Find existing buffers' })
--- vim.keymap.set('n', '<F11>', function() require('dap').step_into() end, { desc = '[ ] Find existing buffers' })
--- vim.keymap.set('n', '<F12>', function() require('dap').step_out() end, { desc = '[ ] Find existing buffers' })
 vim.keymap.set('n', '<Leader>db', function() require('dap').toggle_breakpoint() end, { desc = '[D]ebug [b]reakpoint' })
 vim.keymap.set('n', '<Leader>dU', function() require('dapui').toggle() end, { desc = '[D]ebug [U]UI toggle' })
 vim.keymap.set('n', '<Leader>lp', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, { desc = '[l]log pointer for debug' })
--- vim.keymap.set('n', '<Leader>dr', function() require('dap').repl.open() end, { desc = '[ ] Find existing buffers' })
--- vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end, { desc = '[ ] Find existing buffers' })
 vim.keymap.set({'n', 'v'}, '<Leader>dh', function()
   require('dap.ui.widgets').hover()
 end, {desc = 'debug hover info'})
@@ -586,6 +584,7 @@ local servers = {
   pyright = {},
   rust_analyzer = {},
   tsserver = {},
+  yamlls = {},
 
   lua_ls = {
     Lua = {
