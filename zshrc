@@ -105,7 +105,7 @@ PROMPT='$(kube_ps1)'$'\n'$PROMPT
 # else
 #   export EDITOR='mvim'
 # fi
-export EDITOR="lvim"
+export EDITOR="nvim"
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -126,9 +126,12 @@ alias l='ls -l'
 alias la='ls -la'
 alias gpo='git push origin'
 alias gplo='git pull origin'
+alias g='git'
+alias gcs='git commit -s'
 alias cls='clear'
 
-alias vi='lvim'
+alias vi='nvim'
+# alias vi='lvim'
 
 alias onedrivePull='rclone sync -P onedrive: ~/Onedrive'
 alias onedrivePush='rclone sync -P ~/Onedrive onedrive:'
@@ -150,7 +153,7 @@ export PATH=$PATH:$SPEEDSCALE_HOME
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-export PATH="$PATH:/home/dipankar/istio-1.14.1/bin"
+export PATH="$PATH:/home/dipankar/istio-1.18.0/bin"
 
 alias d=docker
 
@@ -171,9 +174,6 @@ export PATH="$HOME/.amplify/bin:$PATH"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/go/bin"
 
-### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-export PATH="/home/dipankar/.rd/bin:$PATH"
-### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
 
 alias createNode='echo "---\nauthor: Dipankar Das\n---\n" > notes-$(date +%d-%m-%Y).md'
 
@@ -189,8 +189,8 @@ alias mirrordisplay='xrandr --output "eDP-1" --auto --output "HDMI-1" --same-as 
 
 alias normaldisplay='xrandr --output "eDP-1" --auto'
 
-alias conservativemode='sudo sed -i s/STOP_CHARGE_THRESH_BAT0=0/STOP_CHARGE_THRESH_BAT0=1/g /etc/tlp.conf && sudo tlp start'
-alias normalmode='sudo sed -i s/STOP_CHARGE_THRESH_BAT0=1/STOP_CHARGE_THRESH_BAT0=0/g /etc/tlp.conf && sudo tlp start'
+# alias conservativemode='sudo sed -i s/STOP_CHARGE_THRESH_BAT0=0/STOP_CHARGE_THRESH_BAT0=1/g /etc/tlp.conf && sudo tlp start'
+# alias normalmode='sudo sed -i s/STOP_CHARGE_THRESH_BAT0=1/STOP_CHARGE_THRESH_BAT0=0/g /etc/tlp.conf && sudo tlp start'
 
 alias batmode='sudo sed -i s/TLP_DEFAULT_MODE=AC/TLP_DEFAULT_MODE=BAT/g /etc/tlp.conf && sudo tlp start'
 
@@ -199,8 +199,21 @@ alias acmode='sudo sed -i s/TLP_DEFAULT_MODE=BAT/TLP_DEFAULT_MODE=AC/g /etc/tlp.
 export GPG_TTY=$(tty)
 fpath=($fpath "/home/dipankar/.zfunctions")
 
-export PATH="$PATH:$HOME/.npm-global/bin:$HOME/.cargo/env:$HOME/.wasmedge/env"
-# Set typewritten ZSH as a prompt
-# autoload -U promptinit; promptinit
-# prompt typewritten
-. "/home/dipankar/.wasmedge/env"
+export PATH="$PATH:$HOME/.npm-global/bin:$HOME/.cargo/env"
+
+export PATH=/home/dipankar/.groundcover/bin:${PATH}
+
+alias openpdf="evince"
+
+
+export WASMTIME_HOME="$HOME/.wasmtime"
+
+export PATH="$WASMTIME_HOME/bin:$PATH"
+
+# Wasmer
+export WASMER_DIR="/home/dipankar/.wasmer"
+[ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"
+
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_OPS="--extended"

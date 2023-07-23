@@ -40,7 +40,6 @@ P.S. You can delete this when you're done too. It's your config now :)
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
-
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
@@ -69,21 +68,36 @@ require('lazy').setup({
       require("nvterm").setup()
     end,
   },
+
   {
     "sainnhe/everforest",
     config = function()
       vim.g.everforest_diagnostic_text_highlight=1
       vim.g.everforest_diagnostic_line_highlight=1
-      vim.g.everforest_transparent_background=2
+      vim.g.everforest_transparent_background=1
       vim.g.everforest_diagnostic_virtual_text='highlighted'
       vim.cmd.colorscheme 'everforest'
     end,
   },
 
+
+  -- {
+  --   "NvChad/nvim-colorizer.lua",
+  --   config = function()
+  --     vim.opt.termguicolors = true
+  --     require('colorizer').setup({})
+  --   end,
+  -- },
+  --
   -- vim-go
   "fatih/vim-go",
 
-  "preservim/nerdtree",
+  {
+    "folke/todo-comments.nvim",
+    config = function()
+      require("todo-comments").setup({})
+    end
+  },
 
   {
     "romgrk/nvim-treesitter-context",
@@ -237,6 +251,7 @@ require('lazy').setup({
       options = {
         icons_enabled = true,
         theme = 'everforest',
+        -- theme = 'melange',
         component_separators = '|',
         section_separators = '',
       },
@@ -350,6 +365,8 @@ vim.wo.wrap = true
 
 vim.wo.cursorline = true
 
+-- vim.wo.spell = true
+
 
 -- [[ Basic Keymaps ]]
 
@@ -362,20 +379,27 @@ vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 
-vim.keymap.set('n', '<leader>b', ":NERDTreeToggle<CR>", nil)
-
 --- for the nvim-terminal
 vim.keymap.set({'n', 't'}, '<A-h>', function () require("nvterm.terminal").toggle('horizontal') end, { desc = '[A]ctivate terminal [H]orizontal' })
 vim.keymap.set({'n', 't'}, '<A-v>', function () require("nvterm.terminal").toggle('vertical') end, { desc = '[A]ctivate terminal [V]ertical' })
 vim.keymap.set({'n', 't'}, '<A-i>', function () require("nvterm.terminal").toggle('float') end, { desc = '[A]ctivate terminal [I]Floating' })
 
-vim.keymap.set('n', '<A-j>', ':bnext<CR>',{ desc = '[A]ctivate j for next buffer' })
-vim.keymap.set('n', '<A-k>', ':bprev<CR>',{ desc = '[A]ctivate k for prev buffer' })
+vim.keymap.set('n', '<C-Tab>', ':bdelete<CR>',{ desc = 'close buffer' })
+vim.keymap.set('n', '<Tab>', ':bnext<CR>',{ desc = 'next buffer' })
+vim.keymap.set('n', '<S-Tab>', ':bprevious<CR>',{ desc = 'prev buffer' })
 
 vim.keymap.set('n', '<F5>', function() require('dap').continue() end, { desc = 'Go debug CONTINUE' })
 vim.keymap.set('n', '<Leader>db', function() require('dap').toggle_breakpoint() end, { desc = '[D]ebug [b]reakpoint' })
 vim.keymap.set('n', '<Leader>dU', function() require('dapui').toggle() end, { desc = '[D]ebug [U]UI toggle' })
 vim.keymap.set('n', '<Leader>lp', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, { desc = '[l]log pointer for debug' })
+
+vim.keymap.set('v', '<A-j>', ':m .+1<CR>', {desc = 'Move the selected lines to one line down'})
+vim.keymap.set('v', '<A-k>', ':m .-2<CR>', {desc = 'Move the selected lines to one line up'})
+
+vim.keymap.set('n','<C-s>', ':w<CR>', {desc = 'Save the file'})
+vim.keymap.set('n','<C-q>', ':bdelete<CR>', {desc = 'quit window'})
+
+
 vim.keymap.set({'n', 'v'}, '<Leader>dh', function()
   require('dap.ui.widgets').hover()
 end, {desc = 'debug hover info'})
