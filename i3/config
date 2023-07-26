@@ -191,31 +191,29 @@ mode "resize" {
 bar {
   status_command i3status
   # status_command i3status | i3status-title-on-bar --color '#dbbcff' --fixed-width 30
-  i3bar_command i3bar --transparency 
-  # i3bar_command i3bar --transparency 
-  mode hide
-  hidden_state hide
-  modifier $mod
-  
-  separator_symbol "|"
+  i3bar_command i3bar --transparency 1714215f
+  # mode hide
+  # # hidden_state hide
+  # modifier $mod
+
+  separator_symbol "⁞"
   workspace_min_width 10
-  padding 5px 0 0 0
+  tray_padding 0
 
   colors {
-    # background #272e3310
     background #1714215f
-    # background #17142100
-    # statusline #d3c6aa
-    statusline #dbdcff
+    statusline #e2c17b
     separator #d699b6
     # <colorclass> <border> <background> <text>
     focused_workspace  #a7c080 #a7c080 #000000
     active_workspace   #333333 #5f676a #ffffff
-    inactive_workspace #333333 #2222225F #888888
+    inactive_workspace #333333 #2222225F #d699b6
     urgent_workspace   #2f343a #900000 #ffffff
     binding_mode       #2f343a #900000 #ffffff
   }
 }
+
+exec i3-msg border none
 
 bindsym $mod+r mode "resize"
 client.focused          #a7c080 #272e33FF #a7c080 #272e33FF #272e33FF
@@ -256,16 +254,14 @@ bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5 && notify-send "Br
 # for_window [all] title_window_icon on
 
 gaps inner 11
-gaps outer 16
+gaps outer 11
 
 # border size
 for_window [all] border pixel 0
 
-# smart_gaps on
-
-# smart_gaps inverse_outer
-
-# smart_borders on
+smart_gaps on
+smart_gaps inverse_outer
+smart_borders on
 
 # popups during fullscreen
 popup_during_fullscreen smart
