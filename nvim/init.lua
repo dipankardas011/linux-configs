@@ -1,48 +1,12 @@
---[[
+-- disable netrw at the very start of your init.lua
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+-- -- set termguicolors to enable highlight groups
+-- vim.opt.termguicolors = true
 
-=====================================================================
-==================== READ THIS BEFORE CONTINUING ====================
-=====================================================================
-
-Kickstart.nvim is *not* a distribution.
-
-Kickstart.nvim is a template for your own configuration.
-  The goal is that you can read every line of code, top-to-bottom, understand
-  what your configuration is doing, and modify it to suit your needs.
-
-  Once you've done that, you should start exploring, configuring and tinkering to
-  explore Neovim!
-
-  If you don't know anything about Lua, I recommend taking some time to read through
-  a guide. One possible example:
-  - https://learnxinyminutes.com/docs/lua/
-
-  And then you can explore or search through `:help lua-guide`
-
-
-Kickstart Guide:
-
-I have left several `:help X` comments throughout the init.lua
-You should run that command and read that help section for more information.
-
-In addition, I have some `NOTE:` items throughout the file.
-These are for you, the reader to help understand what is happening. Feel free to delete
-them once you know what you're doing, but they should serve as a guide for when you
-are first encountering a few different constructs in your nvim config.
-
-I hope you enjoy your Neovim journey,
-- TJ
-
-P.S. You can delete this when you're done too. It's your config now :)
---]]
--- Set <space> as the leader key
--- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
--- Install package manager
---    https://github.com/folke/lazy.nvim
---    `:help lazy.nvim.txt` for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system {
@@ -56,11 +20,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- NOTE: Here is where you install your plugins.
---  You can configure plugins using the `config` key.
---
---  You can also configure plugins after the setup call,
---    as they will be available in your neovim runtime.
 require('lazy').setup({
   {
     "NvChad/nvterm",
@@ -80,15 +39,84 @@ require('lazy').setup({
     end,
   },
 
+  {
+    'nvim-tree/nvim-tree.lua',
+    config = function()
+      -- OR setup with some options
+      require("nvim-tree").setup({
+        sort = {
+          sorter = "case_sensitive",
+        },
+        view = {
+          -- width = 30,
+          float = {
+            enable = true,
+            quit_on_focus_loss = true,
+            open_win_config = {
+              relative = "editor",
+              col = vim.api.nvim_win_get_width(0),
+              row = vim.api.nvim_win_get_height(0),
+              border = "rounded",
+              width = 40,
+              height = 30,
+              -- row = 1,
+              -- col = 1,
+            },
+          },
+        },
+        renderer = {
+          group_empty = true,
+          icons = {
+            webdev_colors = true,
+            git_placement = "before",
+            modified_placement = "after",
+            padding = " ",
+            symlink_arrow = " ➛ ",
+            show = {
+              file = true,
+              folder = true,
+              folder_arrow = true,
+              git = true,
+              modified = true,
+            },
+            glyphs = {
+              default = "",
+              symlink = "",
+              bookmark = "󰆤",
+              modified = "●",
+              folder = {
+                arrow_closed = "",
+                arrow_open = "",
+                default = "",
+                open = "",
+                empty = "",
+                empty_open = "",
+                symlink = "",
+                symlink_open = "",
+              },
+              git = {
+                unstaged = "✗",
+                staged = "✓",
+                unmerged = "",
+                renamed = "➜",
+                untracked = "★",
+                deleted = "",
+                ignored = "◌",
+              },
+            },
+          },
+        },
+        filters = {
+          dotfiles = true,
+        },
+      })
+    end
+  },
 
-  -- {
-  --   "NvChad/nvim-colorizer.lua",
-  --   config = function()
-  --     vim.opt.termguicolors = true
-  --     require('colorizer').setup({})
-  --   end,
-  -- },
-  --
+  {
+    'nvim-tree/nvim-web-devicons',
+  },
+
   -- vim-go
   "fatih/vim-go",
 
@@ -193,11 +221,11 @@ require('lazy').setup({
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
       { 'j-hui/fidget.nvim', tag = 'legacy', opts = {
         window = {
-        relative = "win",         -- where to anchor, either "win" or "editor"
-        blend = 0,              -- &winblend for the window
-        zindex = nil,             -- the zindex value for the window
-        border = "none",          -- style of border for the fidget window
-      },
+          relative = "win",         -- where to anchor, either "win" or "editor"
+          blend = 0,              -- &winblend for the window
+          zindex = nil,             -- the zindex value for the window
+          border = "none",          -- style of border for the fidget window
+        },
       } },
 
       -- Additional lua configuration, makes nvim stuff amazing!
@@ -348,6 +376,8 @@ vim.o.updatetime = 250
 vim.o.timeout = true
 vim.o.timeoutlen = 300
 
+vim.o.scrolloff = 8
+
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
@@ -378,6 +408,7 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
+vim.keymap.set('n', '<leader>b', ":NvimTreeToggle<CR>", {desc = "toggle nvimtree"})
 
 --- for the nvim-terminal
 vim.keymap.set({'n', 't'}, '<A-h>', function () require("nvterm.terminal").toggle('horizontal') end, { desc = '[A]ctivate terminal [H]orizontal' })
@@ -393,8 +424,17 @@ vim.keymap.set('n', '<Leader>db', function() require('dap').toggle_breakpoint() 
 vim.keymap.set('n', '<Leader>dU', function() require('dapui').toggle() end, { desc = '[D]ebug [U]UI toggle' })
 vim.keymap.set('n', '<Leader>lp', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, { desc = '[l]log pointer for debug' })
 
-vim.keymap.set('v', '<A-j>', ':m .+1<CR>', {desc = 'Move the selected lines to one line down'})
-vim.keymap.set('v', '<A-k>', ':m .-2<CR>', {desc = 'Move the selected lines to one line up'})
+
+-- for moving the selected code
+vim.keymap.set('v', "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set('v', "K", ":m '<-2<CR>gv=gv")
+
+-- allows the search terms to stay in the middle
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
+
+-- make the selected copy to selecte paste to work 
+vim.keymap.set("x", "<leader>p", "\"_dP")
 
 vim.keymap.set('n','<C-s>', ':w<CR>', {desc = 'Save the file'})
 vim.keymap.set('n','<C-q>', ':bdelete<CR>', {desc = 'quit window'})
@@ -563,6 +603,7 @@ local on_attach = function(client, bufnr)
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
   nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+  vim.keymap.set('i','<C-k>', vim.lsp.buf.signature_help)
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
