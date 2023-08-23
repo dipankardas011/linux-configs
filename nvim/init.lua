@@ -4,7 +4,8 @@ vim.g.loaded_netrwPlugin = 1
 -- -- set termguicolors to enable highlight groups
 -- vim.opt.termguicolors = true
 
---  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
+
+
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -35,6 +36,9 @@ require('lazy').setup({
       vim.g.everforest_diagnostic_line_highlight=1
       vim.g.everforest_transparent_background=1
       vim.g.everforest_diagnostic_virtual_text='highlighted'
+      vim.g.everforest_background='hard'
+      vim.g.everforest_ui_contrast='high'
+      vim.g.everforest_current_word='underline'
       vim.cmd.colorscheme 'everforest'
     end,
   },
@@ -107,7 +111,7 @@ require('lazy').setup({
           },
         },
         filters = {
-          dotfiles = true,
+          dotfiles = false,
         },
       })
     end
@@ -623,7 +627,6 @@ local on_attach = function(client, bufnr)
   if client.server_capabilities.documentHighlightProvider then
     vim.api.nvim_create_autocmd("CursorHold", {
       callback = vim.lsp.buf.document_highlight,
-      -- callback = vim.lsp.buf.document_highlight,
       buffer = bufnr,
       group = "lsp_document_highlight",
       desc = "Document Highlight",
