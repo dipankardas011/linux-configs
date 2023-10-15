@@ -281,13 +281,24 @@ require('lazy').setup({
     -- See `:help lualine.txt`
     opts = {
       options = {
+        always_divide_middle = false,
         icons_enabled = true,
         theme = 'everforest',
-        -- theme = 'melange',
         component_separators = '|',
         section_separators = '',
       },
     },
+
+    sections = {
+      lualine_a = {'mode'},
+      lualine_b = {'branch', 'diff', 'diagnostics'},
+      lualine_c = {{'filename', path=2}},
+      lualine_x = {'encoding', 'fileformat', 'filetype'},
+      lualine_y = {'progress'},
+      lualine_z = {'location'}
+    },
+    tabline = {},
+    extensions = {}
   },
 
   {
@@ -380,7 +391,7 @@ vim.o.updatetime = 250
 vim.o.timeout = true
 vim.o.timeoutlen = 300
 
-vim.o.scrolloff = 8
+vim.o.scrolloff = 2
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'

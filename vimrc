@@ -8,3 +8,8 @@ set number
 set relativenumber
 set cursorline
 highlight CursorLine cterm=bold term=bold guibg=Grey40
+
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>

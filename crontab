@@ -1,3 +1,2 @@
-* * * * * /home/dipankar/.config/i3/scripts/battery.sh >> /home/dipankar/battery.log 2>&1
-* * * * * echo "abcd" >> /home/dipankar/cron-dipankar.txt 2>&1
+* * * * * /home/dipankar/.config/i3/scripts/battery.sh >> /var/log/auto-battery.log 2>&1
 
