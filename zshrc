@@ -221,3 +221,5 @@ export FZF_DEFAULT_OPS="--extended"
 export PATH="$PATH:$HOME/.protobuff/bin"
 
 alias tf="terraform"
+
+alias soundControl="pavucontrol"
