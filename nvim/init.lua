@@ -2,7 +2,7 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 -- -- set termguicolors to enable highlight groups
--- vim.opt.termguicolors = true
+vim.opt.termguicolors = true
 
 
 
@@ -27,6 +27,18 @@ require('lazy').setup({
     config = function ()
       require("nvterm").setup()
     end,
+  },
+
+  {
+    'norcalli/nvim-colorizer.lua',
+    config = function()
+      -- OR setup with some options
+      require("colorizer").setup({
+        '!vim'; -- Exclude vim from highlighting.
+        '*';
+      })
+    end,
+
   },
 
   {
@@ -283,22 +295,22 @@ require('lazy').setup({
       options = {
         always_divide_middle = false,
         icons_enabled = true,
-        theme = 'everforest',
+        -- theme = 'everforest',
         component_separators = '|',
         section_separators = '',
       },
     },
 
-    sections = {
-      lualine_a = {'mode'},
-      lualine_b = {'branch', 'diff', 'diagnostics'},
-      lualine_c = {{'filename', path=2}},
-      lualine_x = {'encoding', 'fileformat', 'filetype'},
-      lualine_y = {'progress'},
-      lualine_z = {'location'}
-    },
-    tabline = {},
-    extensions = {}
+    -- sections = {
+    --   lualine_a = {'mode'},
+    --   lualine_b = {'branch', 'diff', 'diagnostics'},
+    --   lualine_c = {{'filename', path=9}},
+    --   lualine_x = {'encoding', 'fileformat', 'filetype'},
+    --   lualine_y = {'progress'},
+    --   lualine_z = {'location'}
+    -- },
+    -- tabline = {},
+    -- extensions = {}
   },
 
   {
@@ -510,7 +522,12 @@ vim.keymap.set('n', '<leader>/', function()
 end, { desc = '[/] Fuzzily search in current buffer' })
 
 vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
-vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
+vim.keymap.set('n', '<leader>sf', function()
+    require('telescope.builtin').find_files({
+        hidden = true, -- Show hidden files
+        prompt_title = '[S]earch [F]iles', -- Set prompt title
+    })
+    end, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
