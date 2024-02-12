@@ -28,6 +28,17 @@ require('lazy').setup({
       require("nvterm").setup()
     end,
   },
+  {
+    "catppuccin/nvim",
+    config = function ()
+      require("catppuccin").setup({
+        flavour="macchiato",
+        transparent_background = true,
+      })
+
+      vim.cmd.colorscheme 'catppuccin'
+    end,
+  },
 
   {
     'norcalli/nvim-colorizer.lua',
@@ -51,7 +62,7 @@ require('lazy').setup({
       vim.g.everforest_background='hard'
       vim.g.everforest_ui_contrast='high'
       vim.g.everforest_current_word='underline'
-      vim.cmd.colorscheme 'everforest'
+      -- vim.cmd.colorscheme 'everforest'
     end,
   },
 
@@ -439,7 +450,7 @@ vim.keymap.set('n', '<leader>b', ":NvimTreeToggle<CR>", {desc = "toggle nvimtree
 --- for the nvim-terminal
 vim.keymap.set({'n', 't'}, '<C-h>', function () require("nvterm.terminal").toggle('horizontal') end, { desc = '[A]ctivate terminal [H]orizontal' })
 vim.keymap.set({'n', 't'}, '<C-v>', function () require("nvterm.terminal").toggle('vertical') end, { desc = '[A]ctivate terminal [V]ertical' })
-vim.keymap.set({'n', 't'}, '<C-i>', function () require("nvterm.terminal").toggle('float') end, { desc = '[A]ctivate terminal [I]Floating' })
+vim.keymap.set({'n', 't'}, '<C-f>', function () require("nvterm.terminal").toggle('float') end, { desc = '[A]ctivate terminal [I]Floating' })
 
 vim.keymap.set('n', '<C-Tab>', ':bdelete<CR>',{ desc = 'close buffer' })
 vim.keymap.set('n', '<Tab>', ':bnext<CR>',{ desc = 'next buffer' })
