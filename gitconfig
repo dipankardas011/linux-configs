@@ -29,3 +29,6 @@
 	gpgsign = true
 [rerere]
 	enabled = true
+
+[fetch]
+	writeCommitGraph = true
