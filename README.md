@@ -60,3 +60,9 @@ git clone https://github.com/Raymo111/i3lock-color.git\ncd i3lock-color
 
 betterlockscreen -u ~/.config/i3/images/bg_6.jpg
 ```
+
+
+for the x11 scaling the i3
+```bash
+xrdb -merge ~/.Xresources
+```
