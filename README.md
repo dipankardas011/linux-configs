@@ -48,6 +48,7 @@ fc-cache -f -v
 .config/fontconfig/fonts.conf
 ```
 
+[for zshrc plugins](https://gist.github.com/n1snt/454b879b8f0b7995740ae04c5fb5b7df)
 
 ```bash
 sudo dnf install -y autoconf automake cairo-devel fontconfig gcc libev-de
