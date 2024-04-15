@@ -1,5 +1,127 @@
-- name: Download foo.conf
-  ansible.builtin.get_url:
-    url: http://example.com/path/file.conf
-    dest: root/.config/nvim/init.lua
-    mode: '0640'
+- hosts: dipankar
+  name: configure my dipankar test server
+  tasks:
+  - name: ping
+    ansible.builtin.ping:
+
+  - name: Download nvim conf
+    ansible.builtin.get_url:
+      url: https://raw.githubusercontent.com/dipankardas011/linux-configs/ansible/ansible/nvim.lua
+      dest: /root/.config/nvim/init.lua
+      mode: '0640'
+
+  - name: Download the tmux conf
+    ansible.builtin.get_url:
+      url: https://raw.githubusercontent.com/dipankardas011/linux-configs/ansible/ansible/tmux.conf
+      dest: /root/.tmux.conf
+      mode: '0640'
+
+  - name: install script for oh-my-zsh
+    ansible.builtin.get_url:
+      url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+      dest: /tmp/install.sh
+      mode: '0550'
+    
+
+
+  - name: Update all packages to their latest version
+    ansible.builtin.apt:
+      name: "*"
+      state: latest
+
+  - name: Add neovim unstable repository from PPA
+    ansible.builtin.apt_repository:
+      repo: ppa:neovim-ppa/unstable
+      state: present
+
+  - name: Install cli tools
+    ansible.builtin.apt:
+      pkg:
+      - neofetch
+      - jq
+      - tree
+      - curl
+      - zsh
+      - neovim
+      - zsh
+      - git
+      state: present
+
+  - name: Override powerline fonts package name for Debian.
+    ansible.builtin.set_fact:
+      powerlinefonts: fonts-powerline
+    when: ansible_os_family == 'Debian'
+   
+  - name: Install Powerline fonts
+    become: true
+    ansible.builtin.package:
+      state: present
+      name: "{{ powerlinefonts }}"
+   
+  - name: Install ripgrep
+    become: true
+    ansible.builtin.package:
+      state: present
+      name: ripgrep
+   
+  # unzip is useful for extracting zips
+  - name: Install unzip
+    become: true
+    ansible.builtin.package:
+      state: present
+      name: unzip
+   
+  - name: Install exa
+    become: true
+    ansible.builtin.package:
+      state: present
+      name: exa
+   
+  - name: Install zoxide
+    become: true
+    ansible.builtin.package:
+      state: present
+      name: zoxide
+   
+  # required by the OMZ plugin zsh-interactive-cd
+  - name: Install fzf (command-line fuzzy finder)
+    become: true
+    ansible.builtin.package:
+      state: present
+      name: fzf
+   
+  - name: Install oh My Zsh
+    ansible.builtin.shell: |
+      rm -rf /root/.oh-my-zsh
+      ./install.sh --unattended
+    args:
+      chdir: /tmp
+      executable: /bin/sh
+   
+  - name: Install zsh-autosuggestions plugin # noqa: latest
+    ansible.builtin.git:
+      repo: https://github.com/zsh-users/zsh-autosuggestions
+      dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+      depth: 1
+   
+  - name: Install zsh-completions plugin # noqa: latest
+    ansible.builtin.git:
+      repo: https://github.com/zsh-users/zsh-completions
+      dest: ~/.oh-my-zsh/custom/plugins/zsh-completions
+      depth: 1
+   
+  - name: Install zsh-syntax-highlighting plugin # noqa: latest
+    ansible.builtin.git:
+      repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
+      dest: ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+      depth: 1
+   
+  - name: Change user shell to zsh 
+    become: true
+    ansible.builtin.user:
+      name: "{{ ansible_user_id }}"
+      shell: /bin/zsh
+
+  - name: Install lsd
+    ansible.builtin.apt:
+      deb: https://github.com/lsd-rs/lsd/releases/download/v1.1.2/lsd-musl_1.1.2_amd64.deb
