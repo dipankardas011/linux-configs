@@ -5,9 +5,10 @@
     ansible.builtin.ping:
 
   - name: Update all packages to their latest version
-    ansible.builtin.apt:
-      name: "*"
-      state: latest
+    ansible.builtin.apt: upgrade=dist update_cache=yes
+    retries: 3
+    delay: 3
+    tags: package_upgrade
 
   - name: Add neovim unstable repository from PPA
     ansible.builtin.apt_repository:

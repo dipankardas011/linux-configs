@@ -1,2 +1,2 @@
 run:
-	 ansible-playbook -i ~/.config/inventory.ini playbook.yml
+	 ansible-playbook -i ~/.config/inventory.ini playbook.yml -vv

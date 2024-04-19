@@ -55,4 +55,5 @@ export FZF_DEFAULT_OPS="--extended"
 export PATH="$PATH:$HOME/.protobuff/bin"
 
 alias curlx="curl -X GET -IL"
+alias cat="cat -e"
 
