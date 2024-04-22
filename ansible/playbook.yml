@@ -113,6 +113,11 @@
     ansible.builtin.apt:
       deb: https://github.com/lsd-rs/lsd/releases/download/v1.1.2/lsd-musl_1.1.2_amd64.deb
 
+  - name: create required directories
+    shell: |
+      mkdir -vp ~/.config/nvim
+
+
   - name: Download nvim conf
     ansible.builtin.get_url:
       url: https://raw.githubusercontent.com/dipankardas011/linux-configs/ansible/ansible/nvim.lua
