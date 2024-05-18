@@ -223,3 +223,16 @@ export PATH="$PATH:$HOME/.protobuff/bin"
 alias tf="terraform"
 
 alias soundControl="pavucontrol"
+
+alias github="cd ~/Onedrive/github"
+alias gitlab="cd ~/Onedrive/gitlab"
+
+
+
+. "/home/dipankar/.wasmedge/env"
+
+# export TERM=alacritty
+
+export TERM="xterm-256color"
+
+alias cat="cat -e"

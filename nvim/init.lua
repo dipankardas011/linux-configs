@@ -40,7 +40,47 @@ require('lazy').setup({
     end,
 
   },
-
+  -- {
+  --   'rebelot/kanagawa.nvim',
+  --   config = function()
+  --     require('kanagawa').setup({
+  --       compile = false,             -- enable compiling the colorscheme
+  --       undercurl = true,            -- enable undercurls
+  --       commentStyle = { italic = true },
+  --       functionStyle = {},
+  --       keywordStyle = { italic = true},
+  --       statementStyle = { bold = true },
+  --       typeStyle = {},
+  --       transparent = false,         -- do not set background color
+  --       dimInactive = false,         -- dim inactive window `:h hl-NormalNC`
+  --       terminalColors = true,       -- define vim.g.terminal_color_{0,17}
+  --       colors = {                   -- add/modify theme and palette colors
+  --         palette = {},
+  --         theme = { wave = {}, lotus = {}, dragon = {}, all = {ui = {bg_gutter = "none"}} },
+  --       },
+  --       theme = "dragon",              -- Load "wave" theme when 'background' option is not set
+  --       background = {               -- map the value of 'background' option to a theme
+  --         dark = "dragon",           -- try "dragon" !
+  --         light = "lotus"
+  --       },
+  --     })
+  --
+  --     -- setup must be called before loading
+  --     vim.cmd("colorscheme kanagawa")
+  --     -- Default options:
+  --   end
+  -- },
+  --
+  -- {
+  --   'romgrk/barbar.nvim',
+  --   dependencies = {
+  --     'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
+  --     'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
+  --   },
+  --   init = function()
+  --     vim.g.barbar_auto_setup = true
+  --   end,
+  -- },
   {
     "sainnhe/everforest",
     config = function()
@@ -54,6 +94,65 @@ require('lazy').setup({
       vim.cmd.colorscheme 'everforest'
     end,
   },
+  -- {
+  --   "catppuccin/nvim",
+  --   name = "catppuccin",
+  --   priority = 1000,
+  --   config = function()
+  --   require("catppuccin").setup({
+  --       flavour = "mocha", -- latte, frappe, macchiato, mocha
+  --       -- flavour = "auto" -- will respect terminal's background
+  --       background = { -- :h background
+  --           light = "latte",
+  --           dark = "mocha",
+  --       },
+  --       transparent_background = true, -- disables setting the background color.
+  --       show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
+  --       term_colors = false, -- sets terminal colors (e.g. `g:terminal_color_0`)
+  --       dim_inactive = {
+  --           enabled = false, -- dims the background color of inactive window
+  --           shade = "dark",
+  --           percentage = 0.15, -- percentage of the shade to apply to the inactive window
+  --       },
+  --       no_italic = false, -- Force no italic
+  --       no_bold = false, -- Force no bold
+  --       no_underline = false, -- Force no underline
+  --       styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
+  --           comments = { "italic" }, -- Change the style of comments
+  --           conditionals = { "italic" },
+  --           loops = {},
+  --           functions = {},
+  --           keywords = {},
+  --           strings = {},
+  --           variables = {},
+  --           numbers = {},
+  --           booleans = {},
+  --           properties = {},
+  --           types = {},
+  --           operators = {},
+  --           -- miscs = {}, -- Uncomment to turn off hard-coded styles
+  --       },
+  --       color_overrides = {},
+  --       custom_highlights = {},
+  --       default_integrations = true,
+  --       integrations = {
+  --           cmp = true,
+  --           gitsigns = true,
+  --           nvimtree = true,
+  --           treesitter = true,
+  --           notify = false,
+  --           mini = {
+  --               enabled = true,
+  --               indentscope_color = "",
+  --           },
+  --           -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
+  --       },
+  --   })
+  --
+  --   -- setup must be called before loading
+  --   vim.cmd.colorscheme "catppuccin"
+  --   end,
+  -- },
 
   {
     'nvim-tree/nvim-tree.lua',
@@ -129,6 +228,13 @@ require('lazy').setup({
     end
   },
 
+  {
+    "startup-nvim/startup.nvim",
+    requires = {"nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim"},
+    config = function()
+      require"startup".setup()
+    end
+  },
   {
     'nvim-tree/nvim-web-devicons',
   },
@@ -294,11 +400,26 @@ require('lazy').setup({
     opts = {
       options = {
         always_divide_middle = false,
-        icons_enabled = true,
-        -- theme = 'everforest',
+        icons_enabled = false,
+        theme = 'everforest',
         component_separators = '|',
         section_separators = '',
       },
+      sections = {
+        lualine_c = {
+          {
+            "filename",
+            path = 1
+          }
+        },
+        -- lualine_a = {},
+        -- lualine_c = {},
+        -- lualine_x = {},
+        -- lualine_y = {},
+        -- lualine_z = {}
+      },
+      tabline = {},
+      extensions = {}
     },
 
     -- sections = {
@@ -380,6 +501,7 @@ vim.wo.number = true
 -- Enable mouse mode
 vim.o.mouse = 'a'
 
+
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
@@ -422,7 +544,12 @@ vim.wo.wrap = true
 
 vim.wo.cursorline = true
 
+
 -- vim.wo.spell = true
+
+vim.opt.colorcolumn = "80"
+
+vim.o.laststatus = 3 -- global status
 
 
 -- [[ Basic Keymaps ]]
@@ -644,6 +771,7 @@ local on_attach = function(client, bufnr)
   nmap('<leader>wl', function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, '[W]orkspace [L]ist Folders')
+
 
   -- Create a command `:Format` local to the LSP buffer
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)

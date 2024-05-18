@@ -6,7 +6,8 @@
 
 * {
 
-    bg0:     #2B3339;
+    bg0:     #2B3339AF;
+    selected-color:     #2B3339;
     bg1:     #323D43;
     fg0:     #D3C6AA;
 
@@ -74,7 +75,7 @@ element normal active {
 }
 
 element selected {
-    text-color: @bg0;
+    text-color: @selected-color;
 }
 
 element selected normal, element selected active {
