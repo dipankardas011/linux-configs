@@ -45,16 +45,16 @@ print_events = false
 # ref_test = false
 
 [font]
-size = 18
+size = 15
 
 [font.glyph_offset]
 x = 0
 y = 0
 
 [font.normal]
-family = "FantasqueSansMono NF"
-style = "Bold"
-
+# family = "ZedMono NF"
+family = "JetBrainsMono NF"
+# family = "FantasqueSansMono NF"
 
 
 [font.offset]
