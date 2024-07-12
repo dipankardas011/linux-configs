@@ -30,8 +30,8 @@ white = "#d3c6aa"
 yellow = "#dbbc7f"
 
 [colors.primary]
-# background = "#23292e"
 background = "#1c2125"
+# background = "#1c2125"
 foreground = "#d3c6aa"
 
 [cursor]
@@ -45,7 +45,7 @@ print_events = false
 # ref_test = false
 
 [font]
-size = 15
+size = 18
 
 [font.glyph_offset]
 x = 0
@@ -53,9 +53,12 @@ y = 0
 
 [font.normal]
 # family = "ZedMono NF"
-family = "JetBrainsMono NF"
-# family = "FantasqueSansMono NF"
+# family = "JetBrainsMono NF"
+family = "FantasqueSansM Nerd Font Mono"
 
+
+# [font.italic]
+# style = "Normal"
 
 [font.offset]
 x = 0
