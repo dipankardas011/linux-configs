@@ -133,18 +133,28 @@ require('lazy').setup({
         terminalColors = true,       -- define vim.g.terminal_color_{0,17}
         colors = {                   -- add/modify theme and palette colors
           palette = {},
-          theme = { wave = {}, lotus = {}, dragon = {}, all = {ui = {bg_gutter = "none"}} },
+          theme = { wave = {}, lotus = {}, dragon = {}, all = {ui = {bg_gutter = "none", float = {bg="#1F1F28"}}} },
         },
         theme = "dragon",              -- Load "wave" theme when 'background' option is not set
         background = {               -- map the value of 'background' option to a theme
           dark = "dragon",           -- try "dragon" !
-          light = "lotus"
+          -- dark = "dragon",           -- try "dragon" !
+          -- light = "lotus"
         },
       })
 
+      overrides = function(colors)
+          local theme = colors.theme
+          return {
+              Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 },  -- add `blend = vim.o.pumblend` to enable transparency
+              PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
+              PmenuSbar = { bg = theme.ui.bg_m1 },
+              PmenuThumb = { bg = theme.ui.bg_p2 },
+          }
+      end,
+
       -- setup must be called before loading
       vim.cmd("colorscheme kanagawa")
-      -- Default options:
     end
   },
   --
@@ -502,6 +512,7 @@ require('lazy').setup({
   -- { import = 'custom.plugins' },
 }, {})
 
+
 -- [[ Setting options ]]
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
@@ -551,6 +562,8 @@ vim.o.termguicolors = true
 vim.o.shiftwidth = 4
 vim.o.tabstop = 4
 vim.o.numberwidth = 4
+vim.o.expandtab = true
+vim.o.smartindent = true
 
 vim.wo.relativenumber = true
 
