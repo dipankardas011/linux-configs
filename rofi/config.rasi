@@ -1,0 +1,16 @@
+configuration {
+    modi: "combi";
+    show: "combi";
+    dpi: 100;
+    combi-modi: "window,drun";
+    show-icons: true;
+    terminal: "alacritty";
+    drun-display-format: "{icon} {name}";
+    location: 0;
+    disable-history: false;
+    hide-scrollbar: true;
+    sidebar-mode: true;
+    display-combi: "🖥️ Search";
+}
+
+@theme "everforest"
