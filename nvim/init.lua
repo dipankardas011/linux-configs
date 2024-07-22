@@ -40,36 +40,125 @@ require('lazy').setup({
     end,
 
   },
+  {
+    "tpope/vim-dadbod",
+    "kristijanhusak/vim-dadbod-completion",
+    "kristijanhusak/vim-dadbod-ui",
+  },
   -- {
-  --   'rebelot/kanagawa.nvim',
+  --   'rose-pine/neovim',
   --   config = function()
-  --     require('kanagawa').setup({
-  --       compile = false,             -- enable compiling the colorscheme
-  --       undercurl = true,            -- enable undercurls
-  --       commentStyle = { italic = true },
-  --       functionStyle = {},
-  --       keywordStyle = { italic = true},
-  --       statementStyle = { bold = true },
-  --       typeStyle = {},
-  --       transparent = false,         -- do not set background color
-  --       dimInactive = false,         -- dim inactive window `:h hl-NormalNC`
-  --       terminalColors = true,       -- define vim.g.terminal_color_{0,17}
-  --       colors = {                   -- add/modify theme and palette colors
-  --         palette = {},
-  --         theme = { wave = {}, lotus = {}, dragon = {}, all = {ui = {bg_gutter = "none"}} },
-  --       },
-  --       theme = "dragon",              -- Load "wave" theme when 'background' option is not set
-  --       background = {               -- map the value of 'background' option to a theme
-  --         dark = "dragon",           -- try "dragon" !
-  --         light = "lotus"
-  --       },
-  --     })
+  --   require("rose-pine").setup({
+  --       variant = "auto", -- auto, main, moon, or dawn
+  --       dark_variant = "main", -- main, moon, or dawn
+  --       dim_inactive_windows = false,
+  --       extend_background_behind_borders = true,
   --
-  --     -- setup must be called before loading
-  --     vim.cmd("colorscheme kanagawa")
-  --     -- Default options:
+  --       enable = {
+  --           terminal = true,
+  --           legacy_highlights = true, -- Improve compatibility for previous versions of Neovim
+  --           migrations = true, -- Handle deprecated options automatically
+  --       },
+  --
+  --       styles = {
+  --           bold = true,
+  --           italic = true,
+  --           transparency = true,
+  --       },
+  --
+  --       groups = {
+  --           border = "muted",
+  --           link = "iris",
+  --           panel = "surface",
+  --
+  --           error = "love",
+  --           hint = "iris",
+  --           info = "foam",
+  --           note = "pine",
+  --           todo = "rose",
+  --           warn = "gold",
+  --
+  --           git_add = "foam",
+  --           git_change = "rose",
+  --           git_delete = "love",
+  --           git_dirty = "rose",
+  --           git_ignore = "muted",
+  --           git_merge = "iris",
+  --           git_rename = "pine",
+  --           git_stage = "iris",
+  --           git_text = "rose",
+  --           git_untracked = "subtle",
+  --
+  --           h1 = "iris",
+  --           h2 = "foam",
+  --           h3 = "rose",
+  --           h4 = "gold",
+  --           h5 = "pine",
+  --           h6 = "foam",
+  --       },
+  --
+  --       highlight_groups = {
+  --           -- Comment = { fg = "foam" },
+  --           -- VertSplit = { fg = "muted", bg = "muted" },
+  --       },
+  --
+  --       before_highlight = function(group, highlight, palette)
+  --           -- Disable all undercurls
+  --           -- if highlight.undercurl then
+  --           --     highlight.undercurl = false
+  --           -- end
+  --           --
+  --           -- Change palette colour
+  --           -- if highlight.fg == palette.pine then
+  --           --     highlight.fg = palette.foam
+  --           -- end
+  --     end,
+  --   })
+  --   vim.cmd("colorscheme rose-pine")
   --   end
   -- },
+  {
+    'rebelot/kanagawa.nvim',
+    config = function()
+      require('kanagawa').setup({
+        compile = false,             -- enable compiling the colorscheme
+        undercurl = true,            -- enable undercurls
+        commentStyle = { italic = true },
+        functionStyle = {},
+        keywordStyle = { italic = true},
+        statementStyle = { bold = true },
+        typeStyle = {},
+        transparent = true,         -- do not set background color
+        dimInactive = false,         -- dim inactive window `:h hl-NormalNC`
+        terminalColors = true,       -- define vim.g.terminal_color_{0,17}
+        colors = {                   -- add/modify theme and palette colors
+          palette = {},
+          theme = { wave = {}, lotus = {}, dragon = {}, all = {ui = {bg_gutter = "none"}} },
+          -- theme = { wave = {}, lotus = {}, dragon = {}, all = {ui = {bg_gutter = "none", float = {bg="#1F1F28"}}} },
+        },
+        theme = "dragon",              -- Load "wave" theme when 'background' option is not set
+        background = {               -- map the value of 'background' option to a theme
+          dark = "dragon",           -- try "dragon" !
+          -- dark = "dragon",           -- try "dragon" !
+          -- light = "lotus"
+        },
+
+        overrides = function(colors)
+            local theme = colors.theme
+            return {
+                Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1, blend = vim.o.pumblend },  -- add `blend = vim.o.pumblend` to enable transparency
+                PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
+                PmenuSbar = { bg = theme.ui.bg_m1 },
+                PmenuThumb = { bg = theme.ui.bg_p2 },
+            }
+        end,
+      })
+
+
+      -- setup must be called before loading
+      vim.cmd("colorscheme kanagawa")
+    end
+  },
   --
   -- {
   --   'romgrk/barbar.nvim',
@@ -81,79 +170,22 @@ require('lazy').setup({
   --     vim.g.barbar_auto_setup = true
   --   end,
   -- },
-  {
-    "sainnhe/everforest",
-    config = function()
-      vim.g.everforest_diagnostic_text_highlight=1
-      vim.g.everforest_diagnostic_line_highlight=1
-      vim.g.everforest_transparent_background=1
-      vim.g.everforest_diagnostic_virtual_text='highlighted'
-      vim.g.everforest_background='hard'
-      vim.g.everforest_ui_contrast='high'
-      vim.g.everforest_current_word='underline'
-      vim.cmd.colorscheme 'everforest'
-    end,
-  },
+
+  {"github/copilot.vim"},
   -- {
-  --   "catppuccin/nvim",
-  --   name = "catppuccin",
-  --   priority = 1000,
+  --   "sainnhe/everforest",
   --   config = function()
-  --   require("catppuccin").setup({
-  --       flavour = "mocha", -- latte, frappe, macchiato, mocha
-  --       -- flavour = "auto" -- will respect terminal's background
-  --       background = { -- :h background
-  --           light = "latte",
-  --           dark = "mocha",
-  --       },
-  --       transparent_background = true, -- disables setting the background color.
-  --       show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
-  --       term_colors = false, -- sets terminal colors (e.g. `g:terminal_color_0`)
-  --       dim_inactive = {
-  --           enabled = false, -- dims the background color of inactive window
-  --           shade = "dark",
-  --           percentage = 0.15, -- percentage of the shade to apply to the inactive window
-  --       },
-  --       no_italic = false, -- Force no italic
-  --       no_bold = false, -- Force no bold
-  --       no_underline = false, -- Force no underline
-  --       styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
-  --           comments = { "italic" }, -- Change the style of comments
-  --           conditionals = { "italic" },
-  --           loops = {},
-  --           functions = {},
-  --           keywords = {},
-  --           strings = {},
-  --           variables = {},
-  --           numbers = {},
-  --           booleans = {},
-  --           properties = {},
-  --           types = {},
-  --           operators = {},
-  --           -- miscs = {}, -- Uncomment to turn off hard-coded styles
-  --       },
-  --       color_overrides = {},
-  --       custom_highlights = {},
-  --       default_integrations = true,
-  --       integrations = {
-  --           cmp = true,
-  --           gitsigns = true,
-  --           nvimtree = true,
-  --           treesitter = true,
-  --           notify = false,
-  --           mini = {
-  --               enabled = true,
-  --               indentscope_color = "",
-  --           },
-  --           -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
-  --       },
-  --   })
-  --
-  --   -- setup must be called before loading
-  --   vim.cmd.colorscheme "catppuccin"
+  --     vim.g.everforest_diagnostic_text_highlight=1
+  --     vim.g.everforest_diagnostic_line_highlight=1
+  --     vim.g.everforest_transparent_background=1
+  --     vim.g.everforest_diagnostic_virtual_text='highlighted'
+  --     vim.g.everforest_background='hard'
+  --     vim.g.everforest_dim_inactive_windows=1
+  --     vim.g.everforest_ui_contrast='high'
+  --     vim.g.everforest_current_word='underline'
+  --     vim.cmd.colorscheme 'everforest'
   --   end,
   -- },
-
   {
     'nvim-tree/nvim-tree.lua',
     config = function()
@@ -232,7 +264,7 @@ require('lazy').setup({
     "startup-nvim/startup.nvim",
     requires = {"nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim"},
     config = function()
-      require"startup".setup()
+      require "startup".setup()
     end
   },
   {
@@ -315,12 +347,7 @@ require('lazy').setup({
 
   'mfussenegger/nvim-dap',
 
-  {
-    "rcarriga/nvim-dap-ui",
-    config = function()
-      require("dapui").setup({})
-    end,
-  },
+  { "rcarriga/nvim-dap-ui", dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} },
 
   -- Git related plugins
   'tpope/vim-fugitive',
@@ -401,7 +428,6 @@ require('lazy').setup({
       options = {
         always_divide_middle = false,
         icons_enabled = false,
-        theme = 'everforest',
         component_separators = '|',
         section_separators = '',
       },
@@ -437,12 +463,11 @@ require('lazy').setup({
   {
     -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
-    -- Enable `lukas-reineke/indent-blankline.nvim`
-    -- See `:help indent_blankline.txt`
-    opts = {
-      char = '┊',
-      show_trailing_blankline_indent = false,
-    },
+    config = function ()
+      require("ibl").setup({
+        indent = { char = '┊'},
+      })
+    end,
   },
 
   -- "gc" to comment visual regions/lines
@@ -487,6 +512,7 @@ require('lazy').setup({
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   -- { import = 'custom.plugins' },
 }, {})
+
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
@@ -537,6 +563,8 @@ vim.o.termguicolors = true
 vim.o.shiftwidth = 4
 vim.o.tabstop = 4
 vim.o.numberwidth = 4
+vim.o.expandtab = true
+vim.o.smartindent = true
 
 vim.wo.relativenumber = true
 
@@ -802,6 +830,7 @@ end
 --
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
+
 local servers = {
   clangd = {},
   gopls = {},
