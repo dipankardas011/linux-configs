@@ -10,7 +10,8 @@ configuration {
     disable-history: false;
     hide-scrollbar: true;
     sidebar-mode: true;
-    display-combi: "🖥️ Search";
+    display-combi: "🔍 Find";
 }
 
-@theme "everforest"
+/*@theme "everforest"*/
+@theme "nord"
