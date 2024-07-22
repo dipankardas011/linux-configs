@@ -38,8 +38,8 @@ exec --no-startup-id dex-autostart --autostart --environment i3
 
 # NOTE:: refer https://github.com/Raymo111/i3lock-color if betterlockscreen not working 
 
-exec --no-startup-id xss-lock --transfer-sleep-lock -- betterlockscreen -l blur
-# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork -i $HOME/.config/i3/images/lockscreen.png
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork -i $HOME/.config/i3/images/lockscreen.png
+bindsym $mod+Control+l exec i3lock --nofork -i $HOME/.config/i3/images/lockscreen.png
 
 exec --no-startup-id picom -b
 exec --no-startup-id copyq
@@ -66,6 +66,7 @@ bindsym $mod+Return exec /bin/alacritty
 bindsym $mod+q kill
 
 # rofi
+# https://davatorium.github.io/rofi/CONFIG/#splitting-configuration-over-multiple-files
 bindsym $mod+d exec rofi -show combi -font 'FantasqueSansM Nerd Font Mono 15'
 
 bindsym $mod+Shift+d exec --no-startup-id "dmenu_run -nf '#7AA2F7' -nb '#282828' -sb '#4C4C4C' -sf '#EEEEEE' -fn 'FantasqueSansMono NF-15'"
@@ -99,6 +100,7 @@ bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
+
 
 # split in horizontal orientation
 bindsym $mod+h split h
@@ -220,7 +222,7 @@ mode "resize" {
 #   }
 # }
 
-exec polybar
+exec polybar -c /home/$USER/.config/polybar/config.ini
 
 exec i3-msg border none
 
@@ -240,8 +242,9 @@ exec --no-startup-id xinput set-prop "MSFT0001:00 04F3:3140 Touchpad" "libinput 
 
 
 # background
-exec feh --bg-scale /home/$USER/.config/i3/images/bg_51.png
-# exec feh --bg-scale /home/$USER/.config/i3/images/bg_4.jpg
+# exec_always feh --bg-scale /home/$USER/.config/i3/images/bg_6.jpg
+# exec_always feh --bg-scale /home/$USER/.config/i3/images/waterfall_1.png
+exec_always feh --bg-scale /home/$USER/.config/i3/images/circuit_1.png
 
 
 # Screenshots
@@ -260,9 +263,9 @@ bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5 &&  notify-send "Bri
 bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5 && notify-send "Brightness level: $(light -G -u low )" #decrease screen brightness
 
 # window title icon
-# for_window [all] title_window_icon on
+# for_window [all] title_window_icon off
 
-gaps inner 11
+gaps inner 6
 gaps outer 5
 
 # border size
@@ -277,11 +280,12 @@ popup_during_fullscreen smart
 
 # lock button
 # betterlockscreen WARN: you might need to install i3-color https://github.com/Raymo111/i3lock-color.git
-bindsym $mod+Control+l exec betterlockscreen -l blur
+
+#exec --no-startup-id xss-lock --transfer-sleep-lock -- betterlockscreen -l blur
+#bindsym $mod+Control+l exec betterlockscreen -l blur
 
 bindsym $mod+i exec thunar
 
-# exec --no-startup-id "sleep 1; urxvt -e i3-msg restart"  # for the i3status-title-on-bar
 
 bindsym $mod+Shift+g scratchpad show
 
