@@ -133,7 +133,16 @@ require('lazy').setup({
         terminalColors = true,       -- define vim.g.terminal_color_{0,17}
         colors = {                   -- add/modify theme and palette colors
           palette = {},
-          theme = { wave = {}, lotus = {}, dragon = {}, all = {ui = {bg_gutter = "none"}} },
+          theme = {
+            wave = {},
+            lotus = {},
+            dragon = {},
+            all = {
+              ui = {
+                bg_gutter = "none"
+              },
+            },
+          },
           -- theme = { wave = {}, lotus = {}, dragon = {}, all = {ui = {bg_gutter = "none", float = {bg="#1F1F28"}}} },
         },
         theme = "dragon",              -- Load "wave" theme when 'background' option is not set
@@ -144,13 +153,14 @@ require('lazy').setup({
         },
 
         overrides = function(colors)
-            local theme = colors.theme
-            return {
-                Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1, blend = vim.o.pumblend },  -- add `blend = vim.o.pumblend` to enable transparency
-                PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
-                PmenuSbar = { bg = theme.ui.bg_m1 },
-                PmenuThumb = { bg = theme.ui.bg_p2 },
-            }
+          local theme = colors.theme
+          return {
+            Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1, blend = vim.o.pumblend },  -- add `blend = vim.o.pumblend` to enable transparency
+            PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
+            PmenuSbar = { bg = theme.ui.bg_m1 },
+            PmenuThumb = { bg = theme.ui.bg_p2 },
+            NormalFloat = { fg = theme.ui.shade0, bg = theme.ui.bg_p1, blend = vim.o.pumblend },
+          }
         end,
       })
 
@@ -347,7 +357,13 @@ require('lazy').setup({
 
   'mfussenegger/nvim-dap',
 
-  { "rcarriga/nvim-dap-ui", dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} },
+  {
+    "rcarriga/nvim-dap-ui",
+    dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"},
+    config = function ()
+      require("dapui").setup()
+    end
+  },
 
   -- Git related plugins
   'tpope/vim-fugitive',
