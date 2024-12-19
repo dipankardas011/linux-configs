@@ -24,7 +24,7 @@ print_events = false
 # ref_test = false
 
 [font]
-size = 15
+size = 16
 
 [font.glyph_offset]
 x = 0
@@ -347,7 +347,7 @@ save_to_clipboard = true
 semantic_escape_chars = ",│`|:\"' ()[]{}<>"
 
 [terminal.shell]
-program = "/bin/bash"
+program = "/bin/zsh"
 
 [window]
 decorations = "none"
