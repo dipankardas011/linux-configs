@@ -1,7 +1,7 @@
 configuration {
     modi: "drun";
     show: "drun";
-    dpi: 100;
+    /*dpi: 100;*/
     combi-modi: "drun";
     show-icons: true;
     terminal: "alacritty";
