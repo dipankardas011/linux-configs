@@ -29,17 +29,14 @@ require('lazy').setup({
     end,
   },
   {
-    "catppuccin/nvim",
-    config = function ()
-      require("catppuccin").setup({
-        flavour="macchiato",
-        transparent_background = true,
-      })
-
-      vim.cmd.colorscheme 'catppuccin'
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    build = "cd app && yarn install",
+    init = function()
+      vim.g.mkdp_filetypes = { "markdown" }
     end,
+    ft = { "markdown" },
   },
-
   {
     'norcalli/nvim-colorizer.lua',
     config = function()
@@ -51,7 +48,148 @@ require('lazy').setup({
     end,
 
   },
+  {
+    "tpope/vim-dadbod",
+    "kristijanhusak/vim-dadbod-completion",
+    "kristijanhusak/vim-dadbod-ui",
+  },
+  -- {
+  --   'rose-pine/neovim',
+  --   config = function()
+  --   require("rose-pine").setup({
+  --       variant = "auto", -- auto, main, moon, or dawn
+  --       dark_variant = "main", -- main, moon, or dawn
+  --       dim_inactive_windows = false,
+  --       extend_background_behind_borders = true,
+  --
+  --       enable = {
+  --           terminal = true,
+  --           legacy_highlights = true, -- Improve compatibility for previous versions of Neovim
+  --           migrations = true, -- Handle deprecated options automatically
+  --       },
+  --
+  --       styles = {
+  --           bold = true,
+  --           italic = true,
+  --           transparency = true,
+  --       },
+  --
+  --       groups = {
+  --           border = "muted",
+  --           link = "iris",
+  --           panel = "surface",
+  --
+  --           error = "love",
+  --           hint = "iris",
+  --           info = "foam",
+  --           note = "pine",
+  --           todo = "rose",
+  --           warn = "gold",
+  --
+  --           git_add = "foam",
+  --           git_change = "rose",
+  --           git_delete = "love",
+  --           git_dirty = "rose",
+  --           git_ignore = "muted",
+  --           git_merge = "iris",
+  --           git_rename = "pine",
+  --           git_stage = "iris",
+  --           git_text = "rose",
+  --           git_untracked = "subtle",
+  --
+  --           h1 = "iris",
+  --           h2 = "foam",
+  --           h3 = "rose",
+  --           h4 = "gold",
+  --           h5 = "pine",
+  --           h6 = "foam",
+  --       },
+  --
+  --       highlight_groups = {
+  --           -- Comment = { fg = "foam" },
+  --           -- VertSplit = { fg = "muted", bg = "muted" },
+  --       },
+  --
+  --       before_highlight = function(group, highlight, palette)
+  --           -- Disable all undercurls
+  --           -- if highlight.undercurl then
+  --           --     highlight.undercurl = false
+  --           -- end
+  --           --
+  --           -- Change palette colour
+  --           -- if highlight.fg == palette.pine then
+  --           --     highlight.fg = palette.foam
+  --           -- end
+  --     end,
+  --   })
+  --   vim.cmd("colorscheme rose-pine")
+  --   end
+  -- },
+  -- {
+  --   'rebelot/kanagawa.nvim',
+  --   config = function()
+  --     require('kanagawa').setup({
+  --       compile = false,             -- enable compiling the colorscheme
+  --       undercurl = true,            -- enable undercurls
+  --       commentStyle = { italic = true },
+  --       functionStyle = {},
+  --       keywordStyle = { italic = true},
+  --       statementStyle = { bold = true },
+  --       typeStyle = {},
+  --       transparent = true,         -- do not set background color
+  --       dimInactive = false,         -- dim inactive window `:h hl-NormalNC`
+  --       terminalColors = true,       -- define vim.g.terminal_color_{0,17}
+  --       colors = {                   -- add/modify theme and palette colors
+  --         palette = {},
+  --         theme = {
+  --           wave = {},
+  --           lotus = {},
+  --           dragon = {},
+  --           all = {
+  --             ui = {
+  --               bg_gutter = "none"
+  --             },
+  --           },
+  --         },
+  --         -- theme = { wave = {}, lotus = {}, dragon = {}, all = {ui = {bg_gutter = "none", float = {bg="#1F1F28"}}} },
+  --       },
+  --       theme = "dragon",              -- Load "wave" theme when 'background' option is not set
+  --       background = {               -- map the value of 'background' option to a theme
+  --         dark = "dragon",           -- try "dragon" !
+  --         -- dark = "dragon",           -- try "dragon" !
+  --         -- light = "lotus"
+  --       },
+  --
+  --       overrides = function(colors)
+  --         local theme = colors.theme
+  --         return {
+  --           Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1, blend = vim.o.pumblend },  -- add `blend = vim.o.pumblend` to enable transparency
+  --           PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
+  --           PmenuSbar = { bg = theme.ui.bg_m1 },
+  --           PmenuThumb = { bg = theme.ui.bg_p2 },
+  --           NormalFloat = { fg = theme.ui.shade0, bg = theme.ui.bg_p1, blend = vim.o.pumblend },
+  --         }
+  --       end,
+  --     })
+  --
+  --
+  --     -- setup must be called before loading
+  --     vim.cmd("colorscheme kanagawa")
+  --   end
+  -- },
+  --
+  -- {
+  --   'romgrk/barbar.nvim',
+  --   dependencies = {
+  --     'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
+  --     'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
+  --   },
+  --   init = function()
+  --     vim.g.barbar_auto_setup = true
+  --   end,
+  -- },
 
+  {"github/copilot.vim"},
   {
     "sainnhe/everforest",
     config = function()
@@ -60,12 +198,12 @@ require('lazy').setup({
       vim.g.everforest_transparent_background=1
       vim.g.everforest_diagnostic_virtual_text='highlighted'
       vim.g.everforest_background='hard'
+      vim.g.everforest_dim_inactive_windows=1
       vim.g.everforest_ui_contrast='high'
       vim.g.everforest_current_word='underline'
-      -- vim.cmd.colorscheme 'everforest'
+      vim.cmd.colorscheme 'everforest'
     end,
   },
-
   {
     'nvim-tree/nvim-tree.lua',
     config = function()
@@ -140,6 +278,13 @@ require('lazy').setup({
     end
   },
 
+  {
+    "startup-nvim/startup.nvim",
+    requires = {"nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim"},
+    config = function()
+      require "startup".setup()
+    end
+  },
   {
     'nvim-tree/nvim-web-devicons',
   },
@@ -222,9 +367,10 @@ require('lazy').setup({
 
   {
     "rcarriga/nvim-dap-ui",
-    config = function()
-      require("dapui").setup({})
-    end,
+    dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"},
+    config = function ()
+      require("dapui").setup()
+    end
   },
 
   -- Git related plugins
@@ -306,10 +452,24 @@ require('lazy').setup({
       options = {
         always_divide_middle = false,
         icons_enabled = true,
-        -- theme = 'everforest',
         component_separators = '|',
         section_separators = '',
       },
+      sections = {
+        lualine_c = {
+          {
+            "filename",
+            path = 1
+          }
+        },
+        -- lualine_a = {},
+        -- lualine_c = {},
+        -- lualine_x = {},
+        -- lualine_y = {},
+        -- lualine_z = {}
+      },
+      tabline = {},
+      extensions = {}
     },
 
     -- sections = {
@@ -330,7 +490,7 @@ require('lazy').setup({
     config = function ()
       require("ibl").setup({
         indent = { char = '┊'},
-    })
+      })
     end,
   },
 
@@ -377,6 +537,7 @@ require('lazy').setup({
   -- { import = 'custom.plugins' },
 }, {})
 
+
 -- [[ Setting options ]]
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
@@ -389,6 +550,7 @@ vim.wo.number = true
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
+
 
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
@@ -425,6 +587,8 @@ vim.o.termguicolors = true
 vim.o.shiftwidth = 4
 vim.o.tabstop = 4
 vim.o.numberwidth = 4
+vim.o.expandtab = true
+vim.o.smartindent = true
 
 vim.wo.relativenumber = true
 
@@ -432,7 +596,12 @@ vim.wo.wrap = true
 
 vim.wo.cursorline = true
 
+
 -- vim.wo.spell = true
+
+vim.opt.colorcolumn = "80"
+
+vim.o.laststatus = 3 -- global status
 
 
 -- [[ Basic Keymaps ]]
@@ -448,9 +617,9 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 vim.keymap.set('n', '<leader>b', ":NvimTreeToggle<CR>", {desc = "toggle nvimtree"})
 
 --- for the nvim-terminal
-vim.keymap.set({'n', 't'}, '<C-h>', function () require("nvterm.terminal").toggle('horizontal') end, { desc = '[A]ctivate terminal [H]orizontal' })
-vim.keymap.set({'n', 't'}, '<C-v>', function () require("nvterm.terminal").toggle('vertical') end, { desc = '[A]ctivate terminal [V]ertical' })
-vim.keymap.set({'n', 't'}, '<C-f>', function () require("nvterm.terminal").toggle('float') end, { desc = '[A]ctivate terminal [I]Floating' })
+vim.keymap.set({'n', 't'}, '<A-h>', function () require("nvterm.terminal").toggle('horizontal') end, { desc = '[A]ctivate terminal [H]orizontal' })
+vim.keymap.set({'n', 't'}, '<A-v>', function () require("nvterm.terminal").toggle('vertical') end, { desc = '[A]ctivate terminal [V]ertical' })
+vim.keymap.set({'n', 't'}, '<A-i>', function () require("nvterm.terminal").toggle('float') end, { desc = '[A]ctivate terminal [I]Floating' })
 
 vim.keymap.set('n', '<C-Tab>', ':bdelete<CR>',{ desc = 'close buffer' })
 vim.keymap.set('n', '<Tab>', ':bnext<CR>',{ desc = 'next buffer' })
@@ -655,6 +824,7 @@ local on_attach = function(client, bufnr)
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, '[W]orkspace [L]ist Folders')
 
+
   -- Create a command `:Format` local to the LSP buffer
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
     vim.lsp.buf.format()
@@ -684,12 +854,12 @@ end
 --
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
+
 local servers = {
   clangd = {},
   gopls = {},
   pyright = {},
   rust_analyzer = {},
-  tsserver = {},
   yamlls = {},
 
   lua_ls = {
