@@ -9,28 +9,52 @@ duration = 0
 draw_bold_text_with_bright_colors = true
 
 [colors.bright]
-black = "#5B6078"
-blue = "#8AADF4"
-cyan = "#8BD5CA"
-green = "#A6DA95"
-magenta = "#F5BDE6"
-red = "#ED8796"
-white = "#A5ADCB"
-yellow = "#EED49F"
+black = "#475258"
+blue = "#7fbbb3"
+cyan = "#83c092"
+green = "#a7c080"
+magenta = "#d699b6"
+red = "#e67e80"
+white = "#d3c6aa"
+yellow = "#dbbc7f"
 
 [colors.normal]
-black = "#494D64"
-blue = "#8AADF4"
-cyan = "#8BD5CA"
-green = "#A6DA95"
-magenta = "#F5BDE6"
-red = "#ED8796"
-white = "#B8C0E0"
-yellow = "#EED49F"
+black = "#414b50"
+blue = "#7fbbb3"
+cyan = "#83c092"
+green = "#a7c080"
+magenta = "#d699b6"
+red = "#e67e80"
+white = "#d3c6aa"
+yellow = "#dbbc7f"
 
 [colors.primary]
-background = "#24273A"
-foreground = "#CAD3F5"
+background = "#272e33"
+foreground = "#d3c6aa"
+
+# [colors.bright]
+# black = "#5B6078"
+# blue = "#8AADF4"
+# cyan = "#8BD5CA"
+# green = "#A6DA95"
+# magenta = "#F5BDE6"
+# red = "#ED8796"
+# white = "#A5ADCB"
+# yellow = "#EED49F"
+#
+# [colors.normal]
+# black = "#494D64"
+# blue = "#8AADF4"
+# cyan = "#8BD5CA"
+# green = "#A6DA95"
+# magenta = "#F5BDE6"
+# red = "#ED8796"
+# white = "#B8C0E0"
+# yellow = "#EED49F"
+#
+# [colors.primary]
+# background = "#24273A"
+# foreground = "#CAD3F5"
 
 [cursor]
 style = "Block"
@@ -42,14 +66,16 @@ persistent_logging = false
 print_events = false
 
 [font]
-size = 20
+size = 18
 
 [font.glyph_offset]
 x = 0
 y = 0
 
+
 [font.normal]
-family = "FantasqueSansM Nerd Font Mono"
+family = "JetBrainsMono Nerd Font"
+# family = "FantasqueSansM Nerd Font Mono"
 style = "Regular"
 
 [font.offset]
@@ -114,7 +140,7 @@ bindings = [
     { chars = "\u001b[2~", key = "Insert" },
     { chars = "\u001b[3~", key = "Delete" },
     { chars = "\u0002&", key = "W", mods = "Command" },
-    { chars = "\u0002c", key = "T", mods = "Command" },
+    # { chars = "\u0002c", key = "T", mods = "Command" },
     { chars = "\u0002n", key = "RBracket", mods = "Command|Shift" },
     { chars = "\u0002p", key = "LBracket", mods = "Command|Shift" },
     { chars = "\u0002o", key = "RBracket", mods = "Command" },
@@ -136,10 +162,12 @@ save_to_clipboard = true
 semantic_escape_chars = ",│`|:\"' ()[]{}<>"
 
 [window]
-decorations = "full"
+# decorations = "None"
+decorations = "Full"
 dynamic_padding = true
 opacity = 0.95
-startup_mode = "Windowed"
+# startup_mode = "Windowed"
+startup_mode = "Maximized"
 
 [window.padding]
 x = 1
