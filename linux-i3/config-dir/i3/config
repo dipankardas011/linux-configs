@@ -42,8 +42,8 @@ exec --no-startup-id dex-autostart --autostart --environment i3
 #exec --no-startup-id xss-lock --transfer-sleep-lock -- betterlockscreen -l blur
 #bindsym $mod+Control+l exec betterlockscreen -l blur
 
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork -i $HOME/.config/i3/images/circuit_1.png
-bindsym $mod+Control+l exec i3lock --nofork -i $HOME/.config/i3/images/circuit_1.png
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork -i "$HOME/.config/i3/images/c-lock-$(shuf -i0-5 -n1).png"
+bindsym $mod+Control+l exec i3lock --nofork -i "$HOME/.config/i3/images/c-lock-$(shuf -i0-5 -n1).png"
 
 
 ##### Background Statup application #####
