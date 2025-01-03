@@ -205,14 +205,22 @@ require('lazy').setup({
       })
     end
   },
-
-  -- {
-  --   "startup-nvim/startup.nvim",
-  --   requires = {"nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim"},
-  --   config = function()
-  --     require "startup".setup()
-  --   end
-  -- },
+  {
+    "maxandron/goplements.nvim",
+    ft = "go",
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    },
+  },
+  {
+    "startup-nvim/startup.nvim",
+    requires = {"nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim"},
+    config = function()
+      require "startup".setup()
+    end
+  },
   {
     'nvim-tree/nvim-web-devicons',
   },
@@ -514,6 +522,7 @@ vim.keymap.set({'n', 't'}, '<A-i>', function () require("nvterm.terminal").toggl
 vim.keymap.set('n', '<C-Tab>', ':bdelete<CR>',{ desc = 'close buffer' })
 vim.keymap.set('n', '<Tab>', ':bnext<CR>',{ desc = 'next buffer' })
 vim.keymap.set('n', '<S-Tab>', ':bprevious<CR>',{ desc = 'prev buffer' })
+vim.keymap.set('n', '<A-t>', ':tabnew<CR>',{ desc = 'new tab' })
 
 vim.keymap.set('n', '<F5>', function() require('dap').continue() end, { desc = 'Go debug CONTINUE' })
 vim.keymap.set('n', '<Leader>db', function() require('dap').toggle_breakpoint() end, { desc = '[D]ebug [b]reakpoint' })

@@ -146,10 +146,10 @@ alias cls='clear'
 alias v='nvim'
 # alias vi='lvim'
 
-alias onedrivePull='rclone sync -P onedrive: ~/Onedrive'
-alias onedrivePush='rclone sync -P ~/Onedrive onedrive:'
 alias gdrivePull='rclone sync -P gdrive: ~/GoogleDrive'
 alias gdrivePush='rclone sync -P ~/GoogleDrive gdrive:'
+alias s3Push='rclone sync -P ~/ext-bkps/s3 s3:'
+alias s3Pull='rclone sync -P s3: ~/ext-bkps/s3'
 
 export PATH=$PATH:/home/dipankar/.linkerd2/bin
 
@@ -256,5 +256,20 @@ alias pbcopy="xsel --clipboard --input"
 alias nixinstall="nix profile install"
 alias nixallupgrade="nix profile upgrade --all"
 
-alias switchtohdmi="xrandr --output HDMI-1 --primary && xrandr --output eDP-1 --off"
-alias switchtolaptop="xrandr --output eDP-1 --primary --auto && xrandr --output HDMI-1 --off"
+# alias switchtohdmi="xrandr --output HDMI-1 --primary && xrandr --output eDP-1 --off"
+# alias switchtolaptop="xrandr --output eDP-1 --primary --auto && xrandr --output HDMI-1 --off"
+alias switchtohdmi='
+if xrandr | grep "HDMI-1 connected"; then
+  xrandr --output HDMI-1 --primary --auto && xrandr --output eDP-1 --off
+else
+  echo "HDMI-1 is not connected."
+fi
+'
+
+alias switchtolaptop='
+if xrandr | grep "eDP-1 connected"; then
+  xrandr --output eDP-1 --primary --auto && xrandr --output HDMI-1 --off
+else
+  echo "eDP-1 is not connected."
+fi
+'
