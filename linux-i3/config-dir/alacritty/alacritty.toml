@@ -24,15 +24,19 @@ print_events = false
 # ref_test = false
 
 [font]
-size = 15
+size = 16
 
 [font.glyph_offset]
 x = 0
 y = 0
 
 [font.normal]
-family = "JetBrainsMono NF"
+family = "terminal-font"
+# family = "JetBrainsMono NF"
 
+# [font.italic]
+# # family = "FantasqueSansMono NF"
+# family = "Zed Plex Mono"
 
 [font.offset]
 x = 0
@@ -352,7 +356,7 @@ program = "/bin/zsh"
 [window]
 decorations = "none"
 dynamic_padding = true
-opacity = 0.95
+opacity = 0.98
 startup_mode = "Windowed"
 
 [window.padding]
