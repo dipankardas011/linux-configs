@@ -4,7 +4,12 @@ vim.g.loaded_netrwPlugin = 1
 -- -- set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
 
-
+vim.cmd [[
+  highlight Normal guibg=none
+  highlight NonText guibg=none
+  highlight Normal ctermbg=none
+  highlight NonText ctermbg=none
+]]
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
@@ -58,10 +63,10 @@ require('lazy').setup({
   --   config = function()
   --     require('kanagawa').setup({
   --       compile = false,             -- enable compiling the colorscheme
-  --       undercurl = true,            -- enable undercurls
+  --       undercurl = false,            -- enable undercurls
   --       commentStyle = { italic = true },
   --       functionStyle = {},
-  --       keywordStyle = { italic = true},
+  --       keywordStyle = { bold = true},
   --       statementStyle = { bold = true },
   --       typeStyle = {},
   --       transparent = true,         -- do not set background color
@@ -105,7 +110,7 @@ require('lazy').setup({
   --     vim.cmd("colorscheme kanagawa")
   --   end
   -- },
-  --
+
   -- {
   --   'romgrk/barbar.nvim',
   --   dependencies = {
@@ -117,7 +122,17 @@ require('lazy').setup({
   --   end,
   -- },
 
-  {"github/copilot.vim"},
+  -- {"github/copilot.vim"},
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    dependencies = {
+      { "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
+    },
+    build = "make tiktoken", -- Only on MacOS or Linux
+    opts = {
+      -- See Configuration section for options
+    },
+  },
   {
     "sainnhe/everforest",
     config = function()
@@ -132,6 +147,7 @@ require('lazy').setup({
       vim.cmd.colorscheme 'everforest'
     end,
   },
+
   {
     'nvim-tree/nvim-tree.lua',
     config = function()
@@ -277,11 +293,19 @@ require('lazy').setup({
         dap_configurations = {
           {
             type = "go",
-            name = "Attach remote",
+            name = "Attach remote for tty",
             mode = "remote",
             request = "attach",
             program = "${file}",
-            port = "40404"
+            -- port = "40404",
+          },
+        },
+        delve = {
+          path = "/home/dipankar/go/bin/dlv",
+          initialize_timeout_sec = 30,
+          args = {
+            "--tty",
+            "--listen=:40404", -- Ensures Delve listens on this port
           },
         },
       })
@@ -371,11 +395,12 @@ require('lazy').setup({
     opts = {
       options = {
         always_divide_middle = false,
-        icons_enabled = false,
+        icons_enabled = true,
         component_separators = '|',
         section_separators = '',
       },
       sections = {
+        lualine_b = {'branch', 'diff', 'diagnostics'},
         lualine_c = {
           {
             "filename",
@@ -522,7 +547,7 @@ vim.keymap.set({'n', 't'}, '<A-i>', function () require("nvterm.terminal").toggl
 vim.keymap.set('n', '<C-Tab>', ':bdelete<CR>',{ desc = 'close buffer' })
 vim.keymap.set('n', '<Tab>', ':bnext<CR>',{ desc = 'next buffer' })
 vim.keymap.set('n', '<S-Tab>', ':bprevious<CR>',{ desc = 'prev buffer' })
-vim.keymap.set('n', '<A-t>', ':tabnew<CR>',{ desc = 'new tab' })
+vim.keymap.set('n', '<Leader>t', ':tabnew<CR>',{ desc = 'new tab' })
 
 vim.keymap.set('n', '<F5>', function() require('dap').continue() end, { desc = 'Go debug CONTINUE' })
 vim.keymap.set('n', '<Leader>db', function() require('dap').toggle_breakpoint() end, { desc = '[D]ebug [b]reakpoint' })
@@ -601,11 +626,11 @@ end, { desc = '[/] Fuzzily search in current buffer' })
 
 vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
 vim.keymap.set('n', '<leader>sf', function()
-    require('telescope.builtin').find_files({
-        hidden = true, -- Show hidden files
-        prompt_title = '[S]earch [F]iles', -- Set prompt title
-    })
-    end, { desc = '[S]earch [F]iles' })
+  require('telescope.builtin').find_files({
+    hidden = true, -- Show hidden files
+    prompt_title = '[S]earch [F]iles', -- Set prompt title
+  })
+end, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
