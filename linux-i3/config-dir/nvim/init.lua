@@ -234,7 +234,9 @@ require('lazy').setup({
     "startup-nvim/startup.nvim",
     requires = {"nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim"},
     config = function()
-      require "startup".setup()
+      require "startup".setup({
+        theme = "dashboard", -- Example theme, customize as needed
+      })
     end
   },
   {
@@ -286,6 +288,7 @@ require('lazy').setup({
     end,
   },
 
+  -- dlv debug --headless --listen=:40404 --api-version=2 --redirect="stdin:/dev/stdin" --redirect="stdout:/dev/stdout" --redirect="stderr:/dev/stderr" -- cluster create
   {
     "leoluz/nvim-dap-go",
     config = function ()
@@ -293,20 +296,34 @@ require('lazy').setup({
         dap_configurations = {
           {
             type = "go",
-            name = "Attach remote for tty",
+            name = "For specific program",
             mode = "remote",
             request = "attach",
             program = "${file}",
-            -- port = "40404",
+            args = require("dap-go").get_arguments,
+            buildFlags = require("dap-go").get_build_flags,
+          },
+          {
+            type = "go",
+            name = "Attach remote",
+            mode = "remote",
+            request = "attach",
+            -- port = 40404,  -- Must match the port in your dlv command
+            port = function()
+              return tonumber(vim.fn.input('Port: ', '40404'))
+            end,
           },
         },
         delve = {
           path = "/home/dipankar/go/bin/dlv",
           initialize_timeout_sec = 30,
-          args = {
-            "--tty",
-            "--listen=:40404", -- Ensures Delve listens on this port
-          },
+          port = 40404,
+          args = function()
+            return require("dap-go").get_arguments()
+          end,
+          build_flags = function()
+            return require("dap-go").get_build_flags()
+          end,
         },
       })
     end,
@@ -458,7 +475,7 @@ require('lazy').setup({
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   -- { import = 'custom.plugins' },
-}, {})
+})
 
 
 -- [[ Setting options ]]
@@ -644,6 +661,9 @@ require('nvim-treesitter.configs').setup {
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
+  sync_install = false,
+  ignore_install = {},
+  modules = {},
 
   highlight = { enable = true },
   indent = { enable = true },
@@ -707,6 +727,17 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous dia
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+
+local dap, dapui = require("dap"), require("dapui")
+dap.listeners.after.event_initialized["dapui_config"] = function()
+  dapui.open()
+end
+dap.listeners.before.event_terminated["dapui_config"] = function()
+  dapui.close()
+end
+dap.listeners.before.event_exited["dapui_config"] = function()
+  dapui.close()
+end
 
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
@@ -806,6 +837,7 @@ local mason_lspconfig = require 'mason-lspconfig'
 
 mason_lspconfig.setup {
   ensure_installed = vim.tbl_keys(servers),
+  automatic_installation = true,
 }
 
 mason_lspconfig.setup_handlers {
