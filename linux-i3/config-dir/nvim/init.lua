@@ -58,71 +58,70 @@ require('lazy').setup({
     "kristijanhusak/vim-dadbod-completion",
     "kristijanhusak/vim-dadbod-ui",
   },
-  -- {
-  --   'rebelot/kanagawa.nvim',
-  --   config = function()
-  --     require('kanagawa').setup({
-  --       compile = false,             -- enable compiling the colorscheme
-  --       undercurl = false,            -- enable undercurls
-  --       commentStyle = { italic = true },
-  --       functionStyle = {},
-  --       keywordStyle = { bold = true},
-  --       statementStyle = { bold = true },
-  --       typeStyle = {},
-  --       transparent = true,         -- do not set background color
-  --       dimInactive = false,         -- dim inactive window `:h hl-NormalNC`
-  --       terminalColors = true,       -- define vim.g.terminal_color_{0,17}
-  --       colors = {                   -- add/modify theme and palette colors
-  --         palette = {},
-  --         theme = {
-  --           wave = {},
-  --           lotus = {},
-  --           dragon = {},
-  --           all = {
-  --             ui = {
-  --               bg_gutter = "none"
-  --             },
-  --           },
-  --         },
-  --         -- theme = { wave = {}, lotus = {}, dragon = {}, all = {ui = {bg_gutter = "none", float = {bg="#1F1F28"}}} },
-  --       },
-  --       theme = "dragon",              -- Load "wave" theme when 'background' option is not set
-  --       background = {               -- map the value of 'background' option to a theme
-  --         dark = "dragon",           -- try "dragon" !
-  --         -- dark = "dragon",           -- try "dragon" !
-  --         -- light = "lotus"
-  --       },
-  --
-  --       overrides = function(colors)
-  --         local theme = colors.theme
-  --         return {
-  --           Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1, blend = vim.o.pumblend },  -- add `blend = vim.o.pumblend` to enable transparency
-  --           PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
-  --           PmenuSbar = { bg = theme.ui.bg_m1 },
-  --           PmenuThumb = { bg = theme.ui.bg_p2 },
-  --           NormalFloat = { fg = theme.ui.shade0, bg = theme.ui.bg_p1, blend = vim.o.pumblend },
-  --         }
-  --       end,
-  --     })
-  --
-  --
-  --     -- setup must be called before loading
-  --     vim.cmd("colorscheme kanagawa")
-  --   end
-  -- },
+  {
+    'rebelot/kanagawa.nvim',
+    config = function()
+      require('kanagawa').setup({
+        compile = false,             -- enable compiling the colorscheme
+        undercurl = false,            -- enable undercurls
+        commentStyle = { italic = true },
+        functionStyle = {},
+        keywordStyle = { bold = true},
+        statementStyle = { bold = true },
+        typeStyle = {},
+        transparent = true,         -- do not set background color
+        dimInactive = false,         -- dim inactive window `:h hl-NormalNC`
+        terminalColors = true,       -- define vim.g.terminal_color_{0,17}
+        colors = {                   -- add/modify theme and palette colors
+          palette = {},
+          theme = {
+            wave = {},
+            lotus = {},
+            dragon = {},
+            all = {
+              ui = {
+                bg_gutter = "none"
+              },
+            },
+          },
+          -- theme = { wave = {}, lotus = {}, dragon = {}, all = {ui = {bg_gutter = "none", float = {bg="#1F1F28"}}} },
+        },
+        theme = "dragon",              -- Load "wave" theme when 'background' option is not set
+        background = {               -- map the value of 'background' option to a theme
+          dark = "dragon",           -- try "dragon" !
+          -- dark = "dragon",           -- try "dragon" !
+          -- light = "lotus"
+        },
 
-  -- {
-  --   'romgrk/barbar.nvim',
-  --   dependencies = {
-  --     'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
-  --     'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
-  --   },
-  --   init = function()
-  --     vim.g.barbar_auto_setup = true
-  --   end,
-  -- },
+        overrides = function(colors)
+          local theme = colors.theme
+          return {
+            Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1, blend = vim.o.pumblend },  -- add `blend = vim.o.pumblend` to enable transparency
+            PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
+            PmenuSbar = { bg = theme.ui.bg_m1 },
+            PmenuThumb = { bg = theme.ui.bg_p2 },
+            NormalFloat = { fg = theme.ui.shade0, bg = theme.ui.bg_p1, blend = vim.o.pumblend },
+          }
+        end,
+      })
 
-  -- {"github/copilot.vim"},
+
+      -- setup must be called before loading
+      vim.cmd("colorscheme kanagawa")
+    end
+  },
+
+  {
+    'romgrk/barbar.nvim',
+    dependencies = {
+      'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
+      'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
+    },
+    init = function()
+      vim.g.barbar_auto_setup = true
+    end,
+  },
+
   {
     "CopilotC-Nvim/CopilotChat.nvim",
     dependencies = {
@@ -133,20 +132,20 @@ require('lazy').setup({
       -- See Configuration section for options
     },
   },
-  {
-    "sainnhe/everforest",
-    config = function()
-      vim.g.everforest_diagnostic_text_highlight=1
-      vim.g.everforest_diagnostic_line_highlight=1
-      vim.g.everforest_transparent_background=1
-      vim.g.everforest_diagnostic_virtual_text='highlighted'
-      vim.g.everforest_background='hard'
-      vim.g.everforest_dim_inactive_windows=1
-      vim.g.everforest_ui_contrast='high'
-      vim.g.everforest_current_word='underline'
-      vim.cmd.colorscheme 'everforest'
-    end,
-  },
+  -- {
+  --   "sainnhe/everforest",
+  --   config = function()
+  --     vim.g.everforest_diagnostic_text_highlight=1
+  --     vim.g.everforest_diagnostic_line_highlight=1
+  --     vim.g.everforest_transparent_background=1
+  --     vim.g.everforest_diagnostic_virtual_text='highlighted'
+  --     vim.g.everforest_background='hard'
+  --     vim.g.everforest_dim_inactive_windows=1
+  --     vim.g.everforest_ui_contrast='high'
+  --     vim.g.everforest_current_word='underline'
+  --     vim.cmd.colorscheme 'everforest'
+  --   end,
+  -- },
 
   {
     'nvim-tree/nvim-tree.lua',
@@ -291,7 +290,7 @@ require('lazy').setup({
   -- dlv debug --headless --listen=:40404 --api-version=2 --redirect="stdin:/dev/stdin" --redirect="stdout:/dev/stdout" --redirect="stderr:/dev/stderr" -- cluster create
   {
     "leoluz/nvim-dap-go",
-    config = function ()
+    config = function()
       require("dap-go").setup({
         dap_configurations = {
           {
@@ -308,7 +307,6 @@ require('lazy').setup({
             name = "Attach remote",
             mode = "remote",
             request = "attach",
-            -- port = 40404,  -- Must match the port in your dlv command
             port = function()
               return tonumber(vim.fn.input('Port: ', '40404'))
             end,
@@ -317,13 +315,8 @@ require('lazy').setup({
         delve = {
           path = "/home/dipankar/go/bin/dlv",
           initialize_timeout_sec = 30,
-          port = 40404,
-          args = function()
-            return require("dap-go").get_arguments()
-          end,
-          build_flags = function()
-            return require("dap-go").get_build_flags()
-          end,
+          -- args = dap_go.get_arguments,
+          -- build_flags = dap_go.get_build_flags,
         },
       })
     end,
@@ -732,12 +725,12 @@ local dap, dapui = require("dap"), require("dapui")
 dap.listeners.after.event_initialized["dapui_config"] = function()
   dapui.open()
 end
-dap.listeners.before.event_terminated["dapui_config"] = function()
-  dapui.close()
-end
-dap.listeners.before.event_exited["dapui_config"] = function()
-  dapui.close()
-end
+-- dap.listeners.before.event_terminated["dapui_config"] = function()
+--   dapui.close()
+-- end
+-- dap.listeners.before.event_exited["dapui_config"] = function()
+--   dapui.close()
+-- end
 
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.

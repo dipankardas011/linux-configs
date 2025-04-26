@@ -24,7 +24,7 @@ print_events = false
 # ref_test = false
 
 [font]
-size = 16
+size = 17
 
 [font.glyph_offset]
 x = 0
@@ -34,9 +34,17 @@ y = 0
 family = "terminal-font"
 # family = "JetBrainsMono NF"
 
-# [font.italic]
-# # family = "FantasqueSansMono NF"
-# family = "Zed Plex Mono"
+[font.italic]
+family = "Victor Mono"
+style = "Bold Italic"
+
+# [font.bold]
+# family = "Victor Mono"
+
+[font.bold_italic]
+family = "Victor Mono"
+style = "Bold Italic"
+
 
 [font.offset]
 x = 0
