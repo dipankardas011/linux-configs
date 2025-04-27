@@ -20,7 +20,12 @@ set $bg_folder $HOME/.config/i3/images/
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:FantasqueSansMono NF 13
+font pango:JetBrainsMono NF 11
+# font pango:FantasqueSansMono NF 13
+
+
+exec xset r rate 400 50
+# exec --no-startup-id xset r rate 300 50
 
 
 # https://wiki.archlinux.org/index.php/XDG_Autostart
@@ -42,7 +47,7 @@ exec --no-startup-id dex-autostart --autostart --environment i3
 #exec --no-startup-id xss-lock --transfer-sleep-lock -- betterlockscreen -l blur
 #bindsym $mod+Control+l exec betterlockscreen -l blur
 
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork -i "$HOME/.config/i3/images/c-lock-$(shuf -i0-5 -n1).png"
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork -i "$HOME/.config/i3/images/c-lock-$(shuf -i0-7 -n1).png"
 bindsym $mod+Control+l exec i3lock --nofork -i "$HOME/.config/i3/images/c-lock-$(shuf -i0-5 -n1).png"
 
 
@@ -56,12 +61,15 @@ exec --no-startup-id nm-applet
 
 
 #### Terminal ####
-bindsym $mod+Return exec __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia /bin/alacritty
+# bindsym $mod+Return exec /usr/bin/alacritty
+bindsym $mod+Return exec __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia /usr/bin/alacritty
 
 
 #### Rofi #####
-bindsym $mod+d exec rofi -show combi -font 'FantasqueSansM Nerd Font Mono 15'
-bindsym $mod+Shift+d exec --no-startup-id "dmenu_run -nf '#7AA2F7' -nb '#282828' -sb '#4C4C4C' -sf '#EEEEEE' -fn 'FantasqueSansMono NF-15'"
+bindsym $mod+d exec rofi -show combi -font 'JetBrainsMono NF 15'
+# bindsym $mod+d exec rofi -show combi -font 'FantasqueSansM Nerd Font Mono 15'
+bindsym $mod+Shift+d exec --no-startup-id "dmenu_run -nf '#7AA2F7' -nb '#282828' -sb '#4C4C4C' -sf '#EEEEEE' -fn 'JetBrainsMono NF-15'"
+# bindsym $mod+Shift+d exec --no-startup-id "dmenu_run -nf '#7AA2F7' -nb '#282828' -sb '#4C4C4C' -sf '#EEEEEE' -fn 'FantasqueSansMono NF-15'"
 
 
 ##### i3 shortcuts #####
@@ -201,10 +209,10 @@ bar {
     colors {
         background #2e3440
         statusline #88c0d0
-	    separator #d699b6
-	    # <colorclass> <border> <background> <text>
-	    focused_workspace  #88c0d0 #88c0d0 #000000
-	    active_workspace   #333333 #5f676a #ffffff
+        separator #d699b6
+        # <colorclass> <border> <background> <text>
+        focused_workspace  #88c0d0 #88c0d0 #000000
+        active_workspace   #333333 #5f676a #ffffff
         inactive_workspace #333333 #2e3440 #8ABEB7
         urgent_workspace   #2f343a #900000 #ffffff
         binding_mode       #2f343a #900000 #ffffff
