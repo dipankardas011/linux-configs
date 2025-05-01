@@ -59,68 +59,67 @@ require('lazy').setup({
     "kristijanhusak/vim-dadbod-ui",
   },
   {
-    'rebelot/kanagawa.nvim',
-    config = function()
-      require('kanagawa').setup({
-        compile = false,             -- enable compiling the colorscheme
-        undercurl = false,            -- enable undercurls
-        commentStyle = { italic = true },
-        functionStyle = {},
-        keywordStyle = { bold = true},
-        statementStyle = { bold = true },
-        typeStyle = {},
-        transparent = true,         -- do not set background color
-        dimInactive = false,         -- dim inactive window `:h hl-NormalNC`
-        terminalColors = true,       -- define vim.g.terminal_color_{0,17}
-        colors = {                   -- add/modify theme and palette colors
-          palette = {},
-          theme = {
-            wave = {},
-            lotus = {},
-            dragon = {},
-            all = {
-              ui = {
-                bg_gutter = "none"
-              },
-            },
-          },
-          -- theme = { wave = {}, lotus = {}, dragon = {}, all = {ui = {bg_gutter = "none", float = {bg="#1F1F28"}}} },
-        },
-        theme = "dragon",              -- Load "wave" theme when 'background' option is not set
-        background = {               -- map the value of 'background' option to a theme
-          dark = "dragon",           -- try "dragon" !
-          -- dark = "dragon",           -- try "dragon" !
-          -- light = "lotus"
-        },
-
-        overrides = function(colors)
-          local theme = colors.theme
-          return {
-            Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1, blend = vim.o.pumblend },  -- add `blend = vim.o.pumblend` to enable transparency
-            PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
-            PmenuSbar = { bg = theme.ui.bg_m1 },
-            PmenuThumb = { bg = theme.ui.bg_p2 },
-            NormalFloat = { fg = theme.ui.shade0, bg = theme.ui.bg_p1, blend = vim.o.pumblend },
-          }
-        end,
-      })
-
-
-      -- setup must be called before loading
-      vim.cmd("colorscheme kanagawa")
-    end
-  },
-
-  {
-    'romgrk/barbar.nvim',
-    dependencies = {
-      'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
-      'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
+    "yetone/avante.nvim",
+    event = "VeryLazy",
+    version = false, -- Never set this value to "*"! Never!
+    opts = {
+      -- add any opts here
+      -- for example
+      provider = "copilot",
     },
-    init = function()
-      vim.g.barbar_auto_setup = true
-    end,
+    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+    build = "make",
+    -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "stevearc/dressing.nvim",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      --- The below dependencies are optional,
+      "echasnovski/mini.pick", -- for file_selector provider mini.pick
+      "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
+      "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
+      "ibhagwan/fzf-lua", -- for file_selector provider fzf
+      "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+      "zbirenbaum/copilot.lua", -- for providers='copilot'
+      {
+        -- support for image pasting
+        "HakonHarnes/img-clip.nvim",
+        event = "VeryLazy",
+        opts = {
+          -- recommended settings
+          default = {
+            embed_image_as_base64 = false,
+            prompt_for_file_name = false,
+            drag_and_drop = {
+              insert_mode = true,
+            },
+            -- required for Windows users
+            use_absolute_path = true,
+          },
+        },
+      },
+      {
+        -- Make sure to set this up properly if you have lazy=true
+        'MeanderingProgrammer/render-markdown.nvim',
+        opts = {
+          file_types = { "markdown", "Avante" },
+        },
+        ft = { "markdown", "Avante" },
+      },
+    },
   },
+
+  -- {
+  --   'romgrk/barbar.nvim',
+  --   dependencies = {
+  --     'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
+  --     'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
+  --   },
+  --   init = function()
+  --     vim.g.barbar_auto_setup = true
+  --   end,
+  -- },
 
   {
     "CopilotC-Nvim/CopilotChat.nvim",
@@ -132,20 +131,73 @@ require('lazy').setup({
       -- See Configuration section for options
     },
   },
-  -- {
-  --   "sainnhe/everforest",
-  --   config = function()
-  --     vim.g.everforest_diagnostic_text_highlight=1
-  --     vim.g.everforest_diagnostic_line_highlight=1
-  --     vim.g.everforest_transparent_background=1
-  --     vim.g.everforest_diagnostic_virtual_text='highlighted'
-  --     vim.g.everforest_background='hard'
-  --     vim.g.everforest_dim_inactive_windows=1
-  --     vim.g.everforest_ui_contrast='high'
-  --     vim.g.everforest_current_word='underline'
-  --     vim.cmd.colorscheme 'everforest'
-  --   end,
-  -- },
+  {
+    "ravitemer/mcphub.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",  -- Required for Job and HTTP requests
+    },
+    -- uncomment the following line to load hub lazily
+    --cmd = "MCPHub",  -- lazy load 
+    build = "npm install -g mcp-hub@latest",  -- Installs required mcp-hub npm module
+    -- uncomment this if you don't want mcp-hub to be available globally or can't use -g
+    -- build = "bundled_build.lua",  -- Use this and set use_bundled_binary = true in opts  (see Advanced configuration)
+    config = function()
+      require("mcphub").setup()
+    end,
+  },
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    opts = {
+      -- add any options here
+    },
+    dependencies = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      "MunifTanjim/nui.nvim",
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view.
+      --   If not available, we use `mini` as the fallback
+      "rcarriga/nvim-notify",
+    }
+  },
+  {
+    "olimorris/codecompanion.nvim",
+    dependencies = {
+      { "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
+    },
+    config = function ()
+      require("codecompanion").setup({
+        opts = {
+          log_level = "DEBUG", -- or "TRACE"
+        }
+      })
+    end
+  },
+  {
+    "zbirenbaum/copilot-cmp",
+    config = function ()
+      require("copilot_cmp").setup()
+    end
+  },
+  {
+    "sainnhe/everforest",
+    config = function()
+      vim.g.everforest_diagnostic_text_highlight=1
+      vim.g.everforest_diagnostic_line_highlight=1
+      vim.g.everforest_transparent_background=1
+      vim.g.everforest_diagnostic_virtual_text='highlighted'
+      vim.g.everforest_background='hard'
+      vim.g.everforest_dim_inactive_windows=1
+      vim.g.everforest_ui_contrast='high'
+      vim.g.everforest_current_word='underline'
+
+      vim.g.everforest_better_performance=1
+      vim.g.everforest_enable_italic=1
+      vim.g.everforest_cursor='aqua'
+      vim.g.everforest_inlay_hints_background='dimmed'
+      vim.cmd.colorscheme 'everforest'
+    end,
+  },
 
   {
     'nvim-tree/nvim-tree.lua',
@@ -563,6 +615,10 @@ vim.keymap.set('n', '<F5>', function() require('dap').continue() end, { desc = '
 vim.keymap.set('n', '<Leader>db', function() require('dap').toggle_breakpoint() end, { desc = '[D]ebug [b]reakpoint' })
 vim.keymap.set('n', '<Leader>dU', function() require('dapui').toggle() end, { desc = '[D]ebug [U]UI toggle' })
 vim.keymap.set('n', '<Leader>lp', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, { desc = '[l]log pointer for debug' })
+
+vim.keymap.set('n', '<leader>gcs', ':CopilotChatCommit<CR>',{ desc = 'generate commit message' })
+vim.keymap.set('n', '<leader>ai', ':CodeCompanionChat<CR>',{ desc = 'Get AI Chat' })
+
 
 
 -- for moving the selected code
