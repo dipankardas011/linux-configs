@@ -1,0 +1,56 @@
+/* Nord Theme for Wofi – translated from rofi nord.rasi */
+
+window {
+    background-color: #2e3440; /* nord0 */
+    border: none;
+    padding: 0px;
+    margin: 0px;
+    color: #d8dee9; /* nord4 */
+    font-family: "JetBrainsMono NF", monospace;
+    font-size: 15;
+}
+
+#input {
+    background-color: #3b4252; /* nord1 */
+    color: #d8dee9; /* nord4 */
+    padding: 8px 12px;
+    margin-bottom: 8px;
+    border: none;
+}
+
+#entry {
+    padding: 11px;
+    margin: 0px;
+    border: none;
+    background-color: transparent;
+    color: #d8dee9; /* nord4 */
+}
+
+#entry:selected {
+    background-color: #88c0d0; /* nord8 */
+    color: #2e3440; /* nord0 */
+}
+
+#scroll {
+    margin: 0px;
+    padding: 0px;
+}
+
+#img {
+    margin-right: 11px;
+    size: 0.95em; /* approximate from element-icon */
+}
+
+#text {
+    vertical-align: middle;
+    color: inherit;
+}
+
+/* Optional: urgent/active states (used rarely in Wofi) */
+.urgent {
+    color: #ebcb8b; /* nord13 */
+}
+
+.active {
+    color: #88c0d0; /* nord8 */
+}
