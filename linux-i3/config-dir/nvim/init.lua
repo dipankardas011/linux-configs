@@ -154,10 +154,10 @@ require('lazy').setup({
     dependencies = {
       -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
       "MunifTanjim/nui.nvim",
-      -- OPTIONAL:
-      --   `nvim-notify` is only needed, if you want to use the notification view.
-      --   If not available, we use `mini` as the fallback
-      "rcarriga/nvim-notify",
+      -- -- OPTIONAL:
+      -- --   `nvim-notify` is only needed, if you want to use the notification view.
+      -- --   If not available, we use `mini` as the fallback
+      -- "rcarriga/nvim-notify",
     }
   },
   {
@@ -184,6 +184,7 @@ require('lazy').setup({
     config = function()
       vim.g.everforest_diagnostic_text_highlight=1
       vim.g.everforest_diagnostic_line_highlight=1
+      vim.g.everforest_transparent_background=0
       vim.g.everforest_transparent_background=1
       vim.g.everforest_diagnostic_virtual_text='highlighted'
       vim.g.everforest_background='hard'
@@ -452,28 +453,98 @@ require('lazy').setup({
     },
   },
 
-  {
-    'nvim-lualine/lualine.nvim',
-    opts = {
-      options = {
-        always_divide_middle = false,
-        icons_enabled = true,
-        component_separators = '|',
-        section_separators = '',
+{
+  'nvim-lualine/lualine.nvim',
+  opts = {
+    options = {
+      icons_enabled = true,
+      -- theme = 'auto', -- or your colorscheme like 'tokyonight', 'catppuccin', etc.
+      theme = nil,
+      component_separators = { left = '', right = '' },
+      section_separators = { left = '', right = '' },
+      disabled_filetypes = {},
+      globalstatus = true,
+    },
+    sections = {
+      lualine_a = {
+        { 'mode', separator = { left = '', right = '' }, right_padding = 2 },
       },
-      sections = {
-        lualine_b = {'branch', 'diff', 'diagnostics'},
-        lualine_c = {
-          {
-            "filename",
-            path = 1
-          }
+      lualine_b = {
+        { 'branch', icon = '', separator = { left = '', right = '' }, right_padding = 2 },
+        {
+          'diff',
+          symbols = { added = ' ', modified = '柳', removed = ' ' },
+          separator = { left = '', right = '' },
+        },
+        {
+          'diagnostics',
+          sources = { 'nvim_diagnostic' },
+          symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
+          separator = { left = '', right = '' },
         },
       },
-      tabline = {},
-      extensions = {}
+      -- lualine_c = {
+      --   {
+      --     'filename',
+      --     path = 1,
+      --     separator = { left = '', right = '' },
+      --     right_padding = 2,
+      --   },
+      -- },
+      lualine_c = {
+        {
+          'filename',
+          path = 1,
+          separator = { left = '', right = '' },
+          color = { bg = '#2c2e34' }, -- Match your lualine background color
+        }
+      },
+      lualine_x = {
+        {
+          'encoding',
+          separator = { left = '', right = '' },
+        },
+        {
+          'fileformat',
+          symbols = {
+            unix = '', -- LF
+            dos = '',  -- CRLF
+            mac = '',  -- CR
+          },
+          separator = { left = '', right = '' },
+        },
+        {
+          'filetype',
+          icon_only = false,
+          separator = { left = '', right = '' },
+        },
+      },
+      lualine_y = {
+        {
+          'progress',
+          separator = { left = '', right = '' },
+        },
+      },
+      lualine_z = {
+        {
+          'location',
+          separator = { left = '', right = '' },
+          left_padding = 2,
+        },
+      },
     },
+    inactive_sections = {
+      lualine_a = {},
+      lualine_b = {},
+      lualine_c = { 'filename' },
+      lualine_x = { 'location' },
+      lualine_y = {},
+      lualine_z = {}
+    },
+    tabline = {},
+    extensions = {}
   },
+},
 
   {
     'lukas-reineke/indent-blankline.nvim',
