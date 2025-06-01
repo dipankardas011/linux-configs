@@ -23,8 +23,8 @@
 }
 
 #waybar {
-  /* background-color: #181825; */
-  background-color: #2e3440;
+  /* background-color: #2e3440; */
+  background: transparent;
   transition-property: background-color;
   transition-duration: 0.5s;
 }
