@@ -473,7 +473,7 @@ require('lazy').setup({
         { 'branch', icon = '', separator = { left = '', right = '' }, right_padding = 2 },
         {
           'diff',
-          symbols = { added = ' ', modified = '柳', removed = ' ' },
+          symbols = { added = ' ', modified = ' ', removed = ' ' },
           separator = { left = '', right = '' },
         },
         {
@@ -483,14 +483,6 @@ require('lazy').setup({
           separator = { left = '', right = '' },
         },
       },
-      -- lualine_c = {
-      --   {
-      --     'filename',
-      --     path = 1,
-      --     separator = { left = '', right = '' },
-      --     right_padding = 2,
-      --   },
-      -- },
       lualine_c = {
         {
           'filename',
