@@ -31,25 +31,25 @@
     // }
   },
   "custom/lock": {
-  "format": "  ",
+  "format": " ",
   "on-click": "hyprlock",
   "tooltip": true,
   "tooltip-format": "Lock Screen"
   },
   "custom/reboot": {
-    "format": "  ",
+    "format": " ",
     "on-click": "zenity --question --text='Do you really want to reboot?' && systemctl reboot",
     "tooltip": true,
     "tooltip-format": "Reboot"
   },
   "custom/power": {
-    "format": "  ",
+    "format": " ",
     "on-click": "zenity --question --text='Do you really want to power off?' && systemctl poweroff",
     "tooltip": true,
     "tooltip-format": "Power Off"
   },
   "network": {
-    "format-wifi": "󰤨 {essid}",
+    "format-wifi": "󰤨  {essid}",
     "format-ethernet": " Wired ",
     "tooltip-format": "<span color='#FF1493'> 󰅧 </span>{bandwidthUpBytes}  <span color='#00BFFF'> 󰅢 </span>{bandwidthDownBytes}",
     "format-linked": "󱘖 {ifname} (No IP)",
@@ -72,16 +72,16 @@
     "format": "{icon}{volume}%",
     "format-muted": "󰖁 0%",
     "format-icons": {
-      "headphone": " ",
-      "hands-free": " ",
-      "headset": " ",
-      "phone": " ",
-      "portable": " ",
-      "car": " ",
+      "headphone": "  ",
+      "hands-free": "  ",
+      "headset": "  ",
+      "phone": "  ",
+      "portable": "  ",
+      "car": "  ",
       "default": [
         " ",
-        " ",
-        " "
+        "  ",
+        "  "
       ]
     },
     "on-click-right": "pavucontrol -t 3",
@@ -91,18 +91,18 @@
   },
   "custom/temperature": {
     "exec": "sensors | awk '/^Package id 0:/ {print int($4)}'",
-    "format": "{}°C",
+    "format": " {}°C",
     "interval": 5,
     "tooltip": true,
     "tooltip-format": "CPU Temp: {}°C"
   },
   "memory": {
-    "format": " {used:0.1f}G/{total:0.1f}G",
+    "format": "  {used:0.1f}G/{total:0.1f}G",
     "tooltip": true,
     "tooltip-format": "Ram: {used:0.2f}G/{total:0.2f}G"
   },
   "cpu": {
-    "format": " {usage}%",
+    "format": "  {usage}%",
     "tooltip": true
   },
   "clock": {
