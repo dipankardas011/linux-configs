@@ -49,12 +49,12 @@
   //   "tooltip-format": "Power Off"
   // },
   "network": {
-    "format-wifi": " 󰤨 {essid} ",
+    "format-wifi": "󰤨 {essid}",
     "format-ethernet": " Wired ",
     "tooltip-format": "<span color='#FF1493'> 󰅧 </span>{bandwidthUpBytes}  <span color='#00BFFF'> 󰅢 </span>{bandwidthDownBytes}",
-    "format-linked": " 󱘖 {ifname} (No IP) ",
+    "format-linked": "󱘖 {ifname} (No IP)",
     "format-disconnected": "  Disconnected ",
-    "format-alt": " 󰤨 {signalStrength}% ",
+    "format-alt": "󰤨 {signalStrength}% ",
     "interval": 1
   },
   "battery": {
@@ -62,26 +62,26 @@
       "warning": 30,
       "critical": 15
     },
-    "format": " {icon} {capacity}% ",
-    "format-charging": " 󱐋{capacity}%",
+    "format": "{icon} {capacity}%",
+    "format-charging": "󱐋{capacity}%",
     "interval": 1,
     "format-icons": ["󰂎", "󰁼", "󰁿", "󰂁", "󰁹"],
     "tooltip": true
   },
   "pulseaudio": {
-    "format": "{icon}{volume}% ",
-    "format-muted": " 󰖁 0% ",
+    "format": "{icon}{volume}%",
+    "format-muted": "󰖁 0%",
     "format-icons": {
-      "headphone": "  ",
-      "hands-free": "  ",
-      "headset": "  ",
-      "phone": "  ",
-      "portable": "  ",
-      "car": "  ",
+      "headphone": " ",
+      "hands-free": " ",
+      "headset": " ",
+      "phone": " ",
+      "portable": " ",
+      "car": " ",
       "default": [
-        "  ",
-        "  ",
-        "  "
+        " ",
+        " ",
+        " "
       ]
     },
     "on-click-right": "pavucontrol -t 3",
@@ -91,26 +91,25 @@
   },
   "custom/temperature": {
     "exec": "sensors | awk '/^Package id 0:/ {print int($4)}'",
-    "format": " {}°C ",
+    "format": "{}°C",
     "interval": 5,
     "tooltip": true,
     "tooltip-format": "CPU Temp: {}°C"
   },
   "memory": {
-    "format": "  {used:0.1f}G/{total:0.1f}G ",
+    "format": " {used:0.1f}G/{total:0.1f}G",
     "tooltip": true,
     "tooltip-format": "Ram: {used:0.2f}G/{total:0.2f}G"
   },
   "cpu": {
-    "format": "  {usage}% ",
+    "format": " {usage}%",
     "tooltip": true
   },
   "clock": {
     "interval": 1,
     "timezone": "Asia/Kolkata",
-    "format": "  {:%H:%M:%S} ",
-    "tooltip": true,
-    "tooltip-format": "{:L%Y %m %d, %A}"
+    "format": "⏰ {:%H:%M:%S 🗓️ %d-%m-%Y}",
+    "tooltip": true
   },
   "tray": {
     "icon-size": 11,
@@ -129,9 +128,9 @@
     ]
   },
   "bluetooth": {
-    "format": "  {status} ",
-    "format-connected": "  {device_alias} ",
-    "format-connected-battery": "  {device_alias}{device_battery_percentage}% ",
+    "format": " {status}",
+    "format-connected": " {device_alias}",
+    "format-connected-battery": " {device_alias}{device_battery_percentage}%",
     "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
     "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
