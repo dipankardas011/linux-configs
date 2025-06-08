@@ -551,7 +551,21 @@ require('lazy').setup({
 
   { 'numToStr/Comment.nvim', opts = {} },
 
-  { 'nvim-telescope/telescope.nvim', branch = '0.1.x', dependencies = { 'nvim-lua/plenary.nvim' } },
+  { 'nvim-telescope/telescope.nvim', branch = '0.1.x', dependencies = { 'nvim-lua/plenary.nvim' },
+    -- remove preview
+    config = function()
+      require('telescope').setup {
+        defaults = {
+          layout_config = {
+            horizontal = { width = 0.5 },
+            vertical = { width = 0.5 }
+          },
+          -- Disable the previewer
+          preview = { hide_on_startup = true },
+        },
+      }
+    end
+  },
 
   {
     'nvim-telescope/telescope-fzf-native.nvim',
