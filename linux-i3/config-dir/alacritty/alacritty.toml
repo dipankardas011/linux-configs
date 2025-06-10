@@ -12,10 +12,15 @@ duration = 0
 [colors]
 draw_bold_text_with_bright_colors = true
 
+[colors.cursor]
+text = "#272e33"      # Same as your background or slightly darker
+cursor = "#83c092"     # Everforest yellow (warm and stands out)
+
 
 [cursor]
 style = "Block"
 unfocused_hollow = true
+
 
 [debug]
 log_level = "OFF"
@@ -365,12 +370,13 @@ program = "/bin/zsh"
 [window]
 decorations = "none"
 dynamic_padding = true
-opacity = 0.98
+# opacity = 0.95
 startup_mode = "Windowed"
 
 [window.padding]
-x = 1
-y = 1
+x = 2
+y = 2
 
 [env]
 TERM = "xterm-256color"
+
