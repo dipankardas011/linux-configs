@@ -6,8 +6,8 @@
   "modules-left": [
     "hyprland/workspaces",
     "custom/lock",
-    "custom/reboot",
-    "custom/power",
+    // "custom/reboot",
+    // "custom/power",
     "clock"
   ],
   "modules-center": ["hyprland/window"],
@@ -31,23 +31,23 @@
     // }
   },
   "custom/lock": {
-  "format": " ",
+  "format": "  ",
   "on-click": "hyprlock",
   "tooltip": true,
   "tooltip-format": "Lock Screen"
   },
-  "custom/reboot": {
-    "format": " ",
-    "on-click": "zenity --question --text='Do you really want to reboot?' && systemctl reboot",
-    "tooltip": true,
-    "tooltip-format": "Reboot"
-  },
-  "custom/power": {
-    "format": " ",
-    "on-click": "zenity --question --text='Do you really want to power off?' && systemctl poweroff",
-    "tooltip": true,
-    "tooltip-format": "Power Off"
-  },
+  // "custom/reboot": {
+  //   "format": " ",
+  //   "on-click": "zenity --question --text='Do you really want to reboot?' && systemctl reboot",
+  //   "tooltip": true,
+  //   "tooltip-format": "Reboot"
+  // },
+  // "custom/power": {
+  //   "format": " ",
+  //   "on-click": "zenity --question --text='Do you really want to power off?' && systemctl poweroff",
+  //   "tooltip": true,
+  //   "tooltip-format": "Power Off"
+  // },
   "network": {
     "format-wifi": "󰤨  {essid}",
     "format-ethernet": " Wired ",
