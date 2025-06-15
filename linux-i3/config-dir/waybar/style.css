@@ -5,8 +5,9 @@
   min-height: 0;
   border: none;
   font-weight: bold;
-  color: #1e2326; /* Everforest foreground */
 }
+
+  /* color: #1e2326;*/ /* Everforest foreground */
 
 #waybar {
   background: transparent;
@@ -14,10 +15,6 @@
   transition-duration: 0.5s;
 }
 
-#workspaces {
-  border: none;
-  box-shadow: none;
-}
 
 #tray {
   margin: 6px 3px;
@@ -88,6 +85,11 @@
 
 #waybar.hidden {
   opacity: 0.5;
+}
+
+#workspaces {
+  border: none;
+  box-shadow: none;
 }
 
 #workspaces button {

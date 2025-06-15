@@ -1,44 +1,46 @@
-/* Nord Theme for Wofi – translated from rofi nord.rasi */
-
 window {
-    background-color: #2e3440; /* nord0 */
+    background-color: #2b3339; /* bg0_h */
     border: none;
-    padding: 0px;
-    margin: 0px;
-    color: #d8dee9; /* nord4 */
+    padding: 0;
+    margin: 0;
+    color: #d3c6aa; /* fg */
     font-family: "JetBrainsMono NF", monospace;
-    font-size: 15;
+    font-size: 15px;
+    border-radius: 6px;
 }
 
 #input {
-    background-color: #3b4252; /* nord1 */
-    color: #d8dee9; /* nord4 */
+    background-color: #2b3331; /* bg1 */
+    color: #d3c6aa; /* fg */
     padding: 8px 12px;
-    margin-bottom: 8px;
+    margin: 6px;
+    border-radius: 4px;
     border: none;
 }
 
 #entry {
-    padding: 11px;
-    margin: 0px;
-    border: none;
+    padding: 10px 12px;
+    margin: 4px 6px;
+    border-radius: 4px;
     background-color: transparent;
-    color: #d8dee9; /* nord4 */
+    color: #d3c6aa; /* fg */
 }
 
 #entry:selected {
-    background-color: #88c0d0; /* nord8 */
-    color: #2e3440; /* nord0 */
+    background-color: #7fbbb3; /* Everforest blue */
+    color: #1e2326; /* bg0_h */
+    margin: 4px 6px;
+    border-radius: 4px;
 }
 
 #scroll {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
 }
 
 #img {
-    margin-right: 11px;
-    size: 0.95em; /* approximate from element-icon */
+    margin-right: 10px;
+    size: 0.95em;
 }
 
 #text {
@@ -46,11 +48,10 @@ window {
     color: inherit;
 }
 
-/* Optional: urgent/active states (used rarely in Wofi) */
-.urgent {
-    color: #ebcb8b; /* nord13 */
-}
-
+/* Optional: matched state colors like Waybar's */
 .active {
-    color: #88c0d0; /* nord8 */
+    color: #a7c080; /* green */
+}
+.urgent {
+    color: #e67e80; /* red */
 }
