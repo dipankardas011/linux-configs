@@ -25,9 +25,9 @@
     "disable-scroll": false,
     "all-outputs": true,
     "format": "{icon}",
-    "on-click": "activate"
+    "on-click": "activate",
     // "persistent-workspaces": {
-    // "*":[1,2,3,4,5,6,7]
+    //   "*":[1,2,3,4,5,6,7]
     // }
   },
   "custom/lock": {
