@@ -284,15 +284,15 @@ require('lazy').setup({
       -- refer to the configuration section below
     },
   },
-  {
-    "startup-nvim/startup.nvim",
-    requires = {"nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim"},
-    config = function()
-      require "startup".setup({
-        theme = "dashboard", -- Example theme, customize as needed
-      })
-    end
-  },
+  -- {
+  --   "startup-nvim/startup.nvim",
+  --   requires = {"nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim"},
+  --   config = function()
+  --     require "startup".setup({
+  --       theme = "dashboard", -- Example theme, customize as needed
+  --     })
+  --   end
+  -- },
   {
     'nvim-tree/nvim-web-devicons',
   },
