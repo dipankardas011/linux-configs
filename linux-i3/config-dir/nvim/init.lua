@@ -667,7 +667,7 @@ vim.o.numberwidth = 4
 vim.o.expandtab = true
 vim.o.smartindent = true
 
--- vim.wo.relativenumber = true
+vim.wo.relativenumber = true
 
 vim.wo.wrap = true
 
@@ -676,7 +676,7 @@ vim.wo.cursorline = true
 
 -- vim.wo.spell = true
 
--- vim.opt.colorcolumn = "80"
+vim.opt.colorcolumn = "100"
 
 vim.o.laststatus = 3 -- global status
 

@@ -14,7 +14,7 @@ draw_bold_text_with_bright_colors = true
 
 [colors.cursor]
 text = "#272e33"      # Same as your background or slightly darker
-cursor = "#83c092"     # Everforest yellow (warm and stands out)
+cursor = "#7fbbb3"     # Everforest yellow (warm and stands out)
 
 
 [cursor]
@@ -370,7 +370,7 @@ program = "/bin/zsh"
 [window]
 decorations = "none"
 dynamic_padding = true
-# opacity = 0.95
+opacity = 0.90
 startup_mode = "Windowed"
 
 [window.padding]

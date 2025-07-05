@@ -5,19 +5,19 @@
   "spacing": 0,
   "modules-left": [
     "hyprland/workspaces",
-    "custom/lock",
+    "custom/lock"
     // "custom/reboot",
     // "custom/power",
-    "clock"
+    // "clock"
   ],
-  "modules-center": ["hyprland/window"],
+  "modules-center": ["clock"],
   "modules-right": [
     "network",
     "cpu",
     "memory",
     "custom/temperature",
     "battery",
-    "bluetooth",
+    // "bluetooth",
     "pulseaudio",
     "tray"
   ],
@@ -49,12 +49,12 @@
   //   "tooltip-format": "Power Off"
   // },
   "network": {
-    "format-wifi": "󰤨  {essid}",
+    "format-wifi": "󰤨  {signalStrength}%",
     "format-ethernet": " Wired ",
     "tooltip-format": "<span color='#FF1493'> 󰅧 </span>{bandwidthUpBytes}  <span color='#00BFFF'> 󰅢 </span>{bandwidthDownBytes}",
     "format-linked": "󱘖 {ifname} (No IP)",
     "format-disconnected": "  Disconnected ",
-    "format-alt": "󰤨 {signalStrength}% ",
+    "format-alt": "󰤨  {essid}",
     "interval": 1
   },
   "battery": {
@@ -108,7 +108,7 @@
   "clock": {
     "interval": 1,
     "timezone": "Asia/Kolkata",
-    "format": "⏰ {:%H:%M:%S 🗓️ %d-%m-%Y}",
+    "format": "{:%H:%M:%S - %d-%m-%Y}",
     "tooltip": true
   },
   "tray": {
